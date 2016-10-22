@@ -1,9 +1,6 @@
 export const CHANGE_SECTION = 'CHANG_SECTION';
-
-
-export function changeSection(section){
-    return {
+export const changeSection = (section )=> ({
         type: CHANGE_SECTION,
         payload: section
-    }
-}
+
+});

@@ -4,44 +4,56 @@ import {connect} from 'react-redux';
 import {Sidebar} from './sidebar'
 import {Footer} from './footer'
 import {Header} from './header'
-import {changeSection} from '../actions/action-ceators'
+import {changeSection} from '../actions/change-section'
+import {getPosts} from '../actions/get-posts'
 
 
-let BlogApp = ({children, onNavClick, activeSection}) =>{
-    return (
-    <div>
-        <Header
-            onNavClick={onNavClick}
-            activeSection={activeSection}/>
-        <div className="container">
-            <div className="row">
-                {children}
-                <Sidebar />
-            </div>
-            <hr />
-            <Footer />
-        </div>
-    </div>)
-};
+class BlogApp extends Component {
 
+    // componentWillMount(){
+    //     this.props.getPosts();
+    // }
 
+    render() {
+
+      const {onNavClick, activeSection, children} = this.props;
+
+        return (
+            <div>
+                <Header
+                    onNavClick={onNavClick}
+                    activeSection={activeSection}/>
+                <div className="container">
+                    <div className="row">
+                        {children}
+                        <Sidebar />
+                    </div>
+                    <hr/>
+                    <Footer />
+                </div>
+            </div>)
+    };
+}
 
 const mapStateProps = (state) => ({
     activeSection: state.activeSection
 });
 
 
-
 const mapDispatchProps = (dispatch) => ({
     onNavClick(section) {
         dispatch(changeSection(section));
-}});
+    },
+    getPosts(){
+        dispatch(getPosts)
+    }
+});
 
 
-BlogApp = connect(
+const App = connect(
     mapStateProps,
     mapDispatchProps
 )(BlogApp);
 
 
-export default BlogApp;
+export default App;

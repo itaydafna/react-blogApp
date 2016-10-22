@@ -1,9 +1,12 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import {activeSection} from './reducers/reducer_main-navigation'
+import {getPosts} from './reducers/reducer-posts'
 
 const reducers = combineReducers({
   // Reducers go here
-    activeSection
+    activeSection,
+    getPosts
+
 });
 
 const store = createStore(reducers);

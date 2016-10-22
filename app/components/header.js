@@ -14,7 +14,9 @@ export const Header = ({onNavClick, activeSection}) => {
                         <span className="icon-bar" />
                     </label>
                 </button>
-                <a className="navbar-brand" href="#/">Netcraft Academy</a>
+                <a className="navbar-brand" href="#/"
+                   onClick = {()=>onNavClick('posts')}
+                >Netcraft Academy</a>
             </div>
             <input type="checkbox" id="toggle-nav-mobile" hidden />
             {/* Collect the nav links, forms, and other content for toggling */}

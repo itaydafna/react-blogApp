@@ -1,4 +1,4 @@
-import {CHANGE_SECTION} from '../actions/action-ceators'
+import {CHANGE_SECTION} from '../actions/change-section'
 export const activeSection = (state = 'posts', action) => {
     if(action.payload === state){return state}
 
