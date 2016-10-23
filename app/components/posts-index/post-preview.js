@@ -1,9 +1,9 @@
-export const PostPreview = () => {
+export const PostPreview = ({title}) => {
     return (
         <article>
             <header>
                 <h2>
-                    <a href="#">AngularJS - Controllers</a>
+                    <a href="#">{title}</a>
                 </h2>
                 <p>
                     <small className="glyphicon glyphicon-user" />

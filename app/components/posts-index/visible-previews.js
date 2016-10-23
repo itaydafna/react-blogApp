@@ -7,7 +7,11 @@ let VisiblePreviews = ({visiblePreviews}) =>{
     return (
         <div>
             {
-                visiblePreviews.map(preview => <PostPreview key={preview.title}/>)
+                visiblePreviews.map(preview => 
+                    <PostPreview 
+                    key={preview.title}
+                    title = {preview.title}
+                    />)
             }
         </div>
     )
