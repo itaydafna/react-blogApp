@@ -2,20 +2,12 @@ import {Component} from 'react'
 import {connect} from 'react-redux';
 
 import {IndexHeader} from './index-header'
-import {PostPreview} from './post-preview'
+import VisiblePreviews from './visible-previews'
 
 let PostsIndex = ({posts}) =>(
     <section className="col-md-8">
-        <IndexHeader posts={posts.posts} />
-        {/* Begin Post */}
-        <PostPreview />
-        {/* End of Post */}
-        {/* Begin Post */}
-        <PostPreview />
-        {/* End of Post */}
-        {/* Begin Post */}
-        <PostPreview />
-        {/* End of Post */}
+        <IndexHeader posts={posts} />
+        <VisiblePreviews />
         {/* Pager */}
         <ul className="pager">
             <li className="previous">
@@ -30,13 +22,13 @@ let PostsIndex = ({posts}) =>(
 
 
 
-const mapStateProps = (state) => ({
+const mapStateToProps = (state) => ({
     posts: state.posts
 });
 
 
 PostsIndex = connect(
-    mapStateProps
+    mapStateToProps
 )(PostsIndex);
 
 
