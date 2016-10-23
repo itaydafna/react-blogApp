@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Header} from './header';
+import {Header} from '../header';
 
 export const Admin = () => (
                     <section className="col-md-8">

@@ -35,7 +35,7 @@ const config = {
 
   plugins: [
 
-    // Generate index.html with included script tags
+    // Generate posts-index.html with included script tags
     new HtmlWebpackPlugin({
       inject: 'body',
       template: 'index.html'

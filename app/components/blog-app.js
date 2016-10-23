@@ -34,6 +34,7 @@ class BlogApp extends Component {
 
 const mapStateProps = (state) => ({
     activeSection: state.activeSection,
+    posts: state.posts
 
 });
 

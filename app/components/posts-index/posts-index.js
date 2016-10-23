@@ -1,12 +1,12 @@
 import {Component} from 'react'
-import {Header} from './header'
-import {Sidebar} from './sidebar'
+import {connect} from 'react-redux';
+
+import {IndexHeader} from './index-header'
 
 
-export const Index = () =>(
-
+let PostsIndex = ({posts}) =>(
     <section className="col-md-8">
-        <h2 className="page-header">Showing 29 posts</h2>
+        <IndexHeader posts={posts.posts} />
         {/* Begin Post */}
         <article>
             <header>
@@ -124,3 +124,17 @@ export const Index = () =>(
         </ul>
     </section>
 );
+
+
+
+const mapStateProps = (state) => ({
+    posts: state.posts
+});
+
+
+PostsIndex = connect(
+    mapStateProps
+)(PostsIndex);
+
+
+export default PostsIndex;
