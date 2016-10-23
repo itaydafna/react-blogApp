@@ -9,7 +9,7 @@ import {changeSection} from '../actions/change-section'
 
 
 class BlogApp extends Component {
-    
+
 
     render() {
 
@@ -33,20 +33,15 @@ class BlogApp extends Component {
 }
 
 const mapStateProps = (state) => ({
-    activeSection: state.activeSection
+    activeSection: state.activeSection,
+
 });
 
-
-const mapDispatchProps = (dispatch) => ({
-    onNavClick(section) {
-        dispatch(changeSection(section));
-    }
-});
 
 
 const App = connect(
     mapStateProps,
-    mapDispatchProps
+    {onNavClick: changeSection}
 )(BlogApp);
 
 
