@@ -3,7 +3,7 @@ import {Header} from './header'
 import {Sidebar} from './sidebar'
 
 
-export const Index = ({params}) =>(
+export const Index = () =>(
 
     <section className="col-md-8">
         <h2 className="page-header">Showing 29 posts</h2>

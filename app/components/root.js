@@ -15,7 +15,6 @@ import {Admin} from './admin';
 
 
 const Root = () => {
-    console.log(store);
     return (
     <Provider store={store}>
         <Router history={hashHistory}>

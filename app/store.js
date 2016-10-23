@@ -1,14 +1,25 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers} from 'redux';
 import {activeSection} from './reducers/reducer_main-navigation'
-import {getPosts} from './reducers/reducer-posts'
+import {posts} from './reducers/reducer-posts'
+import data from '../data/posts.json';
+
+
+
+
 
 const reducers = combineReducers({
   // Reducers go here
     activeSection,
-    getPosts
+    posts
 
 });
 
-const store = createStore(reducers);
+//initializing the store with the existing posts in the JSON
+const persistedState = {
+    posts : data
+};
+
+const store = createStore(reducers, persistedState);
+
 
 export default store;
