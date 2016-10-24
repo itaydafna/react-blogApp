@@ -1,4 +1,16 @@
-export const PostPreview = ({title}) => {
+export const PostPreview = ({
+    title,
+    author,
+    date,
+    description,
+    tags
+
+}) => {
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+    ];
+    
     return (
         <article>
             <header>
@@ -6,33 +18,32 @@ export const PostPreview = ({title}) => {
                     <a href="#">{title}</a>
                 </h2>
                 <p>
-                    <small className="glyphicon glyphicon-user" />
-                    by <a href="#">Ilan Cohen</a>
+                    <small className="glyphicon glyphicon-user"/>
+                    by <a href="#">{author}</a>
                 </p>
                 <p>
-                    <small className="glyphicon glyphicon-time" />
-                    Posted on 14 Jan, 2015
+                    <small className="glyphicon glyphicon-time"/>
+                    Posted on {date.getDate()} {monthNames[date.getMonth()]}, {date.getFullYear()}
                 </p>
             </header>
             {/* Post Description */}
-            <p>In Angular, a Controller is a JavaScript constructor function that is used to augment the Angular Scope. When a Controller is attached to the DOM via the ng-controller directive, Angular will instantiate a new Controller object, using the specified Controller's constructor function. A new child scope will be available as an injectable parameter to the Controller's constructor function as $scope.</p>
+            <p>{description}</p>
             <br />
             <footer className="clearfix">
                 <p className="pull-left">
                     <b>Tags:&nbsp;</b>
-              <span>
-                <a href="#" className="label label-default">JavaScript</a>
-              </span>
-              <span>
-                <a href="#" className="label label-default">AngularJS</a>
-              </span>
+                    {tags.map((tag)=>(
+                        <span key={tag}>
+                            <a href="#" className="label label-default">{tag}</a>
+                        </span>
+                    ))}
                 </p>
                 <a className="btn btn-primary pull-right" href="#">
-                    Read More <i className="glyphicon glyphicon-chevron-right" />
+                    Read More <i className="glyphicon glyphicon-chevron-right"/>
                 </a>
             </footer>
             <hr />
         </article>
     )
 
-}
+};

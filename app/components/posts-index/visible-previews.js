@@ -11,6 +11,10 @@ let VisiblePreviews = ({visiblePreviews}) =>{
                     <PostPreview 
                     key={preview.title}
                     title = {preview.title}
+                    author = {preview.author}
+                    date = {new Date(Number(preview.date))}
+                    description = {preview.description}
+                    tags = {preview.tags}
                     />)
             }
         </div>

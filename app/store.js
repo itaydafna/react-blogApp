@@ -21,8 +21,6 @@ const reducers = combineReducers({
 
 const postsData = data.posts.sort((a,b)=>(Number(b.date)-Number(a.date)));
 
-console.log(postsData);
-
 //initializing the store with the existing posts in the JSON
 //and setting the visible posts to be the 3 newest
 const persistedState = {
