@@ -22,8 +22,8 @@ const postsData = data.posts.sort((a, b)=>(Number(b.date) - Number(a.date)));
 const persistedState = {
     posts: postsData,
     visiblePreviews: {
-        visiblePreviewsData: postsData.slice(0, 3),
-        visiblePreviewsTracking: {
+        data: postsData.slice(0, 3),
+        tracking: {
             firstVisiblePreviewIndex: 0,
             newerPostAvailable: false,
             olderPostsAvailable: postsData.length > 3
