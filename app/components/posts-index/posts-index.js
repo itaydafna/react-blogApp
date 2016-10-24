@@ -7,12 +7,20 @@ import {IndexHeader} from './index-header'
 import {Pager} from './pager'
 import VisiblePreviews from './visible-previews'
 
-let PostsIndex = ({posts, showOlderPosts}) => {
+let PostsIndex = ({
+    posts,
+    showOlderPosts,
+    visiblePreviews
+}) => {
     return(
         <section className="col-md-8">
             <IndexHeader posts={posts}/>
             <VisiblePreviews />
-            <Pager showOlderPosts={()=>showOlderPosts(posts)}/>
+            <Pager
+                showOlderPosts={()=>showOlderPosts(posts)}
+                olderPostsAvailable = {visiblePreviews.tracking.olderPostsAvailable}
+                newerPostsAvailable = {visiblePreviews.tracking.newerPostsAvailable}
+            />
         </section>
     );
 
@@ -20,7 +28,8 @@ let PostsIndex = ({posts, showOlderPosts}) => {
 
 
 const mapStateToProps = (state) => ({
-    posts: state.posts
+    posts: state.posts,
+    visiblePreviews: state.visiblePreviews
 });
 
 
