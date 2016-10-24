@@ -3,13 +3,15 @@ export const SHOW_NEWER_POSTS = 'SHOW_NEWER_POSTS';
 
 export const showOlderPosts = (posts)=> ({
     type: SHOW_OLDER_POSTS,
-    posts: posts
-
+    payload: {
+        posts: posts
+    }
 });
 
 
 export const showNewerPosts = (posts)=> ({
     type: SHOW_NEWER_POSTS,
-    posts: posts
-
+    payload: {
+        posts: posts
+    }
 });
