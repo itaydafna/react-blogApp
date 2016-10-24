@@ -25,8 +25,12 @@ const persistedState = {
         data: postsData.slice(0, 3),
         tracking: {
             firstVisiblePreviewIndex: 0,
-            newerPostAvailable: false,
-            olderPostsAvailable: postsData.length > 3
+            newerPostsAvailable: false,
+            olderPostsAvailable: postsData.length > 3,
+            currentPage: 1,
+            numberOfPages: postsData%3 === 0 ?
+                (postsData.length - postsData.length%3)/3 :
+                    1+(postsData.length - postsData.length%3)/3
         }
     }
 };

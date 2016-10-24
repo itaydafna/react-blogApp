@@ -2,8 +2,7 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import {PostPreview} from './post-preview';
 
-let VisiblePreviews = ({visiblePreviews}) =>{
-
+let VisiblePreviews = ({visiblePreviews, params}) =>{
     return (
         <div>
             {

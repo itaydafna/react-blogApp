@@ -10,9 +10,7 @@ import {changeSection} from '../actions/change-section'
 
 class BlogApp extends Component {
 
-
     render() {
-
       const {onNavClick, activeSection, children} = this.props;
 
         return (
@@ -22,6 +20,8 @@ class BlogApp extends Component {
                     activeSection={activeSection}/>
                 <div className="container">
                     <div className="row">
+                {/* the children components are
+                either Posts-Index or Admin  */}
                         {children}
                         <Sidebar />
                     </div>

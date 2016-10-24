@@ -11,17 +11,22 @@ let PostsIndex = ({
     posts,
     showOlderPosts,
     showNewerPosts,
-    visiblePreviews
+    visiblePreviews,
+    params
 }) => {
+    let currentPage = isNaN(Number(params.page))? 1: Number(params.page);
     return(
         <section className="col-md-8">
             <IndexHeader posts={posts}/>
+
             <VisiblePreviews />
             <Pager
-                showOlderPosts={()=>showOlderPosts(posts)}
-                showNewerPosts={()=>showNewerPosts(posts)}
+                showOlderPosts={()=>showOlderPosts(posts,currentPage + 1)}
+                showNewerPosts={()=>showNewerPosts(posts,currentPage - 1)}
                 olderPostsAvailable = {visiblePreviews.tracking.olderPostsAvailable}
                 newerPostsAvailable = {visiblePreviews.tracking.newerPostsAvailable}
+                currentPage = {currentPage}
+
             />
         </section>
     );

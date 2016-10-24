@@ -1,17 +1,20 @@
 import {Component} from 'react';
+import {Link} from 'react-router';
 
 export const Pager = ({
     showOlderPosts,
     showNewerPosts,
     olderPostsAvailable,
-    newerPostsAvailable
+    newerPostsAvailable,
+    currentPage
+
 }) =>{
     const olderPosts = ()=>{
         if(olderPostsAvailable){
             return (
                 <li className="previous"
                     onClick={showOlderPosts}>
-                    <a href="#">← Older</a>
+                    <Link to={`posts/${currentPage+1}`}>← Older</Link>
                 </li>
             )
         }
@@ -21,14 +24,14 @@ export const Pager = ({
             return (
                 <li className="next"
                     onClick={showNewerPosts}>
-                    <a href="#">Newer →</a>
+                    <Link to={currentPage - 1 === 1?`posts`:`posts/${currentPage-1}`}>Newer →</Link>
                 </li>
             )
         }
     };
 
     return (
-    <ul className="pager">
+    <ul className = "pager">
         {olderPosts()}
         {newerPosts()}
     </ul>
