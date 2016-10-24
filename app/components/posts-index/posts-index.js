@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import {connect} from 'react-redux';
-import {showOlderPosts} from '../../actions/show-older-posts';
+import {showOlderPosts,showNewerPosts } from '../../actions/posts-preview-navigation';
 
 
 import {IndexHeader} from './index-header'
@@ -10,6 +10,7 @@ import VisiblePreviews from './visible-previews'
 let PostsIndex = ({
     posts,
     showOlderPosts,
+    showNewerPosts,
     visiblePreviews
 }) => {
     return(
@@ -18,6 +19,7 @@ let PostsIndex = ({
             <VisiblePreviews />
             <Pager
                 showOlderPosts={()=>showOlderPosts(posts)}
+                showNewerPosts={()=>showNewerPosts(posts)}
                 olderPostsAvailable = {visiblePreviews.tracking.olderPostsAvailable}
                 newerPostsAvailable = {visiblePreviews.tracking.newerPostsAvailable}
             />
@@ -36,7 +38,7 @@ const mapStateToProps = (state) => ({
 
 PostsIndex = connect(
     mapStateToProps,
-    {showOlderPosts}
+    {showOlderPosts, showNewerPosts}
 )(PostsIndex);
 
 

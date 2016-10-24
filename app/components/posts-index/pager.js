@@ -2,6 +2,7 @@ import {Component} from 'react';
 
 export const Pager = ({
     showOlderPosts,
+    showNewerPosts,
     olderPostsAvailable,
     newerPostsAvailable
 }) =>{
@@ -18,7 +19,8 @@ export const Pager = ({
     const newerPosts = ()=>{
         if(newerPostsAvailable){
             return (
-                <li className="next">
+                <li className="next"
+                    onClick={showNewerPosts}>
                     <a href="#">Newer →</a>
                 </li>
             )
