@@ -1,28 +1,29 @@
 import {Component} from 'react'
 import {connect} from 'react-redux';
-import {showOlderPosts,showNewerPosts } from '../../actions/posts-preview-navigation';
-
+import {getActivePosts} from '../../actions/get-active-posts';
 
 import {IndexHeader} from './index-header'
 import {Pager} from './pager'
 import VisiblePreviews from './visible-previews'
 
+
 let PostsIndex = ({
     posts,
-    showOlderPosts,
-    showNewerPosts,
+    getActivePosts,
     visiblePreviews,
     params
 }) => {
+    
     let currentPage = isNaN(Number(params.page))? 1: Number(params.page);
+
     return(
         <section className="col-md-8">
             <IndexHeader posts={posts}/>
 
             <VisiblePreviews />
             <Pager
-                showOlderPosts={()=>showOlderPosts(posts,currentPage + 1)}
-                showNewerPosts={()=>showNewerPosts(posts,currentPage - 1)}
+                showOlderPosts={()=>getActivePosts(posts,currentPage + 1)}
+                showNewerPosts={()=>getActivePosts(posts,currentPage - 1)}
                 olderPostsAvailable = {visiblePreviews.tracking.olderPostsAvailable}
                 newerPostsAvailable = {visiblePreviews.tracking.newerPostsAvailable}
                 currentPage = {currentPage}
@@ -31,7 +32,7 @@ let PostsIndex = ({
         </section>
     );
 
-}
+};
 
 
 const mapStateToProps = (state) => ({
@@ -43,7 +44,7 @@ const mapStateToProps = (state) => ({
 
 PostsIndex = connect(
     mapStateToProps,
-    {showOlderPosts, showNewerPosts}
+    {getActivePosts}
 )(PostsIndex);
 
 

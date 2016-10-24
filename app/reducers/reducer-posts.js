@@ -1,5 +1,5 @@
-import {SHOW_OLDER_POSTS} from '../actions/posts-preview-navigation'
-import {showOlderPosts} from '../actions/posts-preview-navigation'
+import {SHOW_OLDER_POSTS} from '../actions/get-active-posts'
+import {showOlderPosts} from '../actions/get-active-posts'
 
 import visiblePreviews from  './reducer-visible-previews'
 export const posts = (state = [], action) => {
