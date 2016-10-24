@@ -1,25 +1,22 @@
 import {Component} from 'react'
 import {connect} from 'react-redux';
+import {showOlderPosts} from '../../actions/show-older-posts';
+
 
 import {IndexHeader} from './index-header'
+import {Pager} from './pager'
 import VisiblePreviews from './visible-previews'
 
-let PostsIndex = ({posts}) =>(
-    <section className="col-md-8">
-        <IndexHeader posts={posts} />
-        <VisiblePreviews />
-        {/* Pager */}
-        <ul className="pager">
-            <li className="previous">
-                <a href="#">← Older</a>
-            </li>
-            <li className="next">
-                <a href="#">Newer →</a>
-            </li>
-        </ul>
-    </section>
-);
+let PostsIndex = ({posts, showOlderPosts}) => {
+    return(
+        <section className="col-md-8">
+            <IndexHeader posts={posts}/>
+            <VisiblePreviews />
+            <Pager showOlderPosts={()=>showOlderPosts(posts)}/>
+        </section>
+    );
 
+}
 
 
 const mapStateToProps = (state) => ({
@@ -27,8 +24,10 @@ const mapStateToProps = (state) => ({
 });
 
 
+
 PostsIndex = connect(
-    mapStateToProps
+    mapStateToProps,
+    {showOlderPosts}
 )(PostsIndex);
 
 

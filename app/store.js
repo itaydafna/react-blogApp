@@ -33,6 +33,10 @@ const persistedState = {
 
 const store = createStore(reducers, persistedState);
 
-console.log(store.getState());
+function logStore(){console.log(store.getState())};
+
+store.subscribe(logStore);
+
+logStore();
 
 export default store;
