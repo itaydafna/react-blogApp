@@ -6,6 +6,9 @@ import data from '../data/posts.json';
 
 
 
+
+
+
 const reducers = combineReducers({
   // Reducers go here
     activeSection,
@@ -14,12 +17,17 @@ const reducers = combineReducers({
 
 });
 
-const postsData = data.posts;
+//sorting the posts data from newest to oldest
+
+const postsData = data.posts.sort((a,b)=>(Number(b.date)-Number(a.date)));
+
+console.log(postsData);
 
 //initializing the store with the existing posts in the JSON
+//and setting the visible posts to be the 3 newest
 const persistedState = {
     posts : postsData,
-    visiblePreviews: postsData.slice(postsData.length-3)
+    visiblePreviews: postsData.slice(0,3)
 };
 
 const store = createStore(reducers, persistedState);
