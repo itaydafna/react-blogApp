@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {Provider} from 'react-redux';
-import {Router, Route, hashHistory, IndexRedirect, useRouterHistory, Redirect} from 'react-router';
+import {Router, Route, hashHistory, IndexRedirect, useRouterHistory, Redirect, IndexRoute} from 'react-router';
 import {createHashHistory} from 'history'
 
 import store from '../store'
@@ -21,7 +21,8 @@ const Root = () => {
         <Router history={appHistory}>
             <Route path="/" component={App}>
                 <Route path='posts' component={PostsIndex} >
-                    <Route path='(:page)'/>
+                    <Route path='(:page)' component = {VisiblePreviews}/>
+                    <IndexRoute component = {VisiblePreviews}/>
                 </Route>
                 <Route path='admin' component={Admin}/>
                 <Redirect path='/' to ='posts' component = {PostsIndex}/>

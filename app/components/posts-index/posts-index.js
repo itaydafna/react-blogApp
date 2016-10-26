@@ -11,19 +11,21 @@ let PostsIndex = ({
     posts,
     getActivePosts,
     visiblePreviews,
-    params
+    params,
+    children
 }) => {
-    
+
     let currentPage = isNaN(Number(params.page))? 1: Number(params.page);
+    console.log(currentPage);
 
     return(
         <section className="col-md-8">
             <IndexHeader posts={posts}/>
-
-            <VisiblePreviews />
+            {/* the children components are
+             is dynamic VisiblePreviews component  */}
+            {children}
+            {/*<VisiblePreviews />*/}
             <Pager
-                showOlderPosts={()=>getActivePosts(posts,currentPage + 1)}
-                showNewerPosts={()=>getActivePosts(posts,currentPage - 1)}
                 olderPostsAvailable = {visiblePreviews.tracking.olderPostsAvailable}
                 newerPostsAvailable = {visiblePreviews.tracking.newerPostsAvailable}
                 currentPage = {currentPage}

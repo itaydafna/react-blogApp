@@ -22,13 +22,13 @@ const postsData = data.posts.sort((a, b)=>(Number(b.date) - Number(a.date)));
 const persistedState = {
     posts: postsData,
     visiblePreviews: {
-        data: postsData.slice(0, 3),
+        // data: postsData.slice(0, 3),
         tracking: {
-            firstVisiblePreviewIndex: 0,
-            newerPostsAvailable: false,
-            olderPostsAvailable: postsData.length > 3,
-            currentPage: 1,
-            numberOfPages: postsData%3 === 0 ?
+            // firstVisiblePreviewIndex: 0,
+            // newerPostsAvailable: false,
+            // olderPostsAvailable: postsData.length > 3,
+            // currentPage: 1,
+                numberOfPages: postsData%3 === 0 ?
                 (postsData.length - postsData.length%3)/3 :
                     1+(postsData.length - postsData.length%3)/3
         }
