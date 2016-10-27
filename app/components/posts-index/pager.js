@@ -12,7 +12,7 @@ export const Pager = ({
             return (
                 <li className="previous"
                     >
-                    <Link to={`posts/${currentPage+1}`}>← Older</Link>
+                    <Link to={{pathname: 'posts', query: { page: currentPage+1}}}>Older →</Link>
                 </li>
             )
         }
@@ -22,7 +22,7 @@ export const Pager = ({
             return (
                 <li className="next"
                     >
-                    <Link to={currentPage - 1 === 1?`posts`:`posts/${currentPage-1}`}>Newer →</Link>
+                    <Link to={{pathname: 'posts', query: { page: currentPage - 1 === 1 ? '' : currentPage-1}}}>Newer →</Link>
                 </li>
             )
         }

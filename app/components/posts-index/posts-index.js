@@ -11,10 +11,11 @@ let PostsIndex = ({
     posts,
     visiblePreviews,
     params,
+    location: { query },
     children
 }) => {
 
-    let currentPage = isNaN(Number(params.page))? 1: Number(params.page);
+    let currentPage = isNaN(Number(query.page))? 1: Number(query.page);
     console.log(currentPage);
 
     return(
