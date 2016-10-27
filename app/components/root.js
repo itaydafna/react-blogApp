@@ -21,7 +21,6 @@ const Root = () => {
         <Router history={appHistory}>
             <Route path="/" component={App}>
                 <Route path='posts' component={PostsIndex} >
-                    <Route path='(:page)' component = {VisiblePreviews}/>
                     <IndexRoute component = {VisiblePreviews}/>
                 </Route>
                 <Route path='admin' component={Admin}/>

@@ -18,7 +18,7 @@ class VisiblePreviews extends Component{
     //before rendering the component with this data
 
     componentWillReceiveProps (newProps){
-        if(newProps.params.page !== this.props.params.page) {
+        if(newProps.location.query.page !== this.props.location.query.page) {
             this.dispatchPageFromParams(newProps);
         }
     }
@@ -26,9 +26,9 @@ class VisiblePreviews extends Component{
     //this function extracts the current page from the params and dispatches the store with it
     //receives props as a parameter
 
-    dispatchPageFromParams({params, getActivePosts,posts,numberOfPages}){
+    dispatchPageFromParams({params, getActivePosts,posts,numberOfPages, location: { query }}){
 
-        let currentPage = Number(params.page);
+        let currentPage = Number(query.page);
 
 
         //handling a case in which user tries to get to page 1 (or less)
@@ -40,7 +40,12 @@ class VisiblePreviews extends Component{
         //handling a case in which user tries to get to pages higher than the total number of pages
         if(currentPage > numberOfPages){
             currentPage = 1;
-            this.context.router.push(`posts/${numberOfPages}`);
+            this.context.router.push({
+                query: {
+                    page: numberOfPages
+                },
+                path: '/posts'
+            });
         }
 
         //dispatching the store with current page
