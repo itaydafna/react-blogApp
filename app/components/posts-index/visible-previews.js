@@ -5,11 +5,6 @@ import {getActivePosts} from '../../actions/get-active-posts'
 
 class VisiblePreviews extends Component{
 
-    // constructor(props){
-    //     super(props);
-    //
-    // }
-
 
     //initiating the store's data with the current page from the params
 
@@ -17,28 +12,22 @@ class VisiblePreviews extends Component{
 
         this.dispatchPageFromParams(this.props);
 
-
     }
-
-
     
     //added this stage in order to make sure that the store is updated with the current page from the parmas
     //before rendering the component with this data
 
     componentWillReceiveProps (newProps){
         if(newProps.params.page !== this.props.params.page) {
-
             this.dispatchPageFromParams(newProps);
-
         }
     }
 
     //this function extracts the current page from the params and dispatches the store with it
+    //receives props as a parameter
 
-    dispatchPageFromParams(props){
-        const {params, getActivePosts} = props;
-        const {posts} = props.state;
-        const {numberOfPages} =props.state.visiblePreviews.tracking;
+    dispatchPageFromParams({params, getActivePosts,posts,numberOfPages}){
+
         let currentPage = Number(params.page);
 
 
@@ -54,18 +43,16 @@ class VisiblePreviews extends Component{
             this.context.router.push(`posts/${numberOfPages}`);
         }
 
-
+        //dispatching the store with current page
         getActivePosts(posts,currentPage);
-
 
     }
 
 
     render() {
 
-        if(this.props.state.visiblePreviews.data){
-            console.log(this.props.state.visiblePreviews.data);
-            const visiblePreviews = this.props.state.visiblePreviews.data;
+        if(this.props.visiblePreviews){
+            const visiblePreviews = this.props.visiblePreviews;
         return (
             <div>
                 {visiblePreviews.map(preview =>
@@ -85,8 +72,8 @@ class VisiblePreviews extends Component{
     }
 }
 
-//setting router as context type so it can be used to push page to URL on edge cases
-//(used in the dispatchPageFromParams method)
+//setting router as context type so it can be used to push page to URL on edge cases (for example 1 or less)
+//(used in the dispatchPageFromParams method above)
 
 VisiblePreviews.contextTypes = {
     router: PropTypes.object
@@ -94,7 +81,9 @@ VisiblePreviews.contextTypes = {
 
 
 const mapStateToProps = (state) => ({
-    state: state
+    posts: state.posts,
+    numberOfPages: state.visiblePreviews.tracking.numberOfPages,
+    visiblePreviews: state.visiblePreviews.data
 });
 
 
