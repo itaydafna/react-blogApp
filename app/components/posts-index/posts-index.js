@@ -9,7 +9,6 @@ import VisiblePreviews from './visible-previews'
 
 let PostsIndex = ({
     posts,
-    getActivePosts,
     visiblePreviews,
     params,
     children
