@@ -1,7 +1,6 @@
 import {Component} from 'react';
 
 export const SinglePostView = () => {
-    
     return (
         <section className="col-md-8">
             {/* Begin Post */}

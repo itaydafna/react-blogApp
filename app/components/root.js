@@ -25,8 +25,8 @@ const Root = () => {
                     <Route path='(:page)' component = {VisiblePreviews}/>
                     <IndexRoute component = {VisiblePreviews}/>
                 </Route>
-                <Route path="post">
-                    <Route path="(:post)" component = {SinglePostView} />
+                <Route path="post" component = {SinglePostView}>
+                    <Route path="(:post)"/>
                 </Route>
                 <Route path='admin' component={Admin}/>
                 <Redirect path='/' to ='posts' component = {PostsIndex}/>
