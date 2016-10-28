@@ -14,7 +14,7 @@ class SinglePostView extends Component{
     }
 
 
-    //added this stage in order to make sure that the store is updated with the current post from the parmas
+    //added this stage in order to make sure that the store is updated with the current selected post from the parmas
     //before rendering the component with this data
 
     componentWillReceiveProps (newProps){
@@ -37,63 +37,76 @@ class SinglePostView extends Component{
 
 
     render() {
-        return (
-            <section className="col-md-8">
-                {/* Begin Post */}
-                <article>
-                    <header>
-                        <h1 className="page-header">AngularJS - Controllers</h1>
-                        <p>
-                            <small className="glyphicon glyphicon-user"/>
-                            by <a href="#">Ilan Cohen</a>
-                        </p>
-                        <p>
-                            <small className="glyphicon glyphicon-time"/>
-                            Posted on 14 Jan, 2015
-                        </p>
-                        <p>
-                            <b>Tags:&nbsp;</b>
-              <span>
-                <a href="#" className="label label-default">JavaScript</a>
-              </span>
-              <span>
-                <a href="#" className="label label-default">AngularJS</a>
-              </span>
-                        </p>
-                    </header>
-                    <hr />
-                    {/* Post Content */}
-                    <div style={{
+        const selectedPost = this.props.selectedPost;
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+        ];
+        
+        if (selectedPost.title) {
+            const {title, author, date, tags} = selectedPost;
+            const formatedDate =new Date(Number(date));
+
+            console.log(date);
+            return (
+                <section className="col-md-8">
+                    {/* Begin Post */}
+                    <article>
+                        <header>
+                            <h1 className="page-header">{title}</h1>
+                            <p>
+                                <small className="glyphicon glyphicon-user"/>
+                                by <a href="#">{author}</a>
+                            </p>
+                            <p>
+                                <small className="glyphicon glyphicon-time"/>
+                                Posted on {formatedDate.getDate()} {monthNames[formatedDate.getMonth()]}, {formatedDate.getFullYear()}
+                            </p>
+                            <p>
+                                <b>Tags:&nbsp;</b>
+                                {tags.map((tag)=>(
+                                    <span key={tag}>
+                            <a href="#" className="label label-default">{tag}</a>
+                        </span>
+                                ))}
+                            </p>
+                        </header>
+                        <hr />
+                        {/* Post Content */}
+                        <div style={{
                 fontSize: 30,
                  color: 'white',
                  background: 'red',
                   padding: 10,
                  width: 500,
                  height: 600}}>
-                        That's where the post's content should be rendered from the html path..
-                    </div>
-                    {/* End of Post Content */}
-                </article>
-                <hr />
-                {/* End of Post */}
-                {/* Blog Comments */}
-                {/* Comments Form */}
-                <div className="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div className="form-group">
-                            <textarea className="form-control" rows={3} defaultValue={""}/>
+                            That's where the post's content should be rendered from the html path..
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-                <hr />
-                {/* Posted Comments */}
-                {/* Comment */}
-                <hr />
-                {/* Comment */}
-            </section>
-        )
+                        {/* End of Post Content */}
+                    </article>
+                    <hr />
+                    {/* End of Post */}
+                    {/* Blog Comments */}
+                    {/* Comments Form */}
+                    <div className="well">
+                        <h4>Leave a Comment:</h4>
+                        <form role="form">
+                            <div className="form-group">
+                                <textarea className="form-control" rows={3} defaultValue={""}/>
+                            </div>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <hr />
+                    {/* Posted Comments */}
+                    {/* Comment */}
+                    <hr />
+                    {/* Comment */}
+                </section>
+
+            )
+        } else {
+            return <div>Loading...</div>;
+        }
     }
 }
 
