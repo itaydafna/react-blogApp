@@ -21,7 +21,7 @@ class BlogApp extends Component {
                 <div className="container">
                     <div className="row">
                 {/* the children components are
-                either Posts-Index or Admin  */}
+                either PostsIndex, Admin or SinglePostView  */}
                         {children}
                         <Sidebar />
                     </div>

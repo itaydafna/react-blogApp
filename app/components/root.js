@@ -13,6 +13,7 @@ import App from './blog-app';
 import PostsIndex from './posts-index/posts-index';
 import {Admin} from './admin/admin';
 import VisiblePreviews from './posts-index/visible-previews'
+import {SinglePostView} from './single-post/single-post-view'
 
 
 const Root = () => {
@@ -23,6 +24,9 @@ const Root = () => {
                 <Route path='posts' component={PostsIndex} >
                     <Route path='(:page)' component = {VisiblePreviews}/>
                     <IndexRoute component = {VisiblePreviews}/>
+                </Route>
+                <Route path="post">
+                    <Route path="(:post)" component = {SinglePostView} />
                 </Route>
                 <Route path='admin' component={Admin}/>
                 <Redirect path='/' to ='posts' component = {PostsIndex}/>
