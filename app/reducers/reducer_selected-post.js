@@ -21,7 +21,7 @@ const selectedPost = (state = {}, action) => {
 //the second replace() replaces all the whitespace with dashes
 //!NOT SURE IF THIS IS THE RIGHT PLACE TO DEFINE THIS FUNCTION
 
-function removeNonLetters(str){
+export function removeNonLetters(str){
     return str.replace(/[^\w]/g,' ').replace(/\s+/g, '-');
 }
 

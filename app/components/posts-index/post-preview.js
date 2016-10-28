@@ -1,3 +1,6 @@
+import {Link} from 'react-router';
+import {removeNonLetters} from '../../reducers/reducer_selected-post';
+
 export const PostPreview = ({
     title,
     author,
@@ -15,7 +18,7 @@ export const PostPreview = ({
         <article>
             <header>
                 <h2>
-                    <a href="#">{title}</a>
+                    <Link to={`post/${removeNonLetters(title)}`}>{title}</Link>
                 </h2>
                 <p>
                     <small className="glyphicon glyphicon-user"/>
@@ -38,9 +41,9 @@ export const PostPreview = ({
                         </span>
                     ))}
                 </p>
-                <a className="btn btn-primary pull-right" href="#">
+                <Link className="btn btn-primary pull-right" to={`post/${removeNonLetters(title)}`}>
                     Read More <i className="glyphicon glyphicon-chevron-right"/>
-                </a>
+                </Link>
             </footer>
             <hr />
         </article>
