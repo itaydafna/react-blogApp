@@ -1,3 +1,4 @@
+import {GET_SINGLE_POST} from '../actions/get-single-post'
 
 const singlePost = (state = {}, action) => {
     switch (action.type) {
@@ -22,4 +23,7 @@ const singlePost = (state = {}, action) => {
 export function removeNonLetters(str){
     return str.replace(/[^0-9\-]/g,'');
 }
+
+
+export default singlePost;
 

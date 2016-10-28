@@ -13,7 +13,7 @@ import App from './blog-app';
 import PostsIndex from './posts-index/posts-index';
 import {Admin} from './admin/admin';
 import VisiblePreviews from './posts-index/visible-previews'
-import {SinglePostView} from './single-post/single-post-view'
+import SinglePostView from './single-post/single-post-view'
 
 
 const Root = () => {

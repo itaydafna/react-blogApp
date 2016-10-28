@@ -1,5 +1,5 @@
 import {CHANGE_SECTION} from '../actions/change-section'
-export const activeSection = (state = 'posts', action) => {
+const activeSection = (state = 'posts', action) => {
     if(action.payload === state){return state}
 
     switch(action.type) {
@@ -15,4 +15,5 @@ export const activeSection = (state = 'posts', action) => {
     return state;
 };
 
+export default activeSection;
 
