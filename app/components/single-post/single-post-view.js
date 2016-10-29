@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
+import ReactMarkdown from 'react-markdown';
 
 import {getSelectedPost} from '../../actions/get-selected-post'
 
@@ -43,8 +44,11 @@ class SinglePostView extends Component{
         ];
         
         if (selectedPost.title) {
-            const {title, author, date, tags} = selectedPost;
+            const {title, author, date, tags,mdPath} = selectedPost;
             const formatedDate =new Date(Number(date));
+            //this requires the content of the md file at the md file as raw text which can be rendered by the
+            // ReactMarkdown component
+            var md = require(`raw!../../../${mdPath}`);
 
             console.log(date);
             return (
@@ -72,15 +76,8 @@ class SinglePostView extends Component{
                         </header>
                         <hr />
                         {/* Post Content */}
-                        <div style={{
-                fontSize: 30,
-                 color: 'white',
-                 background: 'red',
-                  padding: 10,
-                 width: 500,
-                 height: 600}}>
-                            That's where the post's content should be rendered from the html path..
-                        </div>
+                        {/*this is where the markdown raw text is being rendered*/}
+                        <ReactMarkdown source = {md} />
                         {/* End of Post Content */}
                     </article>
                     <hr />
