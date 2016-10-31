@@ -1,22 +1,9 @@
 import {Component} from 'react'
-
+import {Search} from './search'
 export const Sidebar = () =>(
     <aside className="col-md-4">
     {/* Blog Search Well */}
-    <div className="well">
-        <h4>Search</h4>
-        <form>
-            <div className="input-group">
-                <input type="search" name="search" className="form-control" />
-              <span className="input-group-btn">
-                <button className="btn btn-default" type="submit">
-                  <span className="glyphicon glyphicon-search" />
-                </button>
-              </span>
-            </div>
-            {/* /.input-group */}
-        </form>
-    </div>
+    <Search />
     {/* Blog Categories Well */}
     <div className="well">
         <h3>Filter Posts</h3>
