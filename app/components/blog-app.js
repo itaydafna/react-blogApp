@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {Sidebar} from './sidebar'
+import {Sidebar} from './sidebar/sidebar'
 import {Footer} from './footer'
 import {Header} from './header'
 import {changeSection} from '../actions/change-section'
