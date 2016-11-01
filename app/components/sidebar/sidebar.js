@@ -1,11 +1,11 @@
 import {Component} from 'react'
 import {Search} from './search'
-import {FilterPosts} from './filter-posts'
+import PostsFilter from './posts-filter/posts-filter'
 export const Sidebar = () =>(
     <aside className="col-md-4">
     {/* Blog Search Well */}
     <Search />
     {/* Blog Categories Well */}
-    <FilterPosts />
+    <PostsFilter />
 </aside>
 )
