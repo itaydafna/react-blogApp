@@ -3,6 +3,7 @@ import activeSection from './reducers/reducer_main-navigation'
 import posts from './reducers/reducer-posts'
 import visiblePreviews from './reducers/reducer-visible-previews'
 import selectedPost from './reducers/reducer_selected-post'
+import filteredPosts from './reducers/reducer-filtered-posts'
 
 import data from '../data/posts.json';
 
@@ -11,9 +12,9 @@ const reducers = combineReducers({
     // Reducers go here
     activeSection,
     posts,
+    filteredPosts,
     selectedPost,
     visiblePreviews
-
 });
 
 //sorting the posts data from newest to oldest
@@ -24,6 +25,7 @@ const postsData = data.posts.sort((a, b)=>(Number(b.date) - Number(a.date)));
 const persistedState = {
     //initializing the store with the existing posts in the JSON under posts
     posts: postsData,
+    filteredPosts: postsData,
     visiblePreviews: {
         tracking: {
                 //calculating the total number of post preview pages

@@ -34,7 +34,7 @@ import {combineReducers} from 'redux'
 
 /////////////////////////////////////////////////2.SEPARATED REDUCERS (combined)/////////////////////////////////////
 
-
+//this returns the 3 visible posts based on the page number which is passed on the params
 const data = (state = [], action) => {
     let newFirstPreviewIndex = (action.payload) && action.payload.page * 3 - 3;
     switch (action.type) {
@@ -48,6 +48,7 @@ const data = (state = [], action) => {
 
 
 const tracking = (state={},action) => {
+    console.log(action.payload);
     let newFirstPreviewIndex = (action.payload) && action.payload.page * 3 - 3;
     switch (action.type) {
         case GET_ACTIVE_POSTS:
