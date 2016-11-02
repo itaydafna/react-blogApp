@@ -21,7 +21,11 @@ class VisiblePreviews extends Component{
     componentWillReceiveProps (newProps){
         if(
             newProps.params.page !== this.props.params.page ||
-            newProps.filterTerm !== this.props.filterTerm
+            newProps.filterTerm !== this.props.filterTerm ||
+            newProps.location.query.search !== this.props.location.query.search ||
+            newProps.location.query.category!== this.props.location.query.category ||
+            newProps.location.query.author !== this.props.location.query.author ||
+            newProps.location.query.month !== this.props.location.query.search
         ) {
             this.dispatchPageFromParams(newProps);
         }
@@ -37,10 +41,11 @@ class VisiblePreviews extends Component{
         posts,
         filteredPosts,
         numberOfPages,
+        location
         }){
         let currentPage = Number(params.page);
 
-
+        console.log(location.query);
         //handling a case in which user tries to get to page 1 (or less)
         if(isNaN(currentPage)|| currentPage<=1){
             currentPage = 1;
@@ -54,7 +59,7 @@ class VisiblePreviews extends Component{
         }
 
         //dispatching the store with the filter term from the query params
-        filterPosts(posts,'C');
+        filterPosts(posts,'');
 
         //dispatching the store with current page
         getActivePosts(filteredPosts,currentPage);

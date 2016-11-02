@@ -98,6 +98,7 @@ let PostsFilter = ({posts})=> {
                         <Filter
                             key={category[0]}
                             category={category[0]}
+                            count={category[1]}
                             query = {`?category=${normalizeTag(category[0])}`}
 
                         />)}
