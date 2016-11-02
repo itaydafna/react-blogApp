@@ -2,6 +2,7 @@ import {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {PostPreview} from './post-preview';
 import {getActivePosts} from '../../actions/get-active-posts'
+import {filterPosts} from '../../actions/filter-posts'
 
 class VisiblePreviews extends Component{
 
@@ -18,7 +19,10 @@ class VisiblePreviews extends Component{
     //before rendering the component with this data
 
     componentWillReceiveProps (newProps){
-        if(newProps.params.page !== this.props.params.page) {
+        if(
+            newProps.params.page !== this.props.params.page ||
+            newProps.filterTerm !== this.props.filterTerm
+        ) {
             this.dispatchPageFromParams(newProps);
         }
     }
@@ -26,8 +30,14 @@ class VisiblePreviews extends Component{
     //this function extracts the current page from the params and dispatches the store with it
     //receives props as a parameter
 
-    dispatchPageFromParams({params, getActivePosts,posts,numberOfPages}){
-
+    dispatchPageFromParams({
+        params,
+        filterPosts,
+        getActivePosts,
+        posts,
+        filteredPosts,
+        numberOfPages,
+        }){
         let currentPage = Number(params.page);
 
 
@@ -43,8 +53,11 @@ class VisiblePreviews extends Component{
             this.context.router.push(`posts/${numberOfPages}`);
         }
 
+        //dispatching the store with the filter term from the query params
+        filterPosts(posts,'C');
+
         //dispatching the store with current page
-        getActivePosts(posts,currentPage);
+        getActivePosts(filteredPosts,currentPage);
 
     }
 
@@ -82,15 +95,18 @@ VisiblePreviews.contextTypes = {
 
 const mapStateToProps = (state) => ({
     posts: state.posts,
+    filteredPosts: state.filteredPosts.filteredPostsArray,
     numberOfPages: state.visiblePreviews.tracking.numberOfPages,
-    visiblePreviews: state.visiblePreviews.data
+    visiblePreviews: state.visiblePreviews.data,
+    filterTerm: state.filteredPosts.filterTerm
 });
 
 
 
 VisiblePreviews = connect(
     mapStateToProps,
-    {getActivePosts}
+    {filterPosts
+    ,getActivePosts}
 )(VisiblePreviews);
 
 

@@ -15,7 +15,6 @@ let PostsIndex = ({
 }) => {
 
     let currentPage = isNaN(Number(params.page))? 1: Number(params.page);
-    console.log(currentPage);
 
     return(
         <section className="col-md-8">

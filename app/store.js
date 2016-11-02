@@ -25,7 +25,9 @@ const postsData = data.posts.sort((a, b)=>(Number(b.date) - Number(a.date)));
 const persistedState = {
     //initializing the store with the existing posts in the JSON under posts
     posts: postsData,
-    filteredPosts: postsData,
+    filteredPosts: {
+        filteredPostsArray: postsData
+    },
     visiblePreviews: {
         tracking: {
                 //calculating the total number of post preview pages

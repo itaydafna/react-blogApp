@@ -1,7 +1,7 @@
 export const FILTER_POSTS = 'FILTER_POSTS';
 
 
-export const getActivePosts = (posts,filterTerm)=> (
+export const filterPosts = (posts,filterTerm)=> (
 {
     type: FILTER_POSTS,
     payload: {

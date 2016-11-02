@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import {Filter} from './filter';
 import {Year} from './year';
+import {normalizeAuthor, normalizeTag} from '../../../reducers/reducer-filtered-posts'
 
 let PostsFilter = ({posts})=> {
 
@@ -62,9 +63,6 @@ let PostsFilter = ({posts})=> {
             _.forOwn(resultObj, (months, year) => {
                 let monthsArray = [];
                 _.forOwn(months['months'], (count, month)=> {
-                    console.log('month: ', month);
-                    console.log('count: ', count);
-
                     monthsArray.push([month, count]
                     );
                 });
@@ -79,7 +77,7 @@ let PostsFilter = ({posts})=> {
         const categoriesMap = createFiltersMap(posts, 'tags');
         const authorsMap = createFiltersMap(posts, 'author');
         const yearMap = createDateMap(posts);
-        console.log(yearMap);
+        
 
 
         return (
@@ -100,7 +98,7 @@ let PostsFilter = ({posts})=> {
                         <Filter
                             key={category[0]}
                             category={category[0]}
-                            query = {`?category=${category[0].toLowerCase()}`}
+                            query = {`?category=${normalizeTag(category[0])}`}
 
                         />)}
                 </div>
@@ -114,7 +112,7 @@ let PostsFilter = ({posts})=> {
                             key={category[0]}
                             category={category[0]}
                             count={category[1]}
-                            query = {`?author=${category[0].replace(/\s+/g, '-').toLowerCase()}`}
+                            query = {`?author=${normalizeAuthor(category[0])}`}
                         />)}
                 </div>
                 <h4>
