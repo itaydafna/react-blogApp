@@ -8,11 +8,14 @@ export const Filter = ({
     queryVar,
     queryVal
 })=>{
+
+    console.log(currentPage);
+
     return(
-        <Link to ={{pathname: `/posts/${currentPage}`,
+        <Link to ={{pathname: `/posts/${currentPage?currentPage:''}`,
                     query: {
                     [`${queryVar}`]: `${queryVal}`
-                    }}} href="#" className="list-group-item">
+                    }}}  className="list-group-item">
             <span className="badge">{count}</span>
             {category}
         </Link>
