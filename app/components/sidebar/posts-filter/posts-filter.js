@@ -6,7 +6,7 @@ import {Filter} from './filter';
 import {Year} from './year';
 import {normalizeAuthor, normalizeTag} from '../../../reducers/reducer-filtered-posts'
 
-let PostsFilter = ({posts})=> {
+let PostsFilter = ({posts, currentPage})=> {
 
         //function which creates an object of {filter: count} pairs out of all the posts in the store
         //filter is the parameter which the posts are going to be filtered by (category,author);
@@ -99,9 +99,10 @@ let PostsFilter = ({posts})=> {
                             key={category[0]}
                             category={category[0]}
                             count={category[1]}
-                            query = {`?category=${normalizeTag(category[0])}`}
-
-                        />)}
+                            queryVar = {'category'}
+                            queryVal = {normalizeTag(category[0])}
+                            currentPage = {currentPage}
+                            />)}
                 </div>
                 <h4>
                     <small className="glyphicon glyphicon-user"/>
@@ -113,8 +114,10 @@ let PostsFilter = ({posts})=> {
                             key={category[0]}
                             category={category[0]}
                             count={category[1]}
-                            query = {`?author=${normalizeAuthor(category[0])}`}
-                        />)}
+                            queryVar = {'author'}
+                            queryVal = {normalizeAuthor(category[0])}
+                            currentPage = {currentPage}
+                            />)}
                 </div>
                 <h4>
                     <small className="glyphicon glyphicon-time"/>
@@ -137,7 +140,8 @@ let PostsFilter = ({posts})=> {
     ;
 
 const mapStateToProps = (state) => ({
-    posts: state.posts
+    posts: state.posts,
+    currentPage: state.visiblePreviews.tracking.currentPage
 });
 
 
