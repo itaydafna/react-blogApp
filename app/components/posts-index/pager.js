@@ -4,7 +4,9 @@ import {Link} from 'react-router';
 export const Pager = ({
     olderPostsAvailable,
     newerPostsAvailable,
-    currentPage
+    currentPage,
+    queryVar,
+    queryVal
 
 }) =>{
     const olderPosts = ()=>{
@@ -12,7 +14,9 @@ export const Pager = ({
             return (
                 <li className="previous"
                     >
-                    <Link to={`posts/${currentPage+1}`}>← Older</Link>
+                    <Link to={{pathname: `posts/${currentPage+1}`,
+                          query: {[`${queryVar}`]: `${queryVal}`}}}   
+                    >← Older</Link>
                 </li>
             )
         }
@@ -22,7 +26,10 @@ export const Pager = ({
             return (
                 <li className="next"
                     >
-                    <Link to={currentPage - 1 === 1?`posts`:`posts/${currentPage-1}`}>Newer →</Link>
+                    <Link to={{pathname: currentPage - 1 === 1?`posts`:`posts/${currentPage-1}`,
+                               query: {[`${queryVar}`]: `${queryVal}`}
+                                
+                    }}>Newer →</Link>
                 </li>
             )
         }

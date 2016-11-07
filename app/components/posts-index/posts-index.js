@@ -11,10 +11,16 @@ let PostsIndex = ({
     posts,
     visiblePreviews,
     params,
-    children
+    children,
+    location
 }) => {
 
-    let currentPage = isNaN(Number(params.page))? 1: Number(params.page);
+    let currentPage = isNaN(Number(params.page))? 1: Number(params.page),
+        queryVar = Object.keys(location.query)? Object.keys(location.query)[0] : null,
+        queryVal = location.query[queryVar] || null;
+
+    console.log(queryVar);
+    console.log(queryVar);
 
     return(
         <section className="col-md-8">
@@ -26,6 +32,8 @@ let PostsIndex = ({
             <Pager
                 olderPostsAvailable = {visiblePreviews.tracking.olderPostsAvailable}
                 newerPostsAvailable = {visiblePreviews.tracking.newerPostsAvailable}
+                queryVar = {queryVar}
+                queryVal = {queryVal}
                 currentPage = {currentPage}
 
             />
