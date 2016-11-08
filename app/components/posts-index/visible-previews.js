@@ -97,7 +97,7 @@ class VisiblePreviews extends Component {
         }
 
         //dispatching the store with the filter term from the query params
-        filterPosts(posts, '');
+        filterPosts(posts, 'c');
 
         //dispatching the store with current page
         getActivePosts(filteredPosts, currentPage);
