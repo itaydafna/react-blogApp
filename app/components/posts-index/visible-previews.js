@@ -95,9 +95,12 @@ class VisiblePreviews extends Component {
             }
 
         }
+        
+        //extracting the filter term from the filters params
+        let filterTerm = location.query[Object.keys(location.query)[0]] || '';
 
         //dispatching the store with the filter term from the query params
-        filterPosts(posts, 'c');
+        filterPosts(posts, filterTerm);
 
         //dispatching the store with current page
         getActivePosts(filteredPosts, currentPage);
