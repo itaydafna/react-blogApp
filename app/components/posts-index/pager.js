@@ -9,13 +9,15 @@ export const Pager = ({
     queryVal
 
 }) =>{
+    console.log(queryVar,'=',queryVal);
     const olderPosts = ()=>{
         if(olderPostsAvailable){
             return (
                 <li className="previous"
                     >
                     <Link to={{pathname: `posts/${currentPage+1}`,
-                          query: {[`${queryVar}`]: `${queryVal}`}}}   
+                          query: queryVar?{[`${queryVar}`]: `${queryVal}`}:''
+                          }}
                     >← Older</Link>
                 </li>
             )
@@ -27,7 +29,7 @@ export const Pager = ({
                 <li className="next"
                     >
                     <Link to={{pathname: currentPage - 1 === 1?`posts`:`posts/${currentPage-1}`,
-                               query: {[`${queryVar}`]: `${queryVal}`}
+                               query: queryVar?{[`${queryVar}`]: `${queryVal}`}:''
                                 
                     }}>Newer →</Link>
                 </li>

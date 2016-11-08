@@ -8,9 +8,6 @@ export const Filter = ({
     queryVar,
     queryVal
 })=>{
-
-    console.log(currentPage);
-
     return(
         <Link to ={{pathname: `/posts/${currentPage?currentPage:''}`,
                     query: {

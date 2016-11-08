@@ -18,10 +18,6 @@ let PostsIndex = ({
     let currentPage = isNaN(Number(params.page))? 1: Number(params.page),
         queryVar = Object.keys(location.query)? Object.keys(location.query)[0] : null,
         queryVal = location.query[queryVar] || null;
-
-    console.log(queryVar);
-    console.log(queryVar);
-
     return(
         <section className="col-md-8">
             <IndexHeader posts={posts}/>

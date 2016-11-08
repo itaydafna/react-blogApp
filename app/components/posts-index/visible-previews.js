@@ -49,14 +49,16 @@ class VisiblePreviews extends Component {
         if (currentPage <= 1 || isNaN(currentPage)) {
             currentPage = 1;
             if (location.query) {
+                let queryVar = Object.keys(location.query)[0];
+
                 if (location.query.author) {
-                    this.context.router.push(`posts/${location.query.author}`)
+                    this.context.router.push(`posts/?${queryVar}=${location.query.author}`)
                 }
                 else if (location.query.category) {
-                    this.context.router.push(`posts/${location.query.category}`);
+                    this.context.router.push(`posts/?${queryVar}=${location.query.category}`);
                 }
                 else if (location.query.month) {
-                    this.context.router.push(`posts/${location.query.month}`);
+                    this.context.router.push(`posts/?${queryVar}=${location.query.month}`);
                 }
             }
             else {
