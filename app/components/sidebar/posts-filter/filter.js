@@ -4,12 +4,11 @@ import {Link} from 'react-router';
 export const Filter = ({
     count,
     category,
-    currentPage,
     queryVar,
     queryVal
 })=>{
     return(
-        <Link to ={{pathname: `/posts/${currentPage?currentPage:''}`,
+        <Link to ={{pathname: `/posts/`,
                     query: {
                     [`${queryVar}`]: `${queryVal}`
                     }}}  className="list-group-item">
