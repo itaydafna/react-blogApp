@@ -60,6 +60,10 @@ class VisiblePreviews extends Component {
                 else if (location.query.month) {
                     this.context.router.push(`posts/?${queryVar}=${location.query.month}`);
                 }
+                else if (location.query.search) {
+                    this.context.router.push(`posts/?${queryVar}=${location.query.search}`);
+                }
+
                 else {
                     this.context.router.push(`posts/`);
                 }
@@ -81,6 +85,9 @@ class VisiblePreviews extends Component {
                 }
                 else if (location.query.month) {
                     this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.month}`);
+                }
+                else if (location.query.search) {
+                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.search}`);
                 }
                 else {
                     this.context.router.push(`posts/${numberOfPages}`);
