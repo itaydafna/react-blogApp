@@ -60,16 +60,33 @@ class VisiblePreviews extends Component {
                 else if (location.query.month) {
                     this.context.router.push(`posts/?${queryVar}=${location.query.month}`);
                 }
+                else {
+                    this.context.router.push(`posts/`);
+                }
             }
-            else {
-                this.context.router.push(`posts/`);
-            }
+
         }
 
         //handling a case in which user tries to get to pages higher than the total number of pages
         if (currentPage > numberOfPages) {
-            currentPage = 1;
-            this.context.router.push(`posts/${numberOfPages}`);
+            currentPage = numberOfPages;
+            if (location.query) {
+                let queryVar = Object.keys(location.query)[0];
+
+                if (location.query.author) {
+                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.author}`)
+                }
+                else if (location.query.category) {
+                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.category}`);
+                }
+                else if (location.query.month) {
+                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.month}`);
+                }
+                else {
+                    this.context.router.push(`posts/${numberOfPages}`);
+                }
+            }
+
         }
 
         //dispatching the store with the filter term from the query params
