@@ -1,5 +1,6 @@
 import {Link} from 'react-router';
 import {removeNonLetters} from '../../reducers/reducer_selected-post';
+import {normalizeAuthor, normalizeTag} from '../../reducers/reducer-filtered-posts'
 
 export const PostPreview = ({
     title,
@@ -13,7 +14,7 @@ export const PostPreview = ({
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
     ];
-    
+
     return (
         <article>
             <header>
@@ -22,7 +23,13 @@ export const PostPreview = ({
                 </h2>
                 <p>
                     <small className="glyphicon glyphicon-user"/>
-                    by <a href="#">{author}</a>
+                    by <Link
+                    to={{pathname: `/posts/`,
+                    query: {
+                    'author': `${normalizeAuthor(author)}`
+                    }}}>
+                    {author}
+                </Link>
                 </p>
                 <p>
                     <small className="glyphicon glyphicon-time"/>
@@ -37,7 +44,12 @@ export const PostPreview = ({
                     <b>Tags:&nbsp;</b>
                     {tags.map((tag)=>(
                         <span key={tag}>
-                            <a href="#" className="label label-default">{tag}</a>
+                            <Link
+                                className="label label-default"
+                                to={{pathname: `/posts/`,
+                    query: {
+                    'category': `${normalizeTag(tag)}`
+                    }}}>{tag}</Link>
                         </span>
                     ))}
                 </p>
