@@ -100,7 +100,7 @@ class PostsFilter extends Component {
                     </a>
                 </div>
                 <h4>
-                    <small className="glyphicon glyphicon-tag"/>x
+                    <small className="glyphicon glyphicon-tag"/>
                     Category
                 </h4>
                 <div className="list-group">
