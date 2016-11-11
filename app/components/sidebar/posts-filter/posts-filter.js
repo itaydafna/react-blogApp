@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import {Filter} from './filter';
 import {Year} from './year';
-import {normalizeAuthor, normalizeTag,normalizeMonth} from '../../../reducers/reducer-filtered-posts'
+import {normalizeAuthor, normalizeTag} from '../../../reducers/reducer-filtered-posts'
 
 class PostsFilter extends Component {
 

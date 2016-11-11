@@ -45,7 +45,10 @@ const filteredPostsArray = (state = [], action) => {
                    //testing if the post's author name includes part of the filter term
                    _.includes(normalizeAuthor(post.author),normalizeAuthor(filterTerm))||
                    //testing if one or more(some) of the post's tags includes part of the filter term
-                       post.tags.some((tag)=>_.includes(normalizeTag(tag),normalizeTag(filterTerm)))
+                       post.tags.some((tag)=>_.includes(normalizeTag(tag),normalizeTag(filterTerm)))||
+                    //testing if the post's dates includes part of the filter term
+                   _.includes(normalizeMonth(post.date),filterTerm)
+
                ){
                    return post
                }
