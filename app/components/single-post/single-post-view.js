@@ -1,14 +1,17 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
+import {Link} from 'react-router';
+
 
 import {getSelectedPost} from '../../actions/get-selected-post'
+import {normalizeAuthor, normalizeTag} from '../../reducers/reducer-filtered-posts'
 
-class SinglePostView extends Component{
+class SinglePostView extends Component {
 
     //initiating the store's data with the selected post from the params
 
-    componentWillMount(){
+    componentWillMount() {
 
         this.dispatchSelectedPostFromParams(this.props);
 
@@ -18,8 +21,8 @@ class SinglePostView extends Component{
     //added this stage in order to make sure that the store is updated with the current selected post from the parmas
     //before rendering the component with this data
 
-    componentWillReceiveProps (newProps){
-        if(newProps.params.post !== this.props.params.post) {
+    componentWillReceiveProps(newProps) {
+        if (newProps.params.post !== this.props.params.post) {
             this.dispatchSelectedPostFromParams(newProps);
         }
     }
@@ -28,13 +31,12 @@ class SinglePostView extends Component{
     //this function extracts the selectedPost from the params and dispatches the store with it
     //receives props as a parameter
 
-    dispatchSelectedPostFromParams({params, getSelectedPost,posts}){
-        
+    dispatchSelectedPostFromParams({params, getSelectedPost, posts}) {
+
         //dispatching the store with the selected post
-        getSelectedPost(posts,params.post);
+        getSelectedPost(posts, params.post);
 
     }
-
 
 
     render() {
@@ -42,10 +44,10 @@ class SinglePostView extends Component{
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
             "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
         ];
-        
+
         if (selectedPost.title) {
-            const {title, author, date, tags,mdPath} = selectedPost;
-            const formatedDate =new Date(Number(date));
+            const {title, author, date, tags, mdPath} = selectedPost;
+            const formatedDate = new Date(Number(date));
             //this requires the content of the md file at the md file as raw text which can be rendered by the
             // ReactMarkdown component
             var md = require(`raw!../../../${mdPath}`);
@@ -59,17 +61,31 @@ class SinglePostView extends Component{
                             <h1 className="page-header">{title}</h1>
                             <p>
                                 <small className="glyphicon glyphicon-user"/>
-                                by <a href="#">{author}</a>
+                                by <Link
+                                to={{pathname: `/posts/`,
+                    query: {
+                    'author': `${normalizeAuthor(author)}`
+                    }}}
+                            >
+                                {author}
+                            </Link>
                             </p>
                             <p>
                                 <small className="glyphicon glyphicon-time"/>
-                                Posted on {formatedDate.getDate()} {monthNames[formatedDate.getMonth()]}, {formatedDate.getFullYear()}
+                                Posted
+                                on {formatedDate.getDate()} {monthNames[formatedDate.getMonth()]}, {formatedDate.getFullYear()}
                             </p>
                             <p>
                                 <b>Tags:&nbsp;</b>
                                 {tags.map((tag)=>(
                                     <span key={tag}>
-                            <a href="#" className="label label-default">{tag}</a>
+                            <Link href="#" className="label label-default"
+                                  to={{pathname: `/posts/`,
+                    query: {
+                    'category': `${normalizeTag(tag)}`
+                    }}}>
+                                {tag}
+                            </Link>
                         </span>
                                 ))}
                             </p>
@@ -77,7 +93,7 @@ class SinglePostView extends Component{
                         <hr />
                         {/* Post Content */}
                         {/*this is where the markdown raw text is being rendered*/}
-                        <ReactMarkdown source = {md} />
+                        <ReactMarkdown source={md}/>
                         {/* End of Post Content */}
                     </article>
                     <hr />
@@ -108,7 +124,6 @@ class SinglePostView extends Component{
 }
 
 
-
 const mapStateToProps = (state) => ({
     posts: state.posts,
     selectedPost: state.selectedPost
@@ -117,7 +132,6 @@ const mapStateToProps = (state) => ({
 SinglePostView = connect(
     mapStateToProps,
     {getSelectedPost}
-    
 )(SinglePostView);
 
 export default SinglePostView;
