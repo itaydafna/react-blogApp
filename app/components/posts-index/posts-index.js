@@ -7,18 +7,21 @@ import {Pager} from './pager'
 import VisiblePreviews from './visible-previews'
 
 
-let PostsIndex = ({
-    posts,
-    visiblePreviews,
-    params,
-    children,
-    location
-}) => {
+class PostsIndex extends Component{
+    
+   render(){
+        const{posts,
+            olderPostsAvailable,
+            newerPostsAvailable,
+            params,
+            children,
+            location} = this.props;
 
-    let currentPage = isNaN(Number(params.page))? 1: Number(params.page),
+        let currentPage = isNaN(Number(params.page))? 1: Number(params.page),
         queryVar = Object.keys(location.query)? Object.keys(location.query)[0] : null,
         queryVal = location.query[queryVar] || null;
-    return(
+
+        return(
         <section className="col-md-8">
             <IndexHeader posts={posts}/>
             {/* the children components are
@@ -26,22 +29,23 @@ let PostsIndex = ({
             {children}
             {/*<VisiblePreviews />*/}
             <Pager
-                olderPostsAvailable = {visiblePreviews.tracking.olderPostsAvailable}
-                newerPostsAvailable = {visiblePreviews.tracking.newerPostsAvailable}
+                olderPostsAvailable = {olderPostsAvailable}
+                newerPostsAvailable = {newerPostsAvailable}
                 queryVar = {queryVar}
                 queryVal = {queryVal}
                 currentPage = {currentPage}
 
             />
         </section>
-    );
+    )};
 
 };
 
 
 const mapStateToProps = (state) => ({
     posts: state.filteredPosts.filteredPostsArray,
-    visiblePreviews: state.visiblePreviews
+    olderPostsAvailable: state.visiblePreviews.tracking.olderPostsAvailable,
+    newerPostsAvailable: state.visiblePreviews.tracking.newerPostsAvailable
 });
 
 
