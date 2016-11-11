@@ -112,6 +112,7 @@ class PostsFilter extends Component {
                             queryVar={'category'}
                             queryVal={normalizeTag(category[0])}
                             currentPage={page}
+                            filterTerm = {filterTerm}
                         />)}
                 </div>
                 <h4>
@@ -127,6 +128,7 @@ class PostsFilter extends Component {
                             queryVar={'author'}
                             queryVal={normalizeAuthor(category[0])}
                             currentPage={page}
+                            filterTerm = {filterTerm}
                         />)}
                 </div>
                 <h4>
