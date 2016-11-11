@@ -53,15 +53,18 @@ const tracking = (state={},action) => {
         case GET_ACTIVE_POSTS:
 
             let numFilteredPosts = action.payload.posts.length-1,
+                newCurrentPage = action.payload.page,
                 newNumberOfPages = action.payload.posts%3 === 0 ?
                 (numFilteredPosts - numFilteredPosts%3)/3 :
                 1+(numFilteredPosts - numFilteredPosts%3)/3;
 
+            console.log(newCurrentPage);
+
             return Object.assign({}, state, {
                 firstVisiblePreviewIndex: newFirstPreviewIndex,
                 newerPostsAvailable: newFirstPreviewIndex > 0,
-                olderPostsAvailable: action.payload.page < newNumberOfPages,
-                currentPage: action.payload.page,
+                olderPostsAvailable: newCurrentPage < newNumberOfPages,
+                currentPage: newCurrentPage,
                 //calculating the total number of post preview pages based on the filteredPosts array
                 numberOfPages: newNumberOfPages
             })

@@ -33,7 +33,8 @@ export class Search extends Component{
                         <input type="search"
                                name="search"
                                className="form-control"
-                               onChange={onSearchUpdate}
+                               onKeyUp={onSearchUpdate}
+                               onBlur = {e=>e.target.value=''}
                         />
             <span className="input-group-btn">
               <button className="btn btn-default" type="submit">

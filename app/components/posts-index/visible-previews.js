@@ -43,62 +43,45 @@ class VisiblePreviews extends Component {
         numberOfPages,
         location
     }) {
-        let currentPage = Number(params.page);
+        let currentPage = Number(params.page),
+            queryVar = Object.keys(location.query)[0],
+            queryVal = location.query[queryVar];
+        //turning current page to 1 in case it is NaN of smaller or equal to one
+        //this will help handling a case in which user tries to get to page 1 (or less)
+        currentPage = (currentPage<= 1 || isNaN(currentPage))?1:currentPage;
+
+        //handling a case in which filter term matches 0 posts
+
+        if (numberOfPages === 0){
+            if (queryVar) {
+                this.context.router.push(`posts/?${queryVar}=${queryVal}`)
+            } else {
+                this.context.router.push(`posts/`);
+            }
+        }
 
         //handling a case in which user tries to get to page 1 (or less)
-        if (currentPage <= 1 || isNaN(currentPage)) {
-            currentPage = 1;
-            if (location.query) {
-                let queryVar = Object.keys(location.query)[0];
-        
-                if (location.query.author) {
-                    this.context.router.push(`posts/?${queryVar}=${location.query.author}`)
-                }
-                else if (location.query.category) {
-                    this.context.router.push(`posts/?${queryVar}=${location.query.category}`);
-                }
-                else if (location.query.month) {
-                    this.context.router.push(`posts/?${queryVar}=${location.query.month}`);
-                }
-                else if (location.query.search) {
-                    this.context.router.push(`posts/?${queryVar}=${location.query.search}`);
-                }
-        
-                else {
-                    this.context.router.push(`posts/`);
-                }
+       else if (currentPage === 1) {
+            if (queryVar) {
+                    this.context.router.push(`posts/?${queryVar}=${queryVal}`)
+                } else {
+                this.context.router.push(`posts/`);
             }
-        
         }
 
         //handling a case in which user tries to get to pages higher than the total number of pages
-        if (currentPage > numberOfPages) {
-            currentPage = numberOfPages;
-            if (location.query) {
-                let queryVar = Object.keys(location.query)[0];
-        
-                if (location.query.author) {
-                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.author}`)
-                }
-                else if (location.query.category) {
-                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.category}`);
-                }
-                else if (location.query.month) {
-                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.month}`);
-                }
-                else if (location.query.search) {
-                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.search}`);
-                }
-                else {
-                    this.context.router.push(`posts/${numberOfPages}`);
-                }
+         else if (currentPage > numberOfPages) {
+            if (queryVar) {
+                    this.context.router.push(`posts/${numberOfPages}?${queryVar}=${queryVal}`)
+            }
+            else {
+                this.context.router.push(`posts/${numberOfPages}`);
             }
         
         }
         
         //extracting the filter term from the filters params
         let filterTerm = location.query[Object.keys(location.query)[0]] || '';
-        console.log(filterTerm);
 
         //dispatching the store with the filter term from the query params
         filterPosts(posts, filterTerm);
