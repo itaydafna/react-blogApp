@@ -19,7 +19,7 @@ export const normalizeTag = (tagName) => {
 const filterTerm = (state='',action)=>{
     switch (action.type){
         case FILTER_POSTS:
-            return action.payload.filterTerm ? action.payload.filterTerm: state;
+            return action.payload.filterTerm ? action.payload.filterTerm: '';
     }
     return state;
 };

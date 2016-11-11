@@ -25,7 +25,7 @@ export class Search extends Component{
                         <input type="search"
                                name="search"
                                className="form-control"
-                               onKeyUp={this.onSearchUpdate}
+                               onChange={this.onSearchUpdate}
                         />
             <span className="input-group-btn">
               <button className="btn btn-default" type="submit">

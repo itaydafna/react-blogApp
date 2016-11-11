@@ -80,7 +80,7 @@ class PostsFilter extends Component {
 
     render() {
 
-        const{posts,currentPage} = this.props;
+        const{posts,currentPage,filterTerm} = this.props;
         const categoriesMap = this.createFiltersMap(posts, 'tags');
         const authorsMap = this.createFiltersMap(posts, 'author');
         const yearMap = this.createDateMap(posts);
@@ -92,13 +92,15 @@ class PostsFilter extends Component {
             <div className="well">
                 <h3>Filter Posts</h3>
                 <div className="list-group">
-                    <a href="#" className="list-group-item active">
+                    <a href="#"
+                       className={filterTerm === ''?"list-group-item active":"list-group-item"}
+                    >
                         <span className="badge">{posts.length}</span>
                         Show All Posts
                     </a>
                 </div>
                 <h4>
-                    <small className="glyphicon glyphicon-tag"/>
+                    <small className="glyphicon glyphicon-tag"/>x
                     Category
                 </h4>
                 <div className="list-group">
@@ -150,7 +152,8 @@ class PostsFilter extends Component {
 
 const mapStateToProps = (state) => ({
     posts: state.posts,
-    currentPage: state.visiblePreviews.tracking.currentPage
+    currentPage: state.visiblePreviews.tracking.currentPage,
+    filterTerm: state.filteredPosts.filterTerm
 });
 
 
