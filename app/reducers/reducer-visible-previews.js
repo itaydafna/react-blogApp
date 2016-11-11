@@ -58,8 +58,6 @@ const tracking = (state={},action) => {
                 (numFilteredPosts - numFilteredPosts%3)/3 :
                 1+(numFilteredPosts - numFilteredPosts%3)/3;
 
-            console.log(newCurrentPage);
-
             return Object.assign({}, state, {
                 firstVisiblePreviewIndex: newFirstPreviewIndex,
                 newerPostsAvailable: newFirstPreviewIndex > 0,

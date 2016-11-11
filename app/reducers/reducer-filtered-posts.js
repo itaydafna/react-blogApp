@@ -15,6 +15,17 @@ export const normalizeTag = (tagName) => {
     return tagName.replace(/\s+/g, '').toLowerCase()
 };
 
+//function which turns a date string to this format : monthname-yearnumber (march-1982)
+//(also used by the posts-filter component)
+
+export const normalizeMonth = (dateString) => {
+    const monthNames = ["january", "february", "march", "april", "may", "june",
+        "july", "august", "september", "october", "november", "december"
+    ];
+    let date = new Date(Number(dateString));
+    return `${monthNames[date.getMonth()]}-${date.getFullYear()}`
+};
+
 
 const filterTerm = (state='',action)=>{
     switch (action.type){

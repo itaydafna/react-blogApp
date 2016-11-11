@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import {Filter} from './filter';
 import {Year} from './year';
-import {normalizeAuthor, normalizeTag} from '../../../reducers/reducer-filtered-posts'
+import {normalizeAuthor, normalizeTag,normalizeMonth} from '../../../reducers/reducer-filtered-posts'
 
 class PostsFilter extends Component {
 
@@ -44,7 +44,7 @@ class PostsFilter extends Component {
         let resultObj = {},
             resultArr = [];
 
-        //mapping years in and months in resultsObj (months are nested in every year)
+        //mapping years and months in resultsObj (months are nested in every year)
         posts.forEach((post)=> {
                 let date = new Date(Number(post.date));
                 if (!resultObj[date.getFullYear()]) {
@@ -142,6 +142,7 @@ class PostsFilter extends Component {
                             key={year[0]}
                             year={year[0]}
                             months={year[1]}
+                            filterTerm = {filterTerm}
                         />)
                     }
                 </div>

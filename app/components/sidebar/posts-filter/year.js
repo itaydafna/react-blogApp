@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {Filter} from './filter';
 
-export const Year = ({year,months}) => {
+export const Year = ({year,months,filterTerm}) => {
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
@@ -15,7 +15,9 @@ export const Year = ({year,months}) => {
                     key={month[0]}
                     category={monthNames[month[0]]}
                     count={month[1]}
-                    query = {`?month=${monthNames[month[0]].toLocaleLowerCase()}-${year}`}
+                    queryVar = {`month`}
+                    queryVal = {`${monthNames[month[0]].toLocaleLowerCase()}-${year}`}
+                    filterTerm={filterTerm}
                 />)}
         </div>
     )
