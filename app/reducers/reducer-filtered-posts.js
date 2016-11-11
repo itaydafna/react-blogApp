@@ -30,7 +30,7 @@ export const normalizeMonth = (dateString) => {
 const filterTerm = (state='',action)=>{
     switch (action.type){
         case FILTER_POSTS:
-            return action.payload.filterTerm ? action.payload.filterTerm: '';
+            return action.payload.filterTerm ? action.payload.filterTerm.toLowerCase(): '';
     }
     return state;
 };
@@ -47,7 +47,9 @@ const filteredPostsArray = (state = [], action) => {
                    //testing if one or more(some) of the post's tags includes part of the filter term
                        post.tags.some((tag)=>_.includes(normalizeTag(tag),normalizeTag(filterTerm)))||
                     //testing if the post's dates includes part of the filter term
-                   _.includes(normalizeMonth(post.date),filterTerm)
+                   _.includes(normalizeMonth(post.date),filterTerm)||
+                //testing if the post's description includes part of the filter term
+                   _.includes(post.description.toLowerCase(),filterTerm)
 
                ){
                    return post
