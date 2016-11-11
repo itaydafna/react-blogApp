@@ -8,4 +8,4 @@ export const Sidebar = () =>(
     {/* Blog Categories Well */}
     <PostsFilter />
 </aside>
-)
+);

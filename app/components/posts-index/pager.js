@@ -9,7 +9,6 @@ export const Pager = ({
     queryVal
 
 }) =>{
-    console.log(queryVar,'=',queryVal);
     const olderPosts = ()=>{
         if(olderPostsAvailable){
             return (

@@ -1,4 +1,5 @@
 import {Component, PropTypes} from 'react';
+import _ from 'lodash'
 
 
 export class Search extends Component{
@@ -11,8 +12,8 @@ export class Search extends Component{
    //this function "injects" the search query params to the url upon input change
    onSearchUpdate(e){
         let searchText = e.target.value;
-        searchText === '' ? this.context.router.push(`/`):
-            this.context.router.push(`/posts?search=${searchText}`);
+        _.debounce(searchText === '' ? this.context.router.push(`/`):
+            this.context.router.push(`/posts?search=${searchText}`),500);
     }
 
     render(){
@@ -24,7 +25,7 @@ export class Search extends Component{
                         <input type="search"
                                name="search"
                                className="form-control"
-                               onChange= {this.onSearchUpdate}
+                               onKeyUp={this.onSearchUpdate}
                         />
             <span className="input-group-btn">
               <button className="btn btn-default" type="submit">

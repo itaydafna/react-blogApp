@@ -25,7 +25,7 @@ class VisiblePreviews extends Component {
             newProps.location.query.search !== this.props.location.query.search ||
             newProps.location.query.category !== this.props.location.query.category ||
             newProps.location.query.author !== this.props.location.query.author ||
-            newProps.location.query.month !== this.props.location.query.search
+            newProps.location.query.month !== this.props.location.query.month
         ) {
             this.dispatchPageFromParams(newProps);
         }
@@ -50,7 +50,7 @@ class VisiblePreviews extends Component {
             currentPage = 1;
             if (location.query) {
                 let queryVar = Object.keys(location.query)[0];
-
+        
                 if (location.query.author) {
                     this.context.router.push(`posts/?${queryVar}=${location.query.author}`)
                 }
@@ -63,12 +63,12 @@ class VisiblePreviews extends Component {
                 else if (location.query.search) {
                     this.context.router.push(`posts/?${queryVar}=${location.query.search}`);
                 }
-
+        
                 else {
                     this.context.router.push(`posts/`);
                 }
             }
-
+        
         }
 
         //handling a case in which user tries to get to pages higher than the total number of pages
@@ -76,7 +76,7 @@ class VisiblePreviews extends Component {
             currentPage = numberOfPages;
             if (location.query) {
                 let queryVar = Object.keys(location.query)[0];
-
+        
                 if (location.query.author) {
                     this.context.router.push(`posts/${numberOfPages}?${queryVar}=${location.query.author}`)
                 }
@@ -93,7 +93,7 @@ class VisiblePreviews extends Component {
                     this.context.router.push(`posts/${numberOfPages}`);
                 }
             }
-
+        
         }
         
         //extracting the filter term from the filters params

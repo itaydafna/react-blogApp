@@ -40,7 +40,7 @@ let PostsIndex = ({
 
 
 const mapStateToProps = (state) => ({
-    posts: state.posts,
+    posts: state.filteredPosts.filteredPostsArray,
     visiblePreviews: state.visiblePreviews
 });
 
