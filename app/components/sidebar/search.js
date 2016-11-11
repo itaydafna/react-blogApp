@@ -10,13 +10,21 @@ export class Search extends Component{
     }
 
    //this function "injects" the search query params to the url upon input change
-   onSearchUpdate(e){
-        let searchText = e.target.value;
-        _.debounce(searchText === '' ? this.context.router.push(`/`):
-            this.context.router.push(`/posts?search=${searchText}`),500);
-    }
+   onSearchUpdate(target){
+           let searchText = target.value;
+           searchText === '' ? this.context.router.push(`/`) :
+               this.context.router.push(`/posts?search=${searchText}`);
+       }
+
 
     render(){
+        //used this in order to be able to use ._debounce
+        //found it here: http://stackoverflow.com/questions/35435074/using-debouncer-with-react-event
+        //(_.compose has been updated to _.flowRight by lodash)
+        let onSearchUpdate =  _.flowRight(
+            _.debounce(this.onSearchUpdate,100),
+            _.property('target')
+        );
         return (
             <div className="well">
                 <h4>Search</h4>
@@ -25,7 +33,7 @@ export class Search extends Component{
                         <input type="search"
                                name="search"
                                className="form-control"
-                               onChange={this.onSearchUpdate}
+                               onChange={onSearchUpdate}
                         />
             <span className="input-group-btn">
               <button className="btn btn-default" type="submit">
