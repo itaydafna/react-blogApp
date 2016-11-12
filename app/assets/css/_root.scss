@@ -82,3 +82,8 @@ body {
   resize: none;
   width: 100%;
 }
+
+//added this for Link components active state
+.active-link {
+  color: #fff !important;
+}

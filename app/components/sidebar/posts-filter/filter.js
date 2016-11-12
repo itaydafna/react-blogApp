@@ -9,7 +9,6 @@ export const Filter = ({
     queryVal,
     filterTerm
 })=>{
-    console.log(queryVar,queryVal);
     return(
         <Link to ={{pathname: `/posts/`,
                     query: {

@@ -77,9 +77,9 @@ class VisiblePreviews extends Component {
             else {
                 this.context.router.push(`posts/${numberOfPages}`);
             }
-        
+
         }
-        
+
         //extracting the filter term from the filters params
         let filterTerm = location.query[Object.keys(location.query)[0]] || '';
 

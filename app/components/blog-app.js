@@ -4,20 +4,17 @@ import {connect} from 'react-redux';
 import {Sidebar} from './sidebar/sidebar'
 import {Footer} from './footer'
 import {Header} from './header'
-import {changeSection} from '../actions/change-section'
 
 
 
 class BlogApp extends Component {
 
     render() {
-      const {onNavClick, activeSection, children} = this.props;
+      const {children} = this.props;
 
         return (
             <div>
-                <Header
-                    onNavClick={onNavClick}
-                    activeSection={activeSection}/>
+                <Header/>
                 <div className="container">
                     <div className="row">
                 {/* the children components are
@@ -33,7 +30,6 @@ class BlogApp extends Component {
 }
 
 const mapStateProps = (state) => ({
-    activeSection: state.activeSection,
     posts: state.posts
 
 });
@@ -41,8 +37,7 @@ const mapStateProps = (state) => ({
 
 
 const App = connect(
-    mapStateProps,
-    {onNavClick: changeSection}
+    mapStateProps
 )(BlogApp);
 
 

@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Link} from 'react-router'
 
 export const Header = ({onNavClick, activeSection}) => {
     return (
@@ -14,25 +15,29 @@ export const Header = ({onNavClick, activeSection}) => {
                         <span className="icon-bar" />
                     </label>
                 </button>
-                <a className="navbar-brand" href="#/"
-                   onClick = {()=>onNavClick('posts')}
-                >Netcraft Academy</a>
+                <Link
+                    className="navbar-brand"
+                    to="posts"
+                >
+                    Netcraft Academy
+                </Link>
             </div>
             <input type="checkbox" id="toggle-nav-mobile" hidden />
             {/* Collect the nav links, forms, and other content for toggling */}
             <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav">
-                    <li
-                        onClick = {()=>onNavClick('posts')}
-                        className = {!activeSection || activeSection === 'posts' ? 'active': null}
-                    >
-                        <a href="#/posts">Posts</a>
+                    <li>
+                        <Link to="posts"
+                              activeClassName = 'active-link'
+                        >
+                            Posts
+                        </Link>
                     </li>
-                    <li
-                        onClick = {()=>onNavClick('admin')}
-                        className = {activeSection === 'admin' ? 'active': null}
-                    >
-                        <a href="#/admin">Admin</a>
+                    <li>
+                        <Link to="admin"
+                              activeClassName = 'active-link'>
+                            Admin
+                        </Link>
                     </li>
                 </ul>
             </div>

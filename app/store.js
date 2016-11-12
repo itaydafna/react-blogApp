@@ -1,5 +1,4 @@
 import {createStore, combineReducers} from 'redux';
-import activeSection from './reducers/reducer_main-navigation'
 import posts from './reducers/reducer-posts'
 import visiblePreviews from './reducers/reducer-visible-previews'
 import selectedPost from './reducers/reducer_selected-post'
@@ -10,7 +9,6 @@ import data from '../data/posts.json';
 
 const reducers = combineReducers({
     // Reducers go here
-    activeSection,
     posts,
     filteredPosts,
     selectedPost,

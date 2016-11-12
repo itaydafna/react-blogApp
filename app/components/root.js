@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {Provider} from 'react-redux';
-import {Router, Route, hashHistory, IndexRedirect, useRouterHistory, Redirect, IndexRoute} from 'react-router';
+import {Router, Route, IndexRedirect, useRouterHistory, Redirect, IndexRoute} from 'react-router';
 import {createHashHistory} from 'history'
 
 import store from '../store'
