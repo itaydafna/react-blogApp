@@ -1,5 +1,4 @@
 import {Component} from 'react';
-import {connect} from 'react-redux';
 
 import {Sidebar} from './sidebar/sidebar'
 import {Footer} from './footer'
@@ -16,7 +15,6 @@ const BlogApp = ({children})=> {
                 {/* the children components are
                 either PostsIndex, Admin or SinglePostView  */}
                         {children}
-                        <Sidebar />
                     </div>
                     <hr/>
                     <Footer />
