@@ -7,11 +7,7 @@ import {Header} from './header'
 
 
 
-class BlogApp extends Component {
-
-    render() {
-      const {children} = this.props;
-
+const BlogApp = ({children})=> {
         return (
             <div>
                 <Header/>
@@ -27,18 +23,6 @@ class BlogApp extends Component {
                 </div>
             </div>)
     };
-}
-
-const mapStateProps = (state) => ({
-    posts: state.posts
-
-});
 
 
-
-const App = connect(
-    mapStateProps
-)(BlogApp);
-
-
-export default App;
+export default BlogApp;
