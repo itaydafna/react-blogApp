@@ -36,10 +36,10 @@ const filterTerm = (state='',action)=>{
 };
 
 
-const filteredPostsArray = (state = [], action) => {
+const filteredPostsArray = (state = {}, action) => {
     switch (action.type){
         case FILTER_POSTS:
-            return action.payload.posts.filter((post)=>{
+            let filteredPostsArray = action.payload.posts.filter((post)=>{
                 let filterTerm = action.payload.filterTerm;
                if (
                    //testing if the post's author name includes part of the filter term
@@ -55,6 +55,13 @@ const filteredPostsArray = (state = [], action) => {
                    return post
                }
             });
+            //'chunking' the filteredPostsArray into 'pages' of 3 posts each
+             let chunkedFilteredPosts = _.chunk(filteredPostsArray,3);
+            return {
+                array: filteredPostsArray,
+                chunckedArray: chunkedFilteredPosts,
+                showingPosts: chunkedFilteredPosts[action.payload.page -1] 
+            }
     }
     return state;
 };

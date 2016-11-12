@@ -50,7 +50,7 @@ class PostsIndex extends Component {
 
 
 const mapStateToProps = (state) => ({
-    posts: state.filteredPosts.filteredPostsArray,
+    posts: state.filteredPosts.filteredPostsArray.array,
     olderPostsAvailable: state.visiblePreviews.tracking.olderPostsAvailable,
     newerPostsAvailable: state.visiblePreviews.tracking.newerPostsAvailable
 });
