@@ -1,4 +1,3 @@
-import {GET_ACTIVE_POSTS} from '../actions/get-active-posts'
 import {combineReducers} from 'redux'
 
 //there are tow versions of the same reducer here:
@@ -38,11 +37,10 @@ import {combineReducers} from 'redux'
 const data = (state = [], action) => {
     let newFirstPreviewIndex = (action.payload) && action.payload.page * 3 - 3;
     switch (action.type) {
-        case GET_ACTIVE_POSTS:
+        case 'GET_ACTIVE_POSTS':
             return action.payload.posts.slice(newFirstPreviewIndex,
                 newFirstPreviewIndex + 3);
     }
-    return state;
 };
 
 
@@ -50,7 +48,7 @@ const data = (state = [], action) => {
 const tracking = (state={},action) => {
     let newFirstPreviewIndex = (action.payload) && action.payload.page * 3 - 3;
     switch (action.type) {
-        case GET_ACTIVE_POSTS:
+        case 'GET_ACTIVE_POSTS':
 
             let numFilteredPosts = action.payload.posts.length-1,
                 newCurrentPage = action.payload.page,

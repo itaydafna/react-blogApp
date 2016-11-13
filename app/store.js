@@ -1,7 +1,6 @@
 import {createStore, combineReducers} from 'redux';
 import _ from 'lodash'
 import posts from './reducers/reducer-posts'
-import visiblePreviews from './reducers/reducer-visible-previews'
 import selectedPost from './reducers/reducer_selected-post'
 import filteredPosts from './reducers/reducer-filtered-posts'
 
@@ -27,15 +26,7 @@ const persistedState = {
             array: postsData,
             chunkedArray: _.chunk(postsData, 3)
         }
-    },
-    // visiblePreviews: {
-    //     tracking: {
-    //         //calculating the total number of post preview pages
-    //         numberOfPages: postsData % 3 === 0 ?
-    //         (postsData.length - postsData.length % 3) / 3 :
-    //         1 + (postsData.length - postsData.length % 3) / 3
-    //     }
-    // }
+    }
 };
 
 const store = createStore(reducers, persistedState);

@@ -5,7 +5,7 @@ import {PostPreview} from './post-preview';
 import {IndexHeader} from './index-header'
 import {Pager} from './pager'
 
-import {getActivePosts} from '../../actions/get-active-posts'
+
 import {filterPosts} from '../../actions/filter-posts'
 import {normalizeAuthor, normalizeTag, normalizeMonth} from '../../reducers/reducer-filtered-posts'
 
@@ -90,7 +90,6 @@ VisiblePreviews = connect(
     mapStateToProps,
     {
         filterPosts
-        , getActivePosts
     }
 )(VisiblePreviews);
 

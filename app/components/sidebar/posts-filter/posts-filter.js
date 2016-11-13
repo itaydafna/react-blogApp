@@ -146,8 +146,7 @@ class PostsFilter extends Component {
 
         )
     }
-}
-;
+};
 
 const mapStateToProps = (state) => ({
     posts: state.posts,
