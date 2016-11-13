@@ -2,13 +2,18 @@ import {Component} from 'react';
 import {Link} from 'react-router';
 
 export const Pager = ({
-    olderPostsAvailable,
-    newerPostsAvailable,
+    chunkedArray,
     currentPage,
     queryVar,
     queryVal
 
 }) =>{
+    //checking if there are newer/older posts available
+    console.log(chunkedArray);
+
+    let olderPostsAvailable = chunkedArray[currentPage] ? true : false;
+    let newerPostsAvailable = chunkedArray[currentPage-2] ? true : false;
+
     const olderPosts = ()=>{
         if(olderPostsAvailable){
             return (

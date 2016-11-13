@@ -6,15 +6,14 @@ export const Filter = ({
     count,
     category,
     queryVar,
-    queryVal,
-    filterTerm
+    queryVal
 })=>{
     return(
         <Link to ={{pathname: `/posts/`,
                     query: {
                     [`${queryVar}`]: `${queryVal}`
                     }}}  
-                    className={filterTerm === queryVal? "list-group-item active":"list-group-item"}
+                    className = 'list-group-item'
                     activeClassName = 'active'
                     
         >
