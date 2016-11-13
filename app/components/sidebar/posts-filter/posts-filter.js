@@ -79,12 +79,12 @@ class PostsFilter extends Component {
     };
 
     render() {
-
         const{posts,currentPage,filterTerm} = this.props;
         const categoriesMap = this.createFiltersMap(posts, 'tags');
         const authorsMap = this.createFiltersMap(posts, 'author');
         const yearMap = this.createDateMap(posts);
-        
+
+
 
         const page = currentPage === 1 || !currentPage ? null : currentPage;
 

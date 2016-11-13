@@ -15,6 +15,7 @@ export const Filter = ({
                     [`${queryVar}`]: `${queryVal}`
                     }}}  
                     className={filterTerm === queryVal? "list-group-item active":"list-group-item"}
+                    activeClassName = 'active'
                     
         >
             <span className="badge">{count}</span>
