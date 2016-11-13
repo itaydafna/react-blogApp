@@ -3,11 +3,10 @@ import {connect} from 'react-redux';
 import {PostPreview} from './post-preview';
 import {getActivePosts} from '../../actions/get-active-posts'
 import {filterPosts} from '../../actions/filter-posts'
+import {normalizeAuthor, normalizeTag, normalizeMonth} from '../../reducers/reducer-filtered-posts'
 
-class VisiblePreviews extends Component {
-
-
-
+let VisiblePreviews = ({chunkedArray,location,params,posts}) => {
+    
     // //initiating the store's data with the current page from the params
     //
     // componentWillMount() {
@@ -93,8 +92,34 @@ class VisiblePreviews extends Component {
     // }
 
 
-    render() {
-        const {chunkedArray,params} = this.props;
+    {
+        //extracting the filter term from the filters params
+        let filterTerm = location.query[Object.keys(location.query)[0]] || '';
+
+        console.log(filterTerm);
+
+
+        //filtering the posts array based on the 'filter-term' on the query param
+        let filteredPostsArray = posts.filter((post)=>{
+            if (
+                //testing if the post's author name includes part of the filter term
+            _.includes(normalizeAuthor(post.author),normalizeAuthor(filterTerm))||
+            //testing if one or more(some) of the post's tags includes part of the filter term
+            post.tags.some((tag)=>_.includes(normalizeTag(tag),normalizeTag(filterTerm)))||
+            //testing if the post's dates includes part of the filter term
+            _.includes(normalizeMonth(post.date),filterTerm)||
+            //testing if the post's description includes part of the filter term
+            _.includes(post.description.toLowerCase(),filterTerm)
+
+            ){
+                return post
+            }
+        });
+
+        console.log(filteredPostsArray);
+
+        //chunking the filtered posts array to pages
+        let chunkedArray = _.chunk(filteredPostsArray, 3);
         let visiblePreviews = [];
         if(!params.page){
             visiblePreviews = chunkedArray[0];

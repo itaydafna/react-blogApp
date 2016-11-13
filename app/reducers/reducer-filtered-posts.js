@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import _ from 'lodash'
 
+
 import {FILTER_POSTS} from '../actions/filter-posts'
 
 //function which turns an authors name to this format: itay-dafna
