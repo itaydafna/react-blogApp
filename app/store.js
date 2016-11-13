@@ -20,13 +20,7 @@ const postsData = data.posts.sort((a, b)=>(Number(b.date) - Number(a.date)));
 //setting the stores initial state for some of the properties:
 const persistedState = {
     //initializing the store with the existing posts in the JSON under posts
-    posts: postsData,
-    filteredPosts: {
-        filteredPostsArray: {
-            array: postsData,
-            chunkedArray: _.chunk(postsData, 3)
-        }
-    }
+    posts: postsData
 };
 
 const store = createStore(reducers, persistedState);

@@ -1,6 +1,6 @@
 import {Link} from 'react-router';
 import {removeNonLetters} from '../../reducers/reducer_selected-post';
-import {normalizeAuthor, normalizeTag} from '../../reducers/reducer-filtered-posts'
+import {normalizeAuthor, normalizeTag} from '../../assets/UTILS'
 
 export const PostPreview = ({
     title,

@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 import {PostPreview} from './post-preview';
 import {IndexHeader} from './index-header'
 import {Pager} from './pager'
+import {Sidebar} from '../sidebar/sidebar'
 
-import {normalizeAuthor, normalizeTag, normalizeMonth} from '../../reducers/reducer-filtered-posts'
+import {normalizeAuthor, normalizeTag, normalizeMonth} from '../../assets/UTILS'
 
 
 let VisiblePreviews = ({location, params, posts}) => {
@@ -44,24 +45,29 @@ let VisiblePreviews = ({location, params, posts}) => {
     if (visiblePreviews) {
         return (
             <div>
-                <IndexHeader posts={filteredPostsArray}/>
-                <div>
-                    {visiblePreviews.map(preview =>
-                        <PostPreview
-                            key={preview.title}
-                            title={preview.title}
-                            author={preview.author}
-                            date={new Date(Number(preview.date))}
-                            description={preview.description}
-                            tags={preview.tags}
-                        />)
-                    }
-                </div>
-                <Pager
-                    currentPage={Number(currentPage)}
-                    queryVar={queryVar}
-                    queryVal={filterTerm}
-                    chunkedArray={chunkedArray}
+                <section className="col-md-8">
+                    <IndexHeader posts={filteredPostsArray}/>
+                    <div>
+                        {visiblePreviews.map(preview =>
+                            <PostPreview
+                                key={preview.title}
+                                title={preview.title}
+                                author={preview.author}
+                                date={new Date(Number(preview.date))}
+                                description={preview.description}
+                                tags={preview.tags}
+                            />)
+                        }
+                    </div>
+                    <Pager
+                        currentPage={Number(currentPage)}
+                        queryVar={queryVar}
+                        queryVal={filterTerm}
+                        chunkedArray={chunkedArray}
+                    />
+                </section>
+                <Sidebar
+                filterTerm = {filterTerm}
                 />
             </div>
         )

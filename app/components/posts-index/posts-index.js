@@ -13,13 +13,10 @@ const PostsIndex = ({
 
     return (
         <div>
-            <section className="col-md-8">
-                {/* the children components are
-                 is dynamic VisiblePreviews component  */}
-                {children}
-                {/*<VisiblePreviews />*/}
-            </section>
-            <Sidebar />
+            {/* the children components are
+             is dynamic VisiblePreviews component  */}
+            {children}
+            {/*<VisiblePreviews />*/}
         </div>
     )
 
