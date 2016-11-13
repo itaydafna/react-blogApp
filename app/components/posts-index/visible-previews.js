@@ -116,7 +116,6 @@ let VisiblePreviews = ({chunkedArray,location,params,posts}) => {
             }
         });
 
-        console.log(filteredPostsArray);
 
         //chunking the filtered posts array to pages
         let chunkedArray = _.chunk(filteredPostsArray, 3);
@@ -126,27 +125,29 @@ let VisiblePreviews = ({chunkedArray,location,params,posts}) => {
         }else{
             visiblePreviews = chunkedArray[params.page-1];
         }
-        return (
-            <div>
-                {visiblePreviews.map(preview =>
-                    <PostPreview
-                        key={preview.title}
-                        title={preview.title}
-                        author={preview.author}
-                        date={new Date(Number(preview.date))}
-                        description={preview.description}
-                        tags={preview.tags}
-                    />)
-                }
-            </div>
-        )
+
+
+        if(visiblePreviews) {
+            return (
+                <div>
+                    {visiblePreviews.map(preview =>
+                        <PostPreview
+                            key={preview.title}
+                            title={preview.title}
+                            author={preview.author}
+                            date={new Date(Number(preview.date))}
+                            description={preview.description}
+                            tags={preview.tags}
+                        />)
+                    }
+                </div>
+            )
+        } else {
+            return null;
+        }
     }
 
-    // else {
-    //     return (<div>Loading...</div>)
-    // }
-
-}
+};
 
 //setting router as context type so it can be used to push page to URL on edge cases (for example 1 or less)
 //(used in the dispatchPageFromParams method above)
