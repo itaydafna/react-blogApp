@@ -13,10 +13,15 @@ const PostsIndex = ({
 
     return (
         <div>
-            {/* the children components are
-             is dynamic VisiblePreviews component  */}
-            {children}
-            {/*<VisiblePreviews />*/}
+            <section className="col-md-8">
+                {/* the children components are
+                 is dynamic VisiblePreviews component  */}
+                {children}
+                {/*<VisiblePreviews />*/}
+            </section>
+            <Sidebar
+                filterTerm = {queryVal}
+            />
         </div>
     )
 

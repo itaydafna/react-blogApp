@@ -86,13 +86,12 @@ class PostsFilter extends Component {
         const authorsMap = this.createFiltersMap(posts, 'author');
         const yearMap = this.createDateMap(posts);
 
-
         return (
             <div className="well">
                 <h3>Filter Posts</h3>
                 <div className="list-group">
                     <a href="#"
-                       className={filterTerm === '' ? "list-group-item active": "list-group-item"}
+                       className={filterTerm ? "list-group-item":"list-group-item active"}
                     >
                         <span className="badge">{posts.length}</span>
                         Show All Posts

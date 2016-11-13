@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {PostPreview} from './post-preview';
 import {IndexHeader} from './index-header'
 import {Pager} from './pager'
-import {Sidebar} from '../sidebar/sidebar'
 
 import {normalizeAuthor, normalizeTag, normalizeMonth} from '../../assets/UTILS'
 
@@ -17,22 +16,50 @@ let VisiblePreviews = ({location, params, posts}) => {
 
 
     //filtering the posts array based on the 'filter-term' on the query param
-    let filteredPostsArray = posts.filter((post)=> {
-        if (
-            //testing if the post's author name includes part of the filter term
-        _.includes(normalizeAuthor(post.author), normalizeAuthor(filterTerm)) ||
-        //testing if one or more(some) of the post's tags includes part of the filter term
-        post.tags.some((tag)=>_.includes(normalizeTag(tag), normalizeTag(filterTerm))) ||
-        //testing if the post's dates includes part of the filter term
-        _.includes(normalizeMonth(post.date), filterTerm) ||
-        //testing if the post's description includes part of the filter term
-        _.includes(post.description.toLowerCase(), filterTerm)
+    let filteredPostsArray = [];
+    switch (queryVar) {
+        case 'author':
+            filteredPostsArray = posts.filter((post)=> {
+                if (normalizeAuthor(post.author) === normalizeAuthor(filterTerm)) {
+                    return post
+                }
+            });
+            break;
+        case 'category':
+            filteredPostsArray = posts.filter((post)=> {
+                if (post.tags.some((tag)=>(normalizeTag(tag) === normalizeTag(filterTerm)))) {
+                    return post;
+                }
+            });
+            break;
+        case 'month':
+            filteredPostsArray = posts.filter((post)=> {
+                if (normalizeMonth(post.date) === filterTerm) {
+                    return post;
+                }
+            });
+            break;
+        case 'search':
+            filteredPostsArray = posts.filter((post)=> {
+                if (
+                    //testing if the post's author name includes part of the filter term
+                _.includes(normalizeAuthor(post.author), normalizeAuthor(filterTerm)) ||
+                //testing if one or more(some) of the post's tags includes part of the filter term
+                post.tags.some((tag)=>_.includes(normalizeTag(tag), normalizeTag(filterTerm))) ||
+                //testing if the post's dates includes part of the filter term
+                _.includes(normalizeMonth(post.date), filterTerm) ||
+                //testing if the post's description includes part of the filter term
+                _.includes(post.description.toLowerCase(), filterTerm)
 
-        ) {
-            return post
-        }
-    });
+                ) {
+                    return post
+                }
+            });
+            break;
 
+        default:
+            filteredPostsArray = posts;
+    }
 
     //chunking the filtered posts array to pages
     let chunkedArray = _.chunk(filteredPostsArray, 3);
@@ -45,29 +72,24 @@ let VisiblePreviews = ({location, params, posts}) => {
     if (visiblePreviews) {
         return (
             <div>
-                <section className="col-md-8">
-                    <IndexHeader posts={filteredPostsArray}/>
-                    <div>
-                        {visiblePreviews.map(preview =>
-                            <PostPreview
-                                key={preview.title}
-                                title={preview.title}
-                                author={preview.author}
-                                date={new Date(Number(preview.date))}
-                                description={preview.description}
-                                tags={preview.tags}
-                            />)
-                        }
-                    </div>
-                    <Pager
-                        currentPage={Number(currentPage)}
-                        queryVar={queryVar}
-                        queryVal={filterTerm}
-                        chunkedArray={chunkedArray}
-                    />
-                </section>
-                <Sidebar
-                filterTerm = {filterTerm}
+                <IndexHeader posts={filteredPostsArray}/>
+                <div>
+                    {visiblePreviews.map(preview =>
+                        <PostPreview
+                            key={preview.title}
+                            title={preview.title}
+                            author={preview.author}
+                            date={new Date(Number(preview.date))}
+                            description={preview.description}
+                            tags={preview.tags}
+                        />)
+                    }
+                </div>
+                <Pager
+                    currentPage={Number(currentPage)}
+                    queryVar={queryVar}
+                    queryVal={filterTerm}
+                    chunkedArray={chunkedArray}
                 />
             </div>
         )

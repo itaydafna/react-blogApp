@@ -22,7 +22,7 @@ export class Search extends Component{
         //found it here: http://stackoverflow.com/questions/35435074/using-debouncer-with-react-event
         //(_.compose has been updated to _.flowRight by lodash)
         let onSearchUpdate =  _.flowRight(
-            _.debounce(this.onSearchUpdate,100),
+            _.debounce(this.onSearchUpdate,500),
             _.property('target')
         );
         return (

@@ -2,7 +2,6 @@ import {createStore, combineReducers} from 'redux';
 import _ from 'lodash'
 import posts from './reducers/reducer-posts'
 import selectedPost from './reducers/reducer_selected-post'
-import filteredPosts from './reducers/reducer-filtered-posts'
 
 import data from '../data/posts.json';
 
@@ -10,7 +9,6 @@ import data from '../data/posts.json';
 const reducers = combineReducers({
     // Reducers go here
     posts,
-    filteredPosts,
     selectedPost,
 });
 
