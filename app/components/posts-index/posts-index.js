@@ -3,15 +3,12 @@ import {connect} from 'react-redux';
 import {getActivePosts} from '../../actions/get-active-posts';
 
 import {Sidebar} from '../sidebar/sidebar'
-import {Pager} from './pager'
 
 
 class PostsIndex extends Component {
 
     render() {
         const {
-            olderPostsAvailable,
-            newerPostsAvailable,
             params,
             children,
             location
@@ -24,19 +21,10 @@ class PostsIndex extends Component {
         return (
             <div>
                 <section className="col-md-8">
-
                     {/* the children components are
                      is dynamic VisiblePreviews component  */}
                     {children}
                     {/*<VisiblePreviews />*/}
-                    {/*<Pager
-                        olderPostsAvailable={olderPostsAvailable}
-                        newerPostsAvailable={newerPostsAvailable}
-                        queryVar={queryVar}
-                        queryVal={queryVal}
-                        currentPage={currentPage}
-
-                    />*/}
                 </section>
                 <Sidebar />
             </div>
@@ -48,9 +36,7 @@ class PostsIndex extends Component {
 
 
 const mapStateToProps = (state) => ({
-    posts: state.filteredPosts.filteredPostsArray.array,
-    olderPostsAvailable: state.visiblePreviews.tracking.olderPostsAvailable,
-    newerPostsAvailable: state.visiblePreviews.tracking.newerPostsAvailable
+    posts: state.filteredPosts.filteredPostsArray.array
 });
 
 

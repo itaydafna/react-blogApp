@@ -79,14 +79,12 @@ class PostsFilter extends Component {
     };
 
     render() {
-        const{posts,currentPage,filterTerm} = this.props;
+        const{posts,filterTerm} = this.props;
         const categoriesMap = this.createFiltersMap(posts, 'tags');
         const authorsMap = this.createFiltersMap(posts, 'author');
         const yearMap = this.createDateMap(posts);
 
 
-
-        const page = currentPage === 1 || !currentPage ? null : currentPage;
 
         return (
             <div className="well">
@@ -111,7 +109,6 @@ class PostsFilter extends Component {
                             count={category[1]}
                             queryVar={'category'}
                             queryVal={normalizeTag(category[0])}
-                            currentPage={page}
                             filterTerm = {filterTerm}
                         />)}
                 </div>
@@ -127,7 +124,6 @@ class PostsFilter extends Component {
                             count={category[1]}
                             queryVar={'author'}
                             queryVal={normalizeAuthor(category[0])}
-                            currentPage={page}
                             filterTerm = {filterTerm}
                         />)}
                 </div>
@@ -155,7 +151,6 @@ class PostsFilter extends Component {
 
 const mapStateToProps = (state) => ({
     posts: state.posts,
-    currentPage: state.visiblePreviews.tracking.currentPage,
     filterTerm: state.filteredPosts.filterTerm
 });
 

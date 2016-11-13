@@ -13,7 +13,6 @@ const reducers = combineReducers({
     posts,
     filteredPosts,
     selectedPost,
-    visiblePreviews
 });
 
 //sorting the posts data from newest to oldest
@@ -29,14 +28,14 @@ const persistedState = {
             chunkedArray: _.chunk(postsData, 3)
         }
     },
-    visiblePreviews: {
-        tracking: {
-            //calculating the total number of post preview pages
-            numberOfPages: postsData % 3 === 0 ?
-            (postsData.length - postsData.length % 3) / 3 :
-            1 + (postsData.length - postsData.length % 3) / 3
-        }
-    }
+    // visiblePreviews: {
+    //     tracking: {
+    //         //calculating the total number of post preview pages
+    //         numberOfPages: postsData % 3 === 0 ?
+    //         (postsData.length - postsData.length % 3) / 3 :
+    //         1 + (postsData.length - postsData.length % 3) / 3
+    //     }
+    // }
 };
 
 const store = createStore(reducers, persistedState);

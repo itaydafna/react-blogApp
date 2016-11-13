@@ -80,8 +80,6 @@ let VisiblePreviews = ({location, params, posts}) => {
 const mapStateToProps = (state) => ({
     posts: state.posts,
     filteredPosts: state.filteredPosts.filteredPostsArray,
-    numberOfPages: state.visiblePreviews.tracking.numberOfPages,
-    visiblePreviews: state.visiblePreviews.data,
     filterTerm: state.filteredPosts.filterTerm,
     chunkedArray: state.filteredPosts.filteredPostsArray.chunkedArray
 
