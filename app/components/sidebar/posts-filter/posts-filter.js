@@ -8,10 +8,6 @@ import {normalizeAuthor, normalizeTag} from '../../../assets/UTILS'
 
 class PostsFilter extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
     //function which creates an object of {filter: count} pairs out of all the posts in the store
     //filter is the parameter which the posts are going to be filtered by (category,author);
 
