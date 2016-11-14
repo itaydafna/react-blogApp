@@ -1,15 +1,12 @@
 import {createStore, combineReducers} from 'redux';
-import _ from 'lodash'
-import posts from './reducers/reducer-posts'
-import selectedPost from './reducers/reducer_selected-post'
+import posts from './reducers/reducer-posts';
 
 import data from '../data/posts.json';
 
 
 const reducers = combineReducers({
     // Reducers go here
-    posts,
-    selectedPost,
+    posts
 });
 
 //sorting the posts data from newest to oldest

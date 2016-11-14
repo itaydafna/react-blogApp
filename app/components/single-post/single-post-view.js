@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import {Link} from 'react-router';
 
-import {getSelectedPost} from '../../actions/get-selected-post'
 import {normalizeAuthor, normalizeTag, removeNonLetters} from '../../assets/UTILS'
 
 let SinglePostView = ({posts, params})=> {
@@ -108,8 +107,7 @@ const mapStateToProps = (state) => ({
 });
 
 SinglePostView = connect(
-    mapStateToProps,
-    {getSelectedPost}
+    mapStateToProps
 )(SinglePostView);
 
 export default SinglePostView;
