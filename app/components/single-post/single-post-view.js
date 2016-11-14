@@ -3,44 +3,60 @@ import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import {Link} from 'react-router';
 
-
 import {getSelectedPost} from '../../actions/get-selected-post'
-import {normalizeAuthor, normalizeTag} from '../../assets/UTILS'
+import {normalizeAuthor, normalizeTag, removeNonLetters} from '../../assets/UTILS'
 
 class SinglePostView extends Component {
 
-    //initiating the store's data with the selected post from the params
 
-    componentWillMount() {
-
-        this.dispatchSelectedPostFromParams(this.props);
-
-    }
-
-
-    //added this stage in order to make sure that the store is updated with the current selected post from the parmas
-    //before rendering the component with this data
-
-    componentWillReceiveProps(newProps) {
-        if (newProps.params.post !== this.props.params.post) {
-            this.dispatchSelectedPostFromParams(newProps);
-        }
-    }
-
-
-    //this function extracts the selectedPost from the params and dispatches the store with it
-    //receives props as a parameter
-
-    dispatchSelectedPostFromParams({params, getSelectedPost, posts}) {
-
-        //dispatching the store with the selected post
-        getSelectedPost(posts, params.post);
-
-    }
+    //
+    // //initiating the store's data with the selected post from the params
+    //
+    // componentWillMount() {
+    //
+    //     this.dispatchSelectedPostFromParams(this.props);
+    //
+    // }
+    //
+    //
+    // //added this stage in order to make sure that the store is updated with the current selected post from the parmas
+    // //before rendering the component with this data
+    //
+    // componentWillReceiveProps(newProps) {
+    //     if (newProps.params.post !== this.props.params.post) {
+    //         this.dispatchSelectedPostFromParams(newProps);
+    //     }
+    // }
+    //
+    //
+    // //this function extracts the selectedPost from the params and dispatches the store with it
+    // //receives props as a parameter
+    //
+    // dispatchSelectedPostFromParams({params, getSelectedPost, posts}) {
+    //
+    //     //dispatching the store with the selected post
+    //     getSelectedPost(posts, params.post);
+    //
+    // }
 
 
     render() {
-        const selectedPost = this.props.selectedPost;
+        //a function which filters and gets the selected post based on its title
+        const getSelectedPost = (posts,postTitle)=>{
+            // finding the index of the specific post based on its name as it is passed on the URLs params
+            let postIndex = posts.findIndex((post)=>
+                //the toUpperCase is used in order for the comparison to return true even if there are case-typos
+                // on the URL params.
+            removeNonLetters(post.title).toUpperCase() === postTitle.toUpperCase());
+
+
+            return posts[postIndex];
+        };
+
+
+        const selectedPost = getSelectedPost(this.props.posts,this.props.params.post);
+        console.log(selectedPost);
+
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
             "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
         ];
@@ -52,7 +68,6 @@ class SinglePostView extends Component {
             // ReactMarkdown component
             var md = require(`raw!../../../${mdPath}`);
 
-            console.log(date);
             return (
                 <section className="col-md-8">
                     {/* Begin Post */}

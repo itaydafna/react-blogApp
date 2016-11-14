@@ -22,3 +22,8 @@ export const normalizeMonth = (dateString) => {
     return `${monthNames[date.getMonth()]}-${date.getFullYear()}`
 };
 
+//function which removes all non-letter characters from string and replaces space with dash
+export const removeNonLetters=(str)=>{
+    return str.replace(/[^\w]/g,' ').replace(/\s+/g, '-');
+}
+

@@ -1,5 +1,6 @@
 import {GET_SELECTED_POST} from '../actions/get-selected-post'
 
+
 const selectedPost = (state = {}, action) => {
     switch (action.type) {
         case GET_SELECTED_POST:
