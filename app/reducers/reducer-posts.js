@@ -23,3 +23,52 @@ export const getSelectedPost = (state, postTitle)=> {
 };
 
 
+//SELECTOR used by the PostPreviews Component
+
+//function which filters the posts array based on the 'filter-term' on the query param
+
+export const getFilteredPosts = (state, filterTerm, queryVar) => {
+    switch (queryVar) {
+        case 'author':
+            return [...state.filter((post)=> {
+                if (normalizeAuthor(post.author) === normalizeAuthor(filterTerm)) {
+                    return post
+                }
+            })];
+            break;
+        case 'category':
+            return [...state.filter((post)=> {
+                if (post.tags.some((tag)=>(normalizeTag(tag) === normalizeTag(filterTerm)))) {
+                    return post;
+                }
+            })];
+            break;
+        case 'month':
+            return [...state.filter((post)=> {
+                if (normalizeMonth(post.date) === filterTerm) {
+                    return post;
+                }
+            })];
+            break;
+        case 'search':
+            return [...state.filter((post)=> {
+                if (
+                    //testing if the post's author name includes part of the filter term
+                _.includes(normalizeAuthor(post.author), normalizeAuthor(filterTerm)) ||
+                //testing if one or more(some) of the post's tags includes part of the filter term
+                post.tags.some((tag)=>_.includes(normalizeTag(tag), normalizeTag(filterTerm))) ||
+                //testing if the post's dates includes part of the filter term
+                _.includes(normalizeMonth(post.date), filterTerm) ||
+                //testing if the post's descrisption includes part of the filter term
+                _.includes(post.description.toLowerCase(), filterTerm)
+
+                ) {
+                    return post
+                }
+            })];
+            break;
+
+        default:
+            return state;
+    }
+};
