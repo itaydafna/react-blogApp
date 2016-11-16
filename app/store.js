@@ -1,5 +1,5 @@
 import {createStore, combineReducers} from 'redux';
-import posts from './reducers/reducer-posts';
+import posts, * as fromPosts from './reducers/reducer-posts';
 
 import data from '../data/posts.json';
 
@@ -31,3 +31,8 @@ store.subscribe(logStore);
 logStore();
 
 export default store;
+
+//added this export as part of the 'using Selectors' refactoring 
+//(explained here: https://egghead.io/lessons/javascript-redux-colocating-selectors-with-reducers)
+export const getSelectedPost = (state, postTitle)=>
+    fromPosts.getSelectedPost(state.posts,postTitle);

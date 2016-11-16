@@ -3,19 +3,9 @@ import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import {Link} from 'react-router';
 
+import {getSelectedPost} from '../../store'
+
 import {normalizeAuthor, normalizeTag, removeNonLetters} from '../../assets/UTILS'
-
-//a function which filters and gets the selected post based on its title
-const getSelectedPost = (posts, postTitle)=> {
-    // finding the index of the specific post based on its name as it is passed on the URLs params
-    let postIndex = posts.findIndex((post)=>
-        //the toUpperCase is used in order for the comparison to return true even if there are case-typos
-        // on the URL params.
-    removeNonLetters(post.title).toUpperCase() === postTitle.toUpperCase());
-
-
-    return posts[postIndex];
-};
 
 
 let SinglePostView = ({selectedPost})=> {
@@ -98,8 +88,7 @@ let SinglePostView = ({selectedPost})=> {
 
 
 const mapStateToProps = (state,{params}) => ({
-    posts: state.posts,
-    selectedPost: getSelectedPost(state.posts,params.post)
+    selectedPost: getSelectedPost(state,params.post)
 });
 
 SinglePostView = connect(
