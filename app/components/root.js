@@ -12,7 +12,7 @@ const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
 import BlogApp from './blog-app';
 import PostsIndex from './posts-index/posts-index';
 import {Admin} from './admin/admin';
-import VisiblePreviews from './posts-index/visible-previews'
+import PostPreviews from './posts-index/post-previews'
 import SinglePostView from './single-post/single-post-view'
 
 
@@ -22,8 +22,8 @@ const Root = () => {
         <Router history={appHistory}>
             <Route path="/" component={BlogApp}>
                 <Route path='posts' component={PostsIndex} >
-                    <Route path='(:page)' component = {VisiblePreviews}/>
-                    <IndexRoute component = {VisiblePreviews}/>
+                    <Route path='(:page)' component = {PostPreviews}/>
+                    <IndexRoute component = {PostPreviews}/>
                 </Route>
                 <Route path="post" component = {SinglePostView}>
                     <Route path="(:post)"/>
