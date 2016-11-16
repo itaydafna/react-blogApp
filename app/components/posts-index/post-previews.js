@@ -1,15 +1,15 @@
 import {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-
-import {PostPreview} from './post-preview';
-import {IndexHeader} from './index-header'
-import {Pager} from './pager'
-
 import {normalizeAuthor, normalizeTag, normalizeMonth} from '../../assets/UTILS'
+
+import {IndexHeader} from './index-header';
+import {VisiblePreviews} from './visible-previews';
+import {Pager} from './pager';
+
 
 //function which filters the posts array based on the 'filter-term' on the query param
 
-const getFilteredPosts = (posts,filterTerm,queryVar) => {
+const getFilteredPosts = (posts, filterTerm, queryVar) => {
     switch (queryVar) {
         case 'author':
             return [...posts.filter((post)=> {
@@ -55,17 +55,15 @@ const getFilteredPosts = (posts,filterTerm,queryVar) => {
     }
 };
 
+
 let PostPreviews = ({location, params, posts}) => {
-
-
     //extracting the query var from the url
     let queryVar = Object.keys(location.query)[0];
     //extracting the filter term (query val) from the url
     let filterTerm = location.query[queryVar] || '';
 
     //filtering the posts array based on the 'filter-term' on the query param
-    let filteredPostsArray = getFilteredPosts(posts,filterTerm,queryVar);
-
+    let filteredPostsArray = getFilteredPosts(posts, filterTerm, queryVar);
 
     //chunking the filtered posts array to pages
     let chunkedArray = _.chunk(filteredPostsArray, 3);
@@ -74,38 +72,25 @@ let PostPreviews = ({location, params, posts}) => {
 
     let visiblePreviews = chunkedArray[currentPage - 1];
 
+    return (
+        <div>
+            <IndexHeader posts={filteredPostsArray}/>
+            <VisiblePreviews
+                visiblePreviews = {visiblePreviews}
+            />
+            <Pager
+                currentPage={Number(currentPage)}
+                queryVar={queryVar}
+                queryVal={filterTerm}
+                chunkedArray={chunkedArray}
+            />
+        </div>
 
-    if (visiblePreviews) {
-        return (
-            <div>
-                <IndexHeader posts={filteredPostsArray}/>
-                <div>
-                    {visiblePreviews.map(preview =>
-                        <PostPreview
-                            key={preview.title}
-                            title={preview.title}
-                            author={preview.author}
-                            date={new Date(Number(preview.date))}
-                            description={preview.description}
-                            tags={preview.tags}
-                        />)
-                    }
-                </div>
-                <Pager
-                    currentPage={Number(currentPage)}
-                    queryVar={queryVar}
-                    queryVal={filterTerm}
-                    chunkedArray={chunkedArray}
-                />
-            </div>
-        )
-    } else {
-        return null;
-    }
+    )
 };
 
 
-const mapStateToProps = (state,{params}) => ({
+const mapStateToProps = (state, {params}) => ({
     posts: state.posts
 });
 
