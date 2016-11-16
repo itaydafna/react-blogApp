@@ -56,17 +56,12 @@ const getFilteredPosts = (posts, filterTerm, queryVar) => {
 };
 
 
-let PostPreviews = ({location, params, posts}) => {
-    //extracting the query var from the url
-    let queryVar = Object.keys(location.query)[0];
-    //extracting the filter term (query val) from the url
-    let filterTerm = location.query[queryVar] || '';
-
+let PostPreviews = ({params, filteredPosts, queryVar, filterTerm}) => {
     //filtering the posts array based on the 'filter-term' on the query param
-    let filteredPostsArray = getFilteredPosts(posts, filterTerm, queryVar);
+
 
     //chunking the filtered posts array to pages
-    let chunkedArray = _.chunk(filteredPostsArray, 3);
+    let chunkedArray = _.chunk(filteredPosts, 3);
 
     let currentPage = params.page ? params.page : 1;
 
@@ -74,10 +69,9 @@ let PostPreviews = ({location, params, posts}) => {
 
     return (
         <div>
-            <IndexHeader posts={filteredPostsArray}/>
+            <IndexHeader posts={filteredPosts}/>
             <VisiblePreviews
-                visiblePreviews = {visiblePreviews}
-            />
+                visiblePreviews = {visiblePreviews}/>
             <Pager
                 currentPage={Number(currentPage)}
                 queryVar={queryVar}
@@ -90,9 +84,17 @@ let PostPreviews = ({location, params, posts}) => {
 };
 
 
-const mapStateToProps = (state, {params}) => ({
-    posts: state.posts
-});
+const mapStateToProps = (state, {location}) => {
+    //extracting the query var from the url
+    let queryVar = Object.keys(location.query)[0];
+    //extracting the filter term (query val) from the url
+    let filterTerm = location.query[queryVar] || '';
+
+    return {
+    filteredPosts: getFilteredPosts(state.posts, filterTerm, queryVar),
+    queryVar,
+    filterTerm
+}};
 
 
 PostPreviews = connect(
