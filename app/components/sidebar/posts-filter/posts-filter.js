@@ -1,97 +1,29 @@
 import {connect} from 'react-redux';
 import {Component} from 'react';
-import _ from 'lodash';
+import {Link} from 'react-router';
 
 import {Filter} from './filter';
 import {Year} from './year';
-import {normalizeAuthor, normalizeTag} from '../../../assets/UTILS'
+import {normalizeAuthor, normalizeTag, createFiltersMap, createDateMap} from '../../../assets/UTILS'
 
-class PostsFilter extends Component {
-
-    //function which creates an object of {filter: count} pairs out of all the posts in the store
-    //filter is the parameter which the posts are going to be filtered by (category,author);
-
-    createFiltersMap(posts, filter) {
-        let resultObj = {},
-            resultArr = [],
-        //function which checks if a given filter (instance) exists in the results object - adds it there if it doesn't
-        //or adds 1 to its counter if it does
-            mapToResultObj = (instance)=> {
-                _.has(resultObj, instance) ? resultObj[instance] = resultObj[instance] + 1 : resultObj[instance] = 1
-            };
-
-        posts.forEach((post)=> {
-            //checking if the filter is an array in order to deal with the 'tags' instance (with forEach)
-            (Array.isArray(post[filter])) ?
-                post[filter].forEach(mapToResultObj) :
-                mapToResultObj(post[filter]);
-        });
-        //turning the result object into an array with [key,value] pairs
-        //needed in order to create components out of this data (can't use object itiration in JSX)
-        _.forOwn(resultObj, (value, key) => resultArr.push([key, value]));
-        //sorting the results array alphabetically based on the the category name
-        return resultArr.sort((catA, catB)=> catA[0].toLocaleLowerCase() > catB[0].toLocaleLowerCase());
-    };
-
-    //function which checks if a given month exists in the results object - adds it there if it doesn't
-    //or adds 1 to its counter if it does
-
-    createDateMap(posts) {
-        let resultObj = {},
-            resultArr = [];
-
-        //mapping years and months in resultsObj (months are nested in every year)
-        posts.forEach((post)=> {
-                let date = new Date(Number(post.date));
-                if (!resultObj[date.getFullYear()]) {
-                    resultObj[date.getFullYear()] = {
-                        ['months']: {
-                            [date.getMonth()]: 1
-                        }
-                    }
-                } else {
-                    resultObj[date.getFullYear()]['months'][date.getMonth()] ?
-                        resultObj[date.getFullYear()]['months'][date.getMonth()] =
-                            resultObj[date.getFullYear()]['months'][date.getMonth()] + 1 :
-                        resultObj[date.getFullYear()]['months'][date.getMonth()] = 1;
-                }
-            }
-        );
-
-        //turning the result object into a [year,[[month:count]]] array
-        //needed in order to create components out of this data (can't use object itiration in JSX)
-        _.forOwn(resultObj, (months, year) => {
-            let monthsArray = [];
-            _.forOwn(months['months'], (count, month)=> {
-                monthsArray.push([month, count]
-                );
-            });
-            //sorting month array from newest to oldest
-            monthsArray.sort((monthA, monthB)=> Number(monthA[0]) < Number(monthB[0]));
-            resultArr.push([year, monthsArray]);
-        });
-        //sorting year array from newest to oldest
-        return resultArr.sort((yearA, yearB)=> Number(yearA[0]) < Number(yearB[0]));
-    };
-
-    render() {
-        //filterTerm is passed as a prop from the url query in order to render the 'show all posts' active state
-        //it is is an empty string - all posts are shown else - is should be inactive
-        const{posts,filterTerm,pathPrefix} = this.props;
-        const categoriesMap = this.createFiltersMap(posts, 'tags');
-        const authorsMap = this.createFiltersMap(posts, 'author');
-        const yearMap = this.createDateMap(posts);
+//filterTerm is passed as a prop from the url query in order to render the 'show all posts' active state
+//it is is an empty string - all posts are shown else - is should be inactive
+let PostsFilter = ({posts,filterTerm,pathPrefix})=>{
+    
+        const categoriesMap = createFiltersMap(posts, 'tags');
+        const authorsMap = createFiltersMap(posts, 'author');
+        const yearMap = createDateMap(posts);
 
         return (
             <div className="well">
                 <h3>Filter Posts</h3>
                 <div className="list-group">
-                    <a href="#"
+                    <Link to={pathPrefix}
                        className={filterTerm ? "list-group-item":"list-group-item active"}
                     >
                         <span className="badge">{posts.length}</span>
                         Show All Posts
-                    </a>
+                    </Link>
                 </div>
                 <h4>
                     <small className="glyphicon glyphicon-tag"/>
@@ -141,7 +73,6 @@ class PostsFilter extends Component {
             </div>
 
         )
-    }
 };
 
 const mapStateToProps = (state) => ({

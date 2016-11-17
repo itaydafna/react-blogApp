@@ -1,5 +1,5 @@
-import {Component} from 'react'
-import {Sidebar} from '../sidebar/sidebar'
+import {Component} from 'react';
+import {Sidebar} from '../sidebar/sidebar';
 
 
 const PostsIndex = ({

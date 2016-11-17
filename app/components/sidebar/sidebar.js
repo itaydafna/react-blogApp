@@ -2,7 +2,6 @@ import {Component} from 'react'
 import {Search} from './search'
 import PostsFilter from './posts-filter/posts-filter'
 export const Sidebar = ({filterTerm,pathPrefix}) => {
-    console.log(pathPrefix);
     return(< aside
     className = "col-md-4" >
         {/* Blog Search Well */}
