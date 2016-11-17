@@ -115,6 +115,7 @@ class PostsFilter extends Component {
                 <div className="list-group">
                     {authorsMap.map((category)=>
                         <Filter
+                            pathPrefix = {pathPrefix}
                             key={category[0]}
                             category={category[0]}
                             count={category[1]}
@@ -130,6 +131,7 @@ class PostsFilter extends Component {
                     {/* years go here */}
                     {yearMap.map((year)=>
                         <Year
+                            pathPrefix = {pathPrefix}
                             key={year[0]}
                             year={year[0]}
                             months={year[1]}

@@ -1,10 +1,12 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router'
+import {withRouter} from 'react-router';
+
+import {PostTableRow} from './post-table-row'
 
 import {getFilteredPosts} from '../../store'
 
-let AdminPostsTable = ()=>{
+let AdminPostsTable = ({filteredPosts})=>{
     return (
         <table className="table table-bordered table-hover table-striped postsTable">
             <thead>
@@ -34,54 +36,19 @@ let AdminPostsTable = ()=>{
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>AngularJS - Controllers</td>
-                <td>Ilan Cohen</td>
-                <td>14 Jan, 2015</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>AngularJS - Modules</td>
-                <td>Ilan Cohen</td>
-                <td>14 Jan, 2015</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>AngularJS - Routes</td>
-                <td>Ilan Cohen</td>
-                <td>14 Jan, 2015</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>AngularJS - Services</td>
-                <td>Ilan Cohen</td>
-                <td>14 Jan, 2015</td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>Grunt - Custom Tasks</td>
-                <td>Alex Ilyaev</td>
-                <td>10 Dec, 2014</td>
-            </tr>
-            <tr>
-                <th scope="row">6</th>
-                <td>Grunt - Intro</td>
-                <td>Alex Ilyaev</td>
-                <td>10 Dec, 2014</td>
-            </tr>
-            <tr>
-                <th scope="row">7</th>
-                <td>jQuery - Events, AJAX</td>
-                <td>Amit Choukroun</td>
-                <td>3 Dec, 2014</td>
-            </tr>
-            <tr>
-                <th scope="row">8</th>
-                <td>jQuery - Selectors, DOM</td>
-                <td>Amit Choukroun</td>
-                <td>1 Dec, 2014</td>
-            </tr>
+            {filteredPosts.map(({title,author,date},index)=>{
+                let dateObj = new Date(Number(date));
+                let [,month,day,year] = dateObj.toDateString().split(' ');
+                return(
+                <PostTableRow
+                    number = {index+1}
+                    key = {title}
+                    title = {title}
+                    author = {author}
+                    date = {`${month} ${day}, ${year}`}
+                />)})
+            }
+
             </tbody>
         </table>
     )
