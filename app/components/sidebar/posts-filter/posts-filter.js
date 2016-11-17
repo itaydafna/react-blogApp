@@ -77,7 +77,7 @@ class PostsFilter extends Component {
     render() {
         //filterTerm is passed as a prop from the url query in order to render the 'show all posts' active state
         //it is is an empty string - all posts are shown else - is should be inactive
-        const{posts,filterTerm} = this.props;
+        const{posts,filterTerm,pathPrefix} = this.props;
         const categoriesMap = this.createFiltersMap(posts, 'tags');
         const authorsMap = this.createFiltersMap(posts, 'author');
         const yearMap = this.createDateMap(posts);
@@ -100,6 +100,7 @@ class PostsFilter extends Component {
                 <div className="list-group">
                     {categoriesMap.map((category)=>
                         <Filter
+                            pathPrefix = {pathPrefix}
                             key={category[0]}
                             category={category[0]}
                             count={category[1]}

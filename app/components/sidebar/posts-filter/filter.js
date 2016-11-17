@@ -6,10 +6,12 @@ export const Filter = ({
     count,
     category,
     queryVar,
-    queryVal
+    queryVal,
+    //can be either /posts/ or /admin/
+    pathPrefix
 })=>{
     return(
-        <Link to ={{pathname: `/posts/`,
+        <Link to ={{pathname: pathPrefix,
                     query: {
                     [`${queryVar}`]: `${queryVal}`
                     }}}  
