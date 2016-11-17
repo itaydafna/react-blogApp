@@ -1,4 +1,4 @@
-import {normalizeAuthor, normalizeTag, removeNonLetters} from '../assets/UTILS'
+import {normalizeAuthor, normalizeTag, normalizeMonth,removeNonLetters} from '../assets/UTILS'
 
 const posts = (state = [], action) => {
     return state;

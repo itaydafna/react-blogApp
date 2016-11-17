@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 
 import {getSelectedPost} from '../../store'
 
-import {normalizeAuthor, normalizeTag, removeNonLetters} from '../../assets/UTILS'
+import {normalizeAuthor, normalizeTag} from '../../assets/UTILS'
 
 
 let SinglePostView = ({selectedPost})=> {
