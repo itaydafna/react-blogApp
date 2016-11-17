@@ -21,7 +21,7 @@ const PostsIndex = ({
             </section>
             <Sidebar
                 filterTerm = {queryVal}
-                pathPrefix = {'/posts/'}
+                pathPrefix = {'/posts'}
             />
         </div>
     )

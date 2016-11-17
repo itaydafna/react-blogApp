@@ -11,7 +11,7 @@ export const Filter = ({
     pathPrefix
 })=>{
     return(
-        <Link to ={{pathname: pathPrefix,
+        <Link to ={{pathname: `${pathPrefix}/`,
                     query: {
                     [`${queryVar}`]: `${queryVal}`
                     }}}  

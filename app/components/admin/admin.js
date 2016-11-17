@@ -14,7 +14,7 @@ export const Admin = ({children}) => (
             </footer>
         </section>
         <Sidebar
-        pathPrefix = {'/admin/'}
+        pathPrefix = {'/admin'}
         />
     </div>)
 
