@@ -1,6 +1,10 @@
 import {normalizeAuthor, normalizeTag, normalizeMonth,removeNonLetters} from '../assets/UTILS'
 
 const posts = (state = [], action) => {
+    switch(action.type){
+        case 'SORT_BY_TITLE':
+            return [...state.sort((a, b)=>(a.title.localeCompare(b.title)))]
+    }
     return state;
 };
 
