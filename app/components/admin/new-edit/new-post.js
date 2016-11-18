@@ -1,8 +1,8 @@
 import {Component} from 'react';
-import {PostForm} from './post-form'
+import {PostForm} from './form-components/post-form'
 export const NewPost = ()=> {
     return (<PostForm
-            parent = 'NewPost'
+            formAction = 'Add New'
         />
     );
 };

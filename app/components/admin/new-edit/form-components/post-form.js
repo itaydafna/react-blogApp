@@ -1,10 +1,14 @@
 import {Component} from 'react';
 
 import {DeletePost} from './delete-post'
+import {FormHeading} from './form-heading'
+import {TitleField} from './title-field'
 
-export const PostForm = ({parent})=> {
+
+export const PostForm = ({formAction,post})=> {
     return (<section className="col-sm-12">
-            <h2 className="page-header">Edit Post</h2>
+            <FormHeading
+                formAction={formAction}/>
             {/* Invalid Input Alert */}
             {/* <div class="alert alert-danger" role="alert">
              The entered <strong>Title</strong> already exists in another post.
@@ -16,10 +20,7 @@ export const PostForm = ({parent})=> {
                 {/* Top Settings */}
                 <div className="row">
                     <div className="col-sm-6">
-                        <div className="form-group required">
-                            <label htmlFor="postTitle">Title</label>
-                            <input type="text" className="form-control" id="postTitle" name="postTitle" placeholder="Post Title" required autofocus defaultValue="Grunt - Custom Tasks" />
-                        </div>
+                        <TitleField defaultValue={formAction==='Edit'?post.title:''}/>
                         <div className="form-group required">
                             <label htmlFor="postAuthor">Author</label>
                             <input type="text" className="form-control" id="postAuthor" name="postAuthor" placeholder="Post Author" required defaultValue="Alex Ilyaev" />
@@ -75,7 +76,7 @@ export const PostForm = ({parent})=> {
                 <hr />
                 <button type="submit" className="btn btn-primary">Save Post</button>
                 <DeletePost
-                    parent = {parent}
+                    parent = {formAction}
                 />
             </form>
         </section>
