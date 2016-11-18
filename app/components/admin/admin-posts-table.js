@@ -5,8 +5,9 @@ import {withRouter} from 'react-router';
 import {PostTableRow} from './post-table-row'
 
 import {getFilteredPosts} from '../../reducers/reducer-root'
+import {sortDescending} from '../../action-creators/sort-posts'
 
-let AdminPostsTable = ({filteredPosts})=>{
+let AdminPostsTable = ({filteredPosts,sortDescending})=>{
     return (
         <table className="table table-bordered table-hover table-striped postsTable">
             <thead>
@@ -19,7 +20,7 @@ let AdminPostsTable = ({filteredPosts})=>{
                         {/* <i class="glyphicon glyphicon-chevron-up"></i> */}
                     </span>
                 </th>
-                <th>
+                <th onClick={()=>sortDescending('author')}>
                     Author
                     <span className="pull-right">
                       {/* <i class="glyphicon glyphicon-chevron-down"></i> */}
@@ -68,7 +69,8 @@ const mapStateToProps = (state, {location}) => {
 
 
 AdminPostsTable = withRouter(connect(
-    mapStateToProps
+    mapStateToProps,
+    {sortDescending}
 )(AdminPostsTable));
 
 
