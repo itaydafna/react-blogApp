@@ -11,7 +11,10 @@ const postsData = data.posts.sort((a, b)=>(b.date.localeCompare(a.date)));
 //setting the stores initial state for some of the properties:
 const persistedState = {
     //initializing the store with the existing posts in the JSON under posts
-    posts: postsData
+    posts:{
+      arr: postsData,
+      sortedBy: 'date'
+    }
 };
 
 const store = createStore(reducers, persistedState);

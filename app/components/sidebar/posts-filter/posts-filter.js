@@ -76,7 +76,7 @@ let PostsFilter = ({posts,filterTerm,pathPrefix})=>{
 };
 
 const mapStateToProps = (state) => ({
-    posts: state.posts
+    posts: state.posts.arr
 });
 
 
