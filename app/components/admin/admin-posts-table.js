@@ -4,7 +4,7 @@ import {withRouter} from 'react-router';
 
 import {PostTableRow} from './post-table-row'
 
-import {getFilteredPosts} from '../../store/store'
+import {getFilteredPosts} from '../../reducers/reducer-root'
 
 let AdminPostsTable = ({filteredPosts})=>{
     return (
