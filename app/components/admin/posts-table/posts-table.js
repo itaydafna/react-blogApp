@@ -2,7 +2,7 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import AdminTableHead from './admin-table-head'
+import PostsTableHead from './posts-table-head'
 import {PostTableRow} from './post-table-row'
 
 import {getFilteredPosts} from '../../../reducers/reducer-root'
@@ -11,7 +11,7 @@ import {sortDescending} from '../../../action-creators/sort-posts'
 let PostsTable = ({filteredPosts})=>{
     return (
         <table className="table table-bordered table-hover table-striped postsTable">
-           <AdminTableHead/>
+           <PostsTableHead/>
             <tbody>
             {filteredPosts.map(({title,author,date},index)=>{
                 let dateObj = new Date(Number(date));

@@ -6,7 +6,7 @@ import {sortDescending, sortAscending} from '../../../action-creators/sort-posts
 import {SortChevron} from './sort-chevron';
 
 
-class AdminTableColumnHead extends Component {
+class PostsTableColumnTitle extends Component {
     constructor() {
         super();
         this.state = {
@@ -61,12 +61,12 @@ const mapStateToProps = (state) => ({
     sortedBy: state.posts.sortedBy
 });
 
-AdminTableColumnHead = connect(
+PostsTableColumnTitle = connect(
     mapStateToProps,
     {
         sortDescending,
         sortAscending
     }
-)(AdminTableColumnHead);
+)(PostsTableColumnTitle);
 
-export default AdminTableColumnHead;
+export default PostsTableColumnTitle;

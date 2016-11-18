@@ -1,10 +1,10 @@
 import {Component} from 'react';
 
-import AdminTableColumnHead from './admin-table-column-head';
+import PostsTableColumnTitle from './admin-table-column-head';
 
 
 
-const AdminTableHead = ({sortDescending, sortAscending})=>{
+const PostsTableHead = ({sortDescending, sortAscending})=>{
 
     const columnNames = ['Title','Author','Date'];
     return(
@@ -12,7 +12,7 @@ const AdminTableHead = ({sortDescending, sortAscending})=>{
         <tr>
             <th>#</th>
             {columnNames.map((name)=>
-                <AdminTableColumnHead
+                <PostsTableColumnTitle
                     key = {name}
                     columnName = {name}
                 />
@@ -23,5 +23,5 @@ const AdminTableHead = ({sortDescending, sortAscending})=>{
 };
 
 
-export default AdminTableHead;
+export default PostsTableHead;
 
