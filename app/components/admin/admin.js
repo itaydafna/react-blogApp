@@ -2,7 +2,7 @@ import {Component} from 'react';
 import {Sidebar} from '../sidebar/sidebar'
 
 
-import AdminPostsTable from './admin-posts-table'
+import PostsTable from './posts-table/posts-table'
 
 export const Admin = ({location}) => {
     const queryVar = Object.keys(location.query) ? Object.keys(location.query)[0] : null,
@@ -11,7 +11,7 @@ export const Admin = ({location}) => {
         <div>
             <section className="col-md-8">
                 <h2 className="page-header">Edit posts</h2>
-                <AdminPostsTable />
+                <PostsTable />
                 <footer>
                     <a className="btn btn-primary" href="#">Add New Post</a>
                 </footer>

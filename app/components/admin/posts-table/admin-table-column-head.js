@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {sortDescending, sortAscending} from '../../action-creators/sort-posts'
+import {sortDescending, sortAscending} from '../../../action-creators/sort-posts'
 
 import {SortChevron} from './sort-chevron';
 

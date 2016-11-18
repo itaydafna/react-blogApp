@@ -5,10 +5,10 @@ import {withRouter} from 'react-router';
 import AdminTableHead from './admin-table-head'
 import {PostTableRow} from './post-table-row'
 
-import {getFilteredPosts} from '../../reducers/reducer-root'
-import {sortDescending} from '../../action-creators/sort-posts'
+import {getFilteredPosts} from '../../../reducers/reducer-root'
+import {sortDescending} from '../../../action-creators/sort-posts'
 
-let AdminPostsTable = ({filteredPosts})=>{
+let PostsTable = ({filteredPosts})=>{
     return (
         <table className="table table-bordered table-hover table-striped postsTable">
            <AdminTableHead/>
@@ -44,9 +44,9 @@ const mapStateToProps = (state, {location}) => {
     }};
 
 
-AdminPostsTable = withRouter(connect(
+PostsTable = withRouter(connect(
     mapStateToProps
-)(AdminPostsTable));
+)(PostsTable));
 
 
-export default AdminPostsTable;
+export default PostsTable;
