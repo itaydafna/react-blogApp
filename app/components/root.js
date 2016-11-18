@@ -14,8 +14,8 @@ import PostsIndex from './posts-index/posts-index';
 import {Admin} from './admin/admin';
 import PostPreviews from './posts-index/post-previews'
 import SinglePostView from './single-post/single-post-view'
-import {NewPost} from './admin/new-post/new-post'
-import {EditPost} from './admin/edit-post/edit-post'
+import {NewPost} from './admin/new-edit/new-post'
+import {EditPost} from './admin/new-edit/edit-post'
 
 const Root = () => {
     return (

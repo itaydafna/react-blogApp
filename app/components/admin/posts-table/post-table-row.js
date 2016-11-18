@@ -3,7 +3,6 @@ import {Link} from 'react-router'
 
 import {removeNonLetters} from '../../../assets/UTILS'
 
-
 export class PostTableRow extends Component{
     render() {
         const {number, title, author, date} = this.props;
