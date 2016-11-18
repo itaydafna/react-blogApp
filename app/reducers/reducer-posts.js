@@ -20,27 +20,12 @@ const sortedBy = (state = 'date', action) => {
             return action.column
     }
     return state;
-}
-
-const direction = (state = 'descending', action) => {
-    switch (action.type){
-        case 'SORT_DESCENDING':
-            return 'descending';
-        case 'SORT_ASCENDING':
-            return 'ascending';
-    }
-    return state;
 };
-
-const sorting = combineReducers({
-    sortedBy,
-    direction
-});
 
 
 const posts = combineReducers({
     arr,
-    sorting
+    sortedBy
 })
 
 export default posts;

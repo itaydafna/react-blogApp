@@ -57,7 +57,7 @@ class AdminTableColumnHead extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    sortedBy: state.posts.sorting.sortedBy
+    sortedBy: state.posts.sortedBy
 });
 
 AdminTableColumnHead = connect(
