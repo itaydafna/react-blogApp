@@ -1,14 +1,12 @@
 import {Component} from 'react';
-import {connect} from 'react-redux';
 
-import {AdminTableColumnHead} from './admin-table-column-head';
+import AdminTableColumnHead from './admin-table-column-head';
 
-import {sortDescending} from '../../action-creators/sort-posts'
 
-let AdminTableHead = ({sortDescending,sortedBy})=>{
+
+const AdminTableHead = ({sortDescending, sortAscending})=>{
 
     const columnNames = ['Title','Author','Date'];
-    console.log(sortedBy);
     return(
         <thead>
         <tr>
@@ -17,8 +15,6 @@ let AdminTableHead = ({sortDescending,sortedBy})=>{
                 <AdminTableColumnHead
                     key = {name}
                     columnName = {name}
-                    sortDescending = {()=>sortDescending(name.toLowerCase())}
-                    sortedBy = {sortedBy === name.toLowerCase()}
                 />
             )}
         </tr>
@@ -26,14 +22,6 @@ let AdminTableHead = ({sortDescending,sortedBy})=>{
     )
 };
 
-const mapStateToProps = (state) => ({
-    sortedBy: state.posts.sortedBy
-});
-
-AdminTableHead = connect(
-    mapStateToProps,
-    {sortDescending}
-)(AdminTableHead);
 
 export default AdminTableHead;
 

@@ -1,28 +1,46 @@
 import {combineReducers} from 'redux'
 
-import {normalizeAuthor, normalizeTag, normalizeMonth,removeNonLetters} from '../assets/UTILS'
+import {normalizeAuthor, normalizeTag, normalizeMonth, removeNonLetters} from '../assets/UTILS'
 
 const arr = (state = [], action) => {
-    switch(action.type){
-        case 'SORT_ DESCENDING':
+    switch (action.type) {
+        case 'SORT_DESCENDING':
             return [...state.sort((a, b)=>b[action.column].localeCompare(a[action.column]))];
-        case 'SORT_ ASCENDING':
+        case 'SORT_ASCENDING':
             return [...state.sort((a, b)=>a[action.column].localeCompare(b[action.column]))];
     }
     return state;
 };
 
-const sortedBy = (state = 'date',action) =>{
-    switch(action.type) {
-        case 'SORT_ DESCENDING':
+const sortedBy = (state = 'date', action) => {
+    switch (action.type) {
+        case 'SORT_DESCENDING':
+            return action.column
+        case 'SORT_ASCENDING':
             return action.column
     }
     return state;
 }
 
+const direction = (state = 'descending', action) => {
+    switch (action.type){
+        case 'SORT_DESCENDING':
+            return 'descending';
+        case 'SORT_ASCENDING':
+            return 'ascending';
+    }
+    return state;
+};
+
+const sorting = combineReducers({
+    sortedBy,
+    direction
+});
+
+
 const posts = combineReducers({
-  arr,
-  sortedBy
+    arr,
+    sorting
 })
 
 export default posts;

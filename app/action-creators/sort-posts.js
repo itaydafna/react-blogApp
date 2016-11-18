@@ -1,4 +1,9 @@
 export const sortDescending = (column) => ({
-    type: 'SORT_ DESCENDING',
+    type: 'SORT_DESCENDING',
+    column
+});
+
+export const sortAscending = (column) => ({
+    type: 'SORT_ASCENDING',
     column
 });

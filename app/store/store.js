@@ -13,7 +13,10 @@ const persistedState = {
     //initializing the store with the existing posts in the JSON under posts
     posts:{
       arr: postsData,
-      sortedBy: 'date'
+      sorting: {
+        sortedBy: 'date',
+        direction: 'descending'
+      }
     }
 };
 
