@@ -6,8 +6,8 @@ import {TitleField} from './title-field';
 import {AuthorField} from './author-field';
 import {TagsField} from './tags-field';
 import {DescriptionField} from './description-field';
-import {MarkdownInput} from './markdown-input';
-import {HTMLPreview} from './html-preview';
+import {MarkdownConvertor} from './markdown-convertor/MarkdownConvertor';
+
 
 
 export const PostForm = ({formAction, post})=> {
@@ -36,8 +36,7 @@ export const PostForm = ({formAction, post})=> {
                 <hr />
                 {/* Markdown and Live Preview */}
                 <div className="row">
-                    <MarkdownInput defaultValue={formAction==='Edit'?md:''}/>
-                    <HTMLPreview/>
+                    <MarkdownConvertor defaultValue={formAction==='Edit'?md:''} />
                 </div>
                 <hr />
                 <button type="submit" className="btn btn-primary">Save Post</button>

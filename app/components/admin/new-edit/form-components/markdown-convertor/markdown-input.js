@@ -1,5 +1,5 @@
 import {Component} from 'react';
-export const MarkdownInput = ({defaultValue})=>(
+export const MarkdownInput = ({defaultValue, onTextChange})=>(
         <div className="form-group required col-sm-6">
             <label htmlFor="postMd">Markdown</label>
             <textarea className="form-control previewPane"
@@ -7,6 +7,7 @@ export const MarkdownInput = ({defaultValue})=>(
                       name="postMd"
                       rows={20}
                       placeholder="Post Markdown" required
-                      defaultValue={defaultValue}/>
+                      defaultValue={defaultValue}
+                      onChange = {onTextChange}/>
         </div>
 )
