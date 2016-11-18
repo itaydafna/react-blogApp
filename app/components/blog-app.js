@@ -13,7 +13,7 @@ const BlogApp = ({children})=> {
                 <div className="container">
                     <div className="row">
                 {/* the children components are
-                either PostsIndex, Admin or SinglePostView  */}
+                either PostsIndex, Admin, SinglePostView, NewPost and EditPost  */}
                         {children}
                     </div>
                     <hr/>

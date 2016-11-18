@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import {Link} from 'react-router';
 import {Sidebar} from '../sidebar/sidebar'
 
 
@@ -13,7 +14,7 @@ export const Admin = ({location}) => {
                 <h2 className="page-header">Edit posts</h2>
                 <PostsTable />
                 <footer>
-                    <a className="btn btn-primary" href="#">Add New Post</a>
+                    <Link className="btn btn-primary" to="admin/new/post">Add New Post</Link>
                 </footer>
             </section>
             <Sidebar
