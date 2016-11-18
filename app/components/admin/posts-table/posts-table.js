@@ -6,7 +6,6 @@ import PostsTableHead from './posts-table-head'
 import {PostTableRow} from './post-table-row'
 
 import {getFilteredPosts} from '../../../reducers/reducer-root'
-import {sortDescending} from '../../../action-creators/sort-posts'
 
 let PostsTable = ({filteredPosts})=>{
     return (

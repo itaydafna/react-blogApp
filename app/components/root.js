@@ -14,7 +14,8 @@ import PostsIndex from './posts-index/posts-index';
 import {Admin} from './admin/admin';
 import PostPreviews from './posts-index/post-previews'
 import SinglePostView from './single-post/single-post-view'
-
+import {NewPost} from './admin/new-post/new-post'
+import {EditPost} from './admin/edit-post/edit-post'
 
 const Root = () => {
     return (
@@ -28,7 +29,11 @@ const Root = () => {
                 <Route path="post" component = {SinglePostView}>
                     <Route path="(:post)"/>
                 </Route>
-                <Route path='admin' component={Admin}/>
+                <Route path='admin'>
+                    <IndexRoute component = {Admin}/>
+                    <Route path='edit/post/(:post)' component={EditPost}/>
+                    <Route path='new/post' component={NewPost}/>
+                </Route>
                 <Redirect path='/' to ='posts' component = {PostsIndex}/>
                 <IndexRedirect to='posts'/>
             </Route>
