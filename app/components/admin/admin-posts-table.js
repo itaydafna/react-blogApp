@@ -2,40 +2,16 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
+import AdminTableHead from './admin-table-head'
 import {PostTableRow} from './post-table-row'
 
 import {getFilteredPosts} from '../../reducers/reducer-root'
 import {sortDescending} from '../../action-creators/sort-posts'
 
-let AdminPostsTable = ({filteredPosts,sortDescending})=>{
+let AdminPostsTable = ({filteredPosts})=>{
     return (
         <table className="table table-bordered table-hover table-striped postsTable">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>
-                    Title
-                    <span className="pull-right">
-                      {/* <i class="glyphicon glyphicon-chevron-down"></i> */}
-                        {/* <i class="glyphicon glyphicon-chevron-up"></i> */}
-                    </span>
-                </th>
-                <th onClick={()=>sortDescending('author')}>
-                    Author
-                    <span className="pull-right">
-                      {/* <i class="glyphicon glyphicon-chevron-down"></i> */}
-                        {/* <i class="glyphicon glyphicon-chevron-up"></i> */}
-                    </span>
-                </th>
-                <th>
-                    Date
-                    <span className="pull-right">
-                      <i className="glyphicon glyphicon-chevron-down"/>
-                        {/* <i class="glyphicon glyphicon-chevron-up"></i> */}
-                    </span>
-                </th>
-            </tr>
-            </thead>
+           <AdminTableHead/>
             <tbody>
             {filteredPosts.map(({title,author,date},index)=>{
                 let dateObj = new Date(Number(date));
@@ -69,8 +45,7 @@ const mapStateToProps = (state, {location}) => {
 
 
 AdminPostsTable = withRouter(connect(
-    mapStateToProps,
-    {sortDescending}
+    mapStateToProps
 )(AdminPostsTable));
 
 

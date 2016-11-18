@@ -3,7 +3,9 @@ import {normalizeAuthor, normalizeTag, normalizeMonth,removeNonLetters} from '..
 const posts = (state = [], action) => {
     switch(action.type){
         case 'SORT_ DESCENDING':
-            return [...state.sort((a, b)=>b[action.column].localeCompare(a[action.column]))]
+            return [...state.sort((a, b)=>b[action.column].localeCompare(a[action.column]))];
+        case 'SORT_ ASCENDING':
+            return [...state.sort((a, b)=>a[action.column].localeCompare(b[action.column]))];
     }
     return state;
 };
