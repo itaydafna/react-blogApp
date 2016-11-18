@@ -17,11 +17,12 @@ class AdminTableColumnHead extends Component {
     }
 
     onColumnHeadClick(columnName) {
+        const {sortedBy,sortDescending} = this.props
         //the left part of the first if condition (before the ||) is in order to make sure that if
         //a non-active column is clicked it will first be sorted Descending
-        if (this.props.sortedBy !== columnName ||
+        if (sortedBy !== columnName ||
             this.state.sortDirection === 'ascending') {
-            this.props.sortDescending(columnName);
+            sortDescending(columnName);
             this.setState({
                 sortDirection: 'descending'
             })
