@@ -23,7 +23,7 @@ export const getSelectedPost = (state, postTitle)=> {
 };
 
 
-//SELECTOR used by the PostPreviews Component
+//SELECTOR used by the PostPreviews and the AdminPostsTable Components
 
 //function which filters the posts array based on the 'filter-term' on the query param
 

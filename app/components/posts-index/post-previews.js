@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {getFilteredPosts} from '../../store'
+import {getFilteredPosts} from '../../store/store'
 
 import {IndexHeader} from './index-header';
 import {VisiblePreviews} from './visible-previews';

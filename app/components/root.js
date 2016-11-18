@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {Router, Route, IndexRedirect, useRouterHistory, Redirect, IndexRoute} from 'react-router';
 import {createHashHistory} from 'history'
 
-import store from '../store'
+import store from '../store/store'
 
 //an attempt to get rid of query string following hash on URL
 const appHistory = useRouterHistory(createHashHistory)({queryKey: false});

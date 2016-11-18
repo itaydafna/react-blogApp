@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import {Link} from 'react-router';
 
-import {getSelectedPost} from '../../store'
+import {getSelectedPost} from '../../store/store'
 
 import {normalizeAuthor, normalizeTag} from '../../assets/UTILS'
 

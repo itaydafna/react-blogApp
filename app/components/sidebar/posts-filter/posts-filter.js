@@ -9,7 +9,7 @@ import {normalizeAuthor, normalizeTag, createFiltersMap, createDateMap} from '..
 //filterTerm is passed as a prop from the url query in order to render the 'show all posts' active state
 //it is is an empty string - all posts are shown else - is should be inactive
 let PostsFilter = ({posts,filterTerm,pathPrefix})=>{
-    
+
         const categoriesMap = createFiltersMap(posts, 'tags');
         const authorsMap = createFiltersMap(posts, 'author');
         const yearMap = createDateMap(posts);

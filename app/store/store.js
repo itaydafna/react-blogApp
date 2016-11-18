@@ -1,7 +1,7 @@
 import {createStore, combineReducers} from 'redux';
-import posts, * as fromPosts from './reducers/reducer-posts';
+import posts, * as fromPosts from '../reducers/reducer-posts';
 
-import data from '../data/posts.json';
+import data from '../../data/posts.json';
 
 
 const reducers = combineReducers({
