@@ -1,7 +1,9 @@
 import {Component, PropTypes} from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 
 import {addNewPost} from '../../../../action-creators/add-new-post'
+import {editPost} from '../../../../action-creators/edit-post'
 
 import {DeletePost} from './delete-post';
 import {FormHeading} from './form-heading';
@@ -71,10 +73,11 @@ class PostForm extends Component {
     //function which creates an object out of the input values
 
     createPostObject(formElm) {
+        //intentionally not adding date at this state since this will serve for both
+        //Add New and Edit cases (date shouldn't be changed on edit)
         return {
             title: formElm.querySelector('#postTitle').value,
             author: formElm.querySelector('#postAuthor').value,
-            date: String(Date.now()),
             tags: formElm.querySelector('#postTags').value.replace(/ /g, '').split(','),
             mdSource: formElm.querySelector('#postMd').value,
             description: formElm.querySelector('#postDescription').value
@@ -83,13 +86,23 @@ class PostForm extends Component {
 
     addNewPost(formElm,allFieldsValid, titleExists){
         if (allFieldsValid && !titleExists) {
-            const newPost = this.createPostObject(formElm);
+            let newPost = this.createPostObject(formElm);
+            //adding the new post's date here:
+            newPost.date = String(Date.now());
             this.props.addNewPost(newPost);
             this.context.router.push(`admin`);
         }
     }
 
-    
+    editPost(formElm,allFieldsValid){
+        if(allFieldsValid){
+         let editedPost = this.createPostObject(formElm);
+            this.props.editPost(this.props.params.post,editedPost);
+            this.context.router.push(`admin`);
+        }
+    }
+
+
     onFormSubmit(e) {
         e.preventDefault();
         const formElm = e.target;
@@ -98,6 +111,9 @@ class PostForm extends Component {
 
         if(this.props.formAction === 'Add New') {
             this.addNewPost(formElm, allFieldsValid, titleExists);
+        }
+        else if(this.props.formAction === 'Edit'){
+            this.editPost(formElm,allFieldsValid);
         }
     };
 
@@ -176,11 +192,12 @@ const mapStateToProps = (state)=> {
 
 };
 
-PostForm = connect(
+PostForm = withRouter(connect(
     mapStateToProps, {
-        addNewPost
+        addNewPost,
+        editPost
     }
-)(PostForm);
+)(PostForm));
 
 export default PostForm
 

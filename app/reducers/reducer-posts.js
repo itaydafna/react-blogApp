@@ -11,7 +11,13 @@ const arr = (state = [], action) => {
         case 'SORT_ASCENDING':
             return [...state.sort((a, b)=>a[action.column].localeCompare(b[action.column]))];
         case 'ADD_NEW_POST':
-            return [post(undefined,action),...state]
+            return [post(undefined,action),...state];
+        case 'EDIT_POST':
+            let postToEdit = getSelectedPost(state,action.postTitle);
+            let indexOfPostToEdit = state.indexOf(postToEdit);
+            //replacing postToEdit with editedPost
+            state.splice(indexOfPostToEdit,1,post(postToEdit,action));
+            return[...state];
     }
     return state;
 };

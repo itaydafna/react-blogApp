@@ -4,5 +4,10 @@ export const post = (state = {}, action) => {
             return {
                 ...action.newPost
             };
+        case 'EDIT_POST':
+            return{
+                ...state,
+                ...action.editedPost
+            }
     }
 };
