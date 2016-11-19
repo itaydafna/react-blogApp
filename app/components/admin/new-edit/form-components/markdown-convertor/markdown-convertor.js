@@ -26,6 +26,7 @@ export class MarkdownConvertor extends Component{
         return (
             <div className="row">
                 <MarkdownInput
+                    postMd = {this.props.postMd}
                     defaultValue={this.state.mdValue}
                     onTextChange = {(e)=>this.onTextChange(e)}
                 />

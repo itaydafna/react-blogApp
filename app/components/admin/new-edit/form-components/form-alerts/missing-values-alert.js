@@ -1,6 +1,5 @@
 import {Component} from 'react';
 export const MissingValuesAlert = ({valuesMissing}) =>{
-    console.log(valuesMissing);
     if (valuesMissing){
         return(
     <div className="alert alert-danger" role="alert">

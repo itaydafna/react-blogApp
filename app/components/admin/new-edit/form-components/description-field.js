@@ -1,7 +1,7 @@
 import {Component} from 'react';
-export const DescriptionField = ({defaultValue})=>(
+export const DescriptionField = ({defaultValue,postDescription})=>(
     <div className="col-sm-6">
-        <div className="form-group required">
+        <div className={postDescription?"form-group required":"form-group required has-error"}>
             <label htmlFor="postDescription">Description</label>
             <textarea
                 className="form-control"

@@ -1,6 +1,6 @@
 import {Component} from 'react';
-export const AuthorField = ({defaultValue}) =>(
-    <div className="form-group required">
+export const AuthorField = ({defaultValue,postAuthor}) =>(
+    <div className={postAuthor?"form-group required":"form-group required has-error"}>
         <label htmlFor="postAuthor">Author</label>
         <input type="text"
                className="form-control"

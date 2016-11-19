@@ -39,6 +39,10 @@ export class PostForm extends Component{
                 this.setState({
                     [elm.id]: false
                 })
+            }else {
+                this.setState({
+                    [elm.id]: true
+                })
             }
         })
     }
@@ -49,7 +53,7 @@ export class PostForm extends Component{
         this.requriedFieldsValidity(formElm);
         };
 
-    
+
     render() {
         const {postTitle,postAuthor,postMd,postDescription,titleExists} = this.state;
         const {formAction, post} = this.props;
@@ -73,16 +77,28 @@ export class PostForm extends Component{
                     {/* Top Settings */}
                     <div className="row">
                         <div className="col-sm-6">
-                            <TitleField defaultValue={formAction==='Edit'?post.title:''}/>
-                            <AuthorField defaultValue={formAction==='Edit'?post.author:''}/>
+                            <TitleField
+                                defaultValue={formAction==='Edit'?post.title:''}
+                                postTitle = {postTitle}
+                            />
+                            <AuthorField
+                                defaultValue={formAction==='Edit'?post.author:''}
+                                postAuthor = {postAuthor}
+                            />
                             <TagsField defaultValue={formAction==='Edit'?post.tags.join(', '):''}/>
                         </div>
-                        <DescriptionField defaultValue={formAction==='Edit'?post.description:''}/>
+                        <DescriptionField
+                            defaultValue={formAction==='Edit'?post.description:''}
+                            postDescription = {postDescription}
+                        />
                     </div>
                     <hr />
                     {/* Markdown and Live Preview */}
                     <div className="row">
-                        <MarkdownConvertor defaultValue={formAction==='Edit'?md:''}/>
+                        <MarkdownConvertor
+                            defaultValue={formAction==='Edit'?md:''}
+                            postMd = {postMd}
+                        />
                     </div>
                     <hr />
                     <button type="submit" className="btn btn-primary">Save Post</button>
