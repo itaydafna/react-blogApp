@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {getSelectedPost} from '../../../reducers/reducer-root'
 
-import {PostForm} from './form-components/post-form'
+import PostForm from './form-components/post-form'
 let EditPost = ({selectedPost})=>(
     <PostForm
         formAction = 'Edit'

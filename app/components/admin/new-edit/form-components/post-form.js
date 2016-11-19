@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import {connect} from 'react-redux'
 
 import {DeletePost} from './delete-post';
 import {FormHeading} from './form-heading';
@@ -12,7 +13,7 @@ import {TitleExistsAlert} from './form-alerts/title-exists-alert'
 
 
 //formAction can be either "Edit" or "Add New"
-export class PostForm extends Component{
+class Form extends Component{
     constructor(){
         super();
 
@@ -31,7 +32,8 @@ export class PostForm extends Component{
 
     //function which checks it the required fields have values in them
 
-    requriedFieldsValidity(formElm){
+    requiredFieldsValidity(formElm){
+        let allRequiredFilledsAreValid = true;
         //selecting an array of all the required inputs
         const requiredInputsArray =formElm.querySelectorAll('.form-control[required]');
         requiredInputsArray.forEach((elm)=> {
@@ -39,18 +41,37 @@ export class PostForm extends Component{
                 this.setState({
                     [elm.id]: false
                 })
+                allRequiredFilledsAreValid = false
             }else {
                 this.setState({
                     [elm.id]: true
                 })
             }
-        })
+        });
+        return allRequiredFilledsAreValid;
+    }
+
+    //function which checks if the post's title entered to the form already exists posts list
+
+    titleExists(formElm){
+        const postTitle = formElm.querySelector('#postTitle').value;
+        if(this.props.posts.findIndex((post)=>post.title === postTitle)>-1) {
+            this.setState({
+                titleExists: true
+            });
+            return true;
+        } else{
+            this.setState({
+                titleExists: false
+            });
+        }
     }
 
     onFormSubmit(e){
         e.preventDefault();
         const formElm = e.target;
-        this.requriedFieldsValidity(formElm);
+        this.requiredFieldsValidity(formElm);
+        this.titleExists(formElm)
         };
 
 
@@ -109,3 +130,17 @@ export class PostForm extends Component{
         );
     }
 };
+
+
+const mapStateToProps=(state)=>{
+    return {
+        posts: state.posts.arr
+    }
+
+}
+
+const PostForm = connect(
+    mapStateToProps
+)(Form);
+
+export default PostForm
