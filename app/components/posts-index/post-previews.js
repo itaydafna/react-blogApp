@@ -9,8 +9,10 @@ import {Pager} from './pager';
 
 
 let PostPreviews = ({params, filteredPosts, queryVar, filterTerm}) => {
-    //filtering the posts array based on the 'filter-term' on the query param
 
+    //sorting the posts data from newest to oldest
+    //(done here and not in store since the sortedBy value should be saved for switching to the admin tab)
+    filteredPosts= filteredPosts.sort((a, b)=>(b.date.localeCompare(a.date)));
 
     //chunking the filtered posts array to pages
     let chunkedArray = _.chunk(filteredPosts, 3);
@@ -43,6 +45,7 @@ const mapStateToProps = (state, {location}) => {
     let filterTerm = location.query[queryVar] || '';
 
     return {
+    //filtering the posts array based on the 'filter-term' on the query param
     filteredPosts: getFilteredPosts(state, filterTerm, queryVar),
     queryVar,
     filterTerm

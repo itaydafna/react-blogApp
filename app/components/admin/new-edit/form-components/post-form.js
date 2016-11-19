@@ -81,18 +81,25 @@ class PostForm extends Component {
         }
     }
 
+    addNewPost(formElm,allFieldsValid, titleExists){
+        if (allFieldsValid && !titleExists) {
+            const newPost = this.createPostObject(formElm);
+            this.props.addNewPost(newPost);
+            this.context.router.push(`admin`);
+        }
+    }
+
+    
     onFormSubmit(e) {
         e.preventDefault();
         const formElm = e.target;
         let allFieldsValid = this.requiredFieldsValidity(formElm);
         let titleExists = this.titleExists(formElm);
-        if (allFieldsValid && !titleExists) {
-            const newPost = this.createPostObject(formElm);
-            this.props.addNewPost(newPost);
-            this.context.router.push(`admin`)
+
+        if(this.props.formAction === 'Add New') {
+            this.addNewPost(formElm, allFieldsValid, titleExists);
         }
     };
-
 
     render() {
         //formAction can be either "Edit" or "Add New"
