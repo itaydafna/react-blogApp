@@ -16,30 +16,24 @@ class PostsTableColumnTitle extends Component {
     }
 
     render() {
-        const {sortedBy, sortDescending, sortAscending, columnName} = this.props;
+        const {sortedBy,direction,sortDescending, sortAscending, columnName} = this.props;
         const onColumnHeadClick = (columnName) => {
             //case in which a column which the posts are currently sorted by is being clicked
             //(sorting to the other direction)
             if (sortedBy === columnName) {
-                if (this.state.sortDirection === 'ascending') {
-                    this.setState({
-                        sortDirection: 'descending'
-                    });
+                if (direction === 'ascending') {
                     sortDescending(columnName);
-                } else if (this.state.sortDirection === 'descending') {
-                    this.setState({
-                        sortDirection: 'ascending'
-                    });
+                } else if (direction === 'descending') {
                     sortAscending(columnName);
                 }
             }
             //case in which a columns which the posts are not currently sorted by is being clicked
             //(keeping the sorted direction of the previous sorted column_
             else {
-                if (this.state.sortDirection === 'ascending') {
+                if (direction=== 'ascending') {
                     sortAscending(columnName);
                 }
-                else if (this.state.sortDirection === 'descending') {
+                else if (direction === 'descending') {
                     sortDescending(columnName);
                 }
 
@@ -51,7 +45,7 @@ class PostsTableColumnTitle extends Component {
                     <span className="pull-right">
                       <SortChevron
                           sortedBy={sortedBy===columnName.toLowerCase()}
-                          sortDirection={this.state.sortDirection}
+                          sortDirection={direction}
                       />
                     </span>
             </th>
@@ -60,7 +54,8 @@ class PostsTableColumnTitle extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    sortedBy: state.posts.sortedBy
+    sortedBy: state.posts.sorting.sortedBy,
+    direction: state.posts.sorting.direction
 });
 
 PostsTableColumnTitle = connect(
