@@ -14,12 +14,19 @@ let SinglePostView = ({selectedPost})=> {
         "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
     ];
 
-    const {title, author, date, tags, mdPath} = selectedPost;
+    const {title, author, date, tags, mdPath, mdSource} = selectedPost;
     const formatedDate = new Date(Number(date));
-    //this requires the content of the md file at the md file as raw text which can be rendered by the
-    // ReactMarkdown component
-    var md = require(`raw!../../../${mdPath}`);
+    let md = '';
 
+    //added this condition since new posts don't have an mdPath - they have an mdSource instead
+    if(mdSource){
+        md = mdSource;
+    }
+    else {
+        //this requires the content of the md file at the md file as raw text which can be rendered by the
+        // ReactMarkdown component
+        md = require(`raw!../../../${mdPath}`);
+    }
     return (
         <section className="col-md-8">
             {/* Begin Post */}

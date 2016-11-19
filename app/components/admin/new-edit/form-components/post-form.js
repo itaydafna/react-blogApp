@@ -1,6 +1,8 @@
 import {Component} from 'react';
 import {connect} from 'react-redux'
 
+import {addNewPost} from '../../../../action-creators/add-new-post'
+
 import {DeletePost} from './delete-post';
 import {FormHeading} from './form-heading';
 import {TitleField} from './title-field';
@@ -40,7 +42,7 @@ class Form extends Component {
             if (elm.value === '') {
                 this.setState({
                     [elm.id]: false
-                })
+                });
                 allRequiredFilledsAreValid = false
             } else {
                 this.setState({
@@ -86,7 +88,9 @@ class Form extends Component {
         let allFieldsValid = this.requiredFieldsValidity(formElm);
         let titleExists = this.titleExists(formElm);
         if (allFieldsValid && !titleExists) {
-            console.log(this.createPostObject(formElm));
+            const newPost = this.createPostObject(formElm);
+            console.log(newPost);
+            this.props.addNewPost(newPost);
         }
 
     };
@@ -95,8 +99,14 @@ class Form extends Component {
     render() {
         const {postTitle, postAuthor, postMd, postDescription, titleExists} = this.state;
         const {formAction, post} = this.props;
+
+        //added these multiple conditions since md should only be rendered on Edit formed
+        // and since new posts don't have an mdPath - they have an mdSource instead
         const mdPath = formAction === 'Edit' ? post.mdPath : null;
-        const md = mdPath && require(`raw!../../../../../${mdPath}`);
+        const mdSource = formAction === 'Edit' ? post.mdSource : null;
+        let md = mdPath?require(`raw!../../../../../${mdPath}`):mdSource;
+
+
         return (<section className="col-sm-12">
                 <FormHeading
                     formAction={formAction}/>
@@ -155,10 +165,12 @@ const mapStateToProps = (state)=> {
         posts: state.posts.arr
     }
 
-}
+};
 
 const PostForm = connect(
-    mapStateToProps
+    mapStateToProps,{
+        addNewPost
+    }
 )(Form);
 
 export default PostForm

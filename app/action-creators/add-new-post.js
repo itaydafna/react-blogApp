@@ -1,3 +1,5 @@
-/**
- * Created by itaydafna on 19/11/2016.
- */
+export const addNewPost = (newPost) => ({
+    type: 'ADD_NEW_POST',
+    newPost
+});
+

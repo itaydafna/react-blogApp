@@ -8,6 +8,8 @@ const arr = (state = [], action) => {
             return [...state.sort((a, b)=>b[action.column].localeCompare(a[action.column]))];
         case 'SORT_ASCENDING':
             return [...state.sort((a, b)=>a[action.column].localeCompare(b[action.column]))];
+        case 'ADD_NEW_POST':
+            return [action.newPost,...state]
     }
     return state;
 };
@@ -15,9 +17,9 @@ const arr = (state = [], action) => {
 const sortedBy = (state = 'date', action) => {
     switch (action.type) {
         case 'SORT_DESCENDING':
-            return action.column
+            return action.column;
         case 'SORT_ASCENDING':
-            return action.column
+            return action.column;
     }
     return state;
 };
