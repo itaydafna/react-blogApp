@@ -1,6 +1,7 @@
 import {Component} from 'react';
-import {MarkdownInput} from './markdown-input'
-import {HTMLPreview} from './html-preview'
+import {MarkdownInput} from './markdown-input';
+import {HTMLPreview} from './html-preview';
+import Marked from 'marked';
 
 export class MarkdownConvertor extends Component{
     constructor(props){
@@ -9,6 +10,7 @@ export class MarkdownConvertor extends Component{
             mdValue: this.props.defaultValue
         };
         this.onTextChange = this.onTextChange.bind(this);
+        this.createMarkup = this.createMarkup.bind(this);
     }
     onTextChange(e){
         this.setState({
@@ -16,6 +18,10 @@ export class MarkdownConvertor extends Component{
         })
         
     }
+    createMarkup() {
+        return {__html: `${Marked(this.state.mdValue)}`};
+    }
+
     render(){
         return (
             <div className="row">
@@ -24,7 +30,7 @@ export class MarkdownConvertor extends Component{
                     onTextChange = {(e)=>this.onTextChange(e)}
                 />
                 <HTMLPreview
-                    text = {this.state.mdValue}
+                    html = {this.createMarkup()}
                 />
             </div>
         )

@@ -7,6 +7,7 @@ export const TitleField = ({defaultValue}) =>(
            id="postTitle" 
            name="postTitle" 
            placeholder="Post Title" 
-           required autofocus 
+           required
+           autofocus
            defaultValue={defaultValue}/>
 </div>)

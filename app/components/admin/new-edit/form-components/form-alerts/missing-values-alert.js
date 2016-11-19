@@ -1,3 +1,12 @@
-/**
- * Created by itaydafna on 19/11/2016.
- */
+import {Component} from 'react';
+export const MissingValuesAlert = ({valuesMissing}) =>{
+    console.log(valuesMissing);
+    if (valuesMissing){
+        return(
+    <div className="alert alert-danger" role="alert">
+        One or more required fields have no value.
+    </div>)} else{
+        return null;
+    }
+}
+
