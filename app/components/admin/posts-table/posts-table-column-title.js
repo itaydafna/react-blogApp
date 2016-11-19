@@ -6,46 +6,61 @@ import {sortDescending, sortAscending} from '../../../action-creators/sort-posts
 import {SortChevron} from './sort-chevron';
 
 
-let PostsTableColumnTitle = ({sortedBy, sortDirection, sortDescending, sortAscending, columnName})=> {
+class PostsTableColumnTitle extends Component {
 
-    const onColumnHeadClick = (columnName) => {
-        //case in which a column which the posts are currently sorted by is being clicked
-        //(sorting to the other direction)
-        if (sortedBy === columnName) {
-            if (sortDirection === 'ascending') {
-                sortDescending(columnName);
-            } else if (sortDirection === 'descending') {
-                sortAscending(columnName);
-            }
+    constructor(){
+        super();
+        this.state = {
+            sortDirection:'descending'
         }
-        //case in which a columns which the posts are not currently sorted by is being clicked
-        //(keeping the sorted direction of the previous sorted column_
-        else {
-            if (sortDirection === 'ascending') {
-                sortAscending(columnName);
-            }
-            else if (sortDirection === 'descending') {
-                sortDescending(columnName);
-            }
+    }
 
-        }
-    };
-    return (
-        <th onClick={()=>onColumnHeadClick(columnName.toLowerCase())}>
-            {columnName}
+    render() {
+        const {sortedBy, sortDescending, sortAscending, columnName} = this.props;
+        const onColumnHeadClick = (columnName) => {
+            //case in which a column which the posts are currently sorted by is being clicked
+            //(sorting to the other direction)
+            if (sortedBy === columnName) {
+                if (this.state.sortDirection === 'ascending') {
+                    this.setState({
+                        sortDirection: 'descending'
+                    });
+                    sortDescending(columnName);
+                } else if (this.state.sortDirection === 'descending') {
+                    this.setState({
+                        sortDirection: 'ascending'
+                    });
+                    sortAscending(columnName);
+                }
+            }
+            //case in which a columns which the posts are not currently sorted by is being clicked
+            //(keeping the sorted direction of the previous sorted column_
+            else {
+                if (this.state.sortDirection === 'ascending') {
+                    sortAscending(columnName);
+                }
+                else if (this.state.sortDirection === 'descending') {
+                    sortDescending(columnName);
+                }
+
+            }
+        };
+        return (
+            <th onClick={()=>onColumnHeadClick(columnName.toLowerCase())}>
+                {columnName}
                     <span className="pull-right">
                       <SortChevron
                           sortedBy={sortedBy===columnName.toLowerCase()}
-                          sortDirection={sortDirection}
+                          sortDirection={this.state.sortDirection}
                       />
                     </span>
-        </th>
-    )
-};
+            </th>
+        )
+    };
+}
 
 const mapStateToProps = (state) => ({
-    sortedBy: state.posts.sorting.sortedBy,
-    sortDirection: state.posts.sorting.direction
+    sortedBy: state.posts.sortedBy
 });
 
 PostsTableColumnTitle = connect(

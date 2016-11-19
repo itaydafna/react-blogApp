@@ -1,5 +1,5 @@
 import {Component, PropTypes} from 'react';
-import {Link} from 'react-router'
+
 
 import {removeNonLetters} from '../../../assets/UTILS'
 

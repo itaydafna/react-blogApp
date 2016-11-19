@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {Component, PropTypes} from 'react';
 import {connect} from 'react-redux'
 
 import {addNewPost} from '../../../../action-creators/add-new-post'
@@ -14,8 +14,7 @@ import {MissingValuesAlert} from './form-alerts/missing-values-alert'
 import {TitleExistsAlert} from './form-alerts/title-exists-alert'
 
 
-//formAction can be either "Edit" or "Add New"
-class Form extends Component {
+class PostForm extends Component {
     constructor() {
         super();
 
@@ -89,14 +88,14 @@ class Form extends Component {
         let titleExists = this.titleExists(formElm);
         if (allFieldsValid && !titleExists) {
             const newPost = this.createPostObject(formElm);
-            console.log(newPost);
             this.props.addNewPost(newPost);
+            this.context.router.push(`admin`)
         }
-
     };
 
 
     render() {
+        //formAction can be either "Edit" or "Add New"
         const {postTitle, postAuthor, postMd, postDescription, titleExists} = this.state;
         const {formAction, post} = this.props;
 
@@ -104,7 +103,7 @@ class Form extends Component {
         // and since new posts don't have an mdPath - they have an mdSource instead
         const mdPath = formAction === 'Edit' ? post.mdPath : null;
         const mdSource = formAction === 'Edit' ? post.mdSource : null;
-        let md = mdPath?require(`raw!../../../../../${mdPath}`):mdSource;
+        let md = mdPath ? require(`raw!../../../../../${mdPath}`) : mdSource;
 
 
         return (<section className="col-sm-12">
@@ -156,8 +155,11 @@ class Form extends Component {
             </section>
         );
     }
-}
-;
+};
+
+PostForm.contextTypes = {
+    router: PropTypes.object
+};
 
 
 const mapStateToProps = (state)=> {
@@ -167,10 +169,12 @@ const mapStateToProps = (state)=> {
 
 };
 
-const PostForm = connect(
-    mapStateToProps,{
+PostForm = connect(
+    mapStateToProps, {
         addNewPost
     }
-)(Form);
+)(PostForm);
 
 export default PostForm
+
+

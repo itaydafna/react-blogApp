@@ -3,6 +3,24 @@ import {MarkdownInput} from './markdown-input';
 import {HTMLPreview} from './html-preview';
 import Marked from 'marked';
 
+Marked.setOptions({
+    // GitHub Flavored Markdown
+    gfm: true,
+    // GFM tables
+    tables: true,
+    // GFM line breaks
+    breaks: true,
+    // Better lists handling
+    smartLists: true,
+    // Better punctuation handling
+    smartypants: true,
+    // Code blocks language prefix (reset default)
+    langPrefix: '',
+    // Prefix for headings ID's
+    headerPrefix: 'hid-',
+    highlight: false
+});
+
 export class MarkdownConvertor extends Component{
     constructor(props){
         super(props);
