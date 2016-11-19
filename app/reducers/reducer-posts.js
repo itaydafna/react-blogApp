@@ -1,5 +1,7 @@
 import {combineReducers} from 'redux'
 
+import {post} from './reducer-post'
+
 import {normalizeAuthor, normalizeTag, normalizeMonth, removeNonLetters} from '../assets/UTILS'
 
 const arr = (state = [], action) => {
@@ -9,7 +11,7 @@ const arr = (state = [], action) => {
         case 'SORT_ASCENDING':
             return [...state.sort((a, b)=>a[action.column].localeCompare(b[action.column]))];
         case 'ADD_NEW_POST':
-            return [action.newPost,...state]
+            return [post(undefined,action),...state]
     }
     return state;
 };
