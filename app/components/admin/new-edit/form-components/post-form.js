@@ -13,36 +13,36 @@ import {TitleExistsAlert} from './form-alerts/title-exists-alert'
 
 
 //formAction can be either "Edit" or "Add New"
-class Form extends Component{
-    constructor(){
+class Form extends Component {
+    constructor() {
         super();
 
-        this.state ={
-        //validity status for the 4 required fields - true if valid
-        // (I intentionally named them as the form input element's IDs so I can use these to easily change the validity
+        this.state = {
+            //validity status for the 4 required fields - true if valid
+            // (I intentionally named them as the form input element's IDs so I can use these to easily change the validity
             // state while iterating over all the elements' array (used on requriedFieldsValidity))
             postTitle: true,
             postAuthor: true,
             postDescription: true,
             postMd: true,
-        //should be true if title of the post already exists in data
+            //should be true if title of the post already exists in data
             titleExists: false
         }
     }
 
     //function which checks it the required fields have values in them
 
-    requiredFieldsValidity(formElm){
+    requiredFieldsValidity(formElm) {
         let allRequiredFilledsAreValid = true;
         //selecting an array of all the required inputs
-        const requiredInputsArray =formElm.querySelectorAll('.form-control[required]');
+        const requiredInputsArray = formElm.querySelectorAll('.form-control[required]');
         requiredInputsArray.forEach((elm)=> {
             if (elm.value === '') {
                 this.setState({
                     [elm.id]: false
                 })
                 allRequiredFilledsAreValid = false
-            }else {
+            } else {
                 this.setState({
                     [elm.id]: true
                 })
@@ -53,30 +53,47 @@ class Form extends Component{
 
     //function which checks if the post's title entered to the form already exists posts list
 
-    titleExists(formElm){
+    titleExists(formElm) {
         const postTitle = formElm.querySelector('#postTitle').value;
-        if(this.props.posts.findIndex((post)=>post.title === postTitle)>-1) {
+        if (this.props.posts.findIndex((post)=>post.title === postTitle) > -1) {
             this.setState({
                 titleExists: true
             });
             return true;
-        } else{
+        } else {
             this.setState({
                 titleExists: false
             });
         }
     }
 
-    onFormSubmit(e){
+    //function which creates an object out of the input values
+
+    createPostObject(formElm) {
+        return {
+            title: formElm.querySelector('#postTitle').value,
+            author: formElm.querySelector('#postAuthor').value,
+            date: String(Date.now()),
+            tags: formElm.querySelector('#postTags').value.replace(/ /g, '').split(','),
+            mdSource: formElm.querySelector('#postMd').value,
+            description: formElm.querySelector('#postDescription').value
+        }
+    }
+
+    onFormSubmit(e) {
         e.preventDefault();
         const formElm = e.target;
-        this.requiredFieldsValidity(formElm);
-        this.titleExists(formElm)
-        };
+        let allFieldsValid = this.requiredFieldsValidity(formElm);
+        let titleExists = this.titleExists(formElm);
+        if (allFieldsValid && !titleExists) {
+            console.log(this.createPostObject(formElm));
+        }
+
+    };
 
 
     render() {
-        const {postTitle,postAuthor,postMd,postDescription,titleExists} = this.state;
+        const {postTitle, postAuthor, postMd, postDescription, titleExists} = this.state;
         const {formAction, post} = this.props;
         const mdPath = formAction === 'Edit' ? post.mdPath : null;
         const md = mdPath && require(`raw!../../../../../${mdPath}`);
@@ -100,17 +117,17 @@ class Form extends Component{
                         <div className="col-sm-6">
                             <TitleField
                                 defaultValue={formAction==='Edit'?post.title:''}
-                                postTitle = {postTitle}
+                                postTitle={postTitle}
                             />
                             <AuthorField
                                 defaultValue={formAction==='Edit'?post.author:''}
-                                postAuthor = {postAuthor}
+                                postAuthor={postAuthor}
                             />
                             <TagsField defaultValue={formAction==='Edit'?post.tags.join(', '):''}/>
                         </div>
                         <DescriptionField
                             defaultValue={formAction==='Edit'?post.description:''}
-                            postDescription = {postDescription}
+                            postDescription={postDescription}
                         />
                     </div>
                     <hr />
@@ -118,7 +135,7 @@ class Form extends Component{
                     <div className="row">
                         <MarkdownConvertor
                             defaultValue={formAction==='Edit'?md:''}
-                            postMd = {postMd}
+                            postMd={postMd}
                         />
                     </div>
                     <hr />
@@ -129,10 +146,11 @@ class Form extends Component{
             </section>
         );
     }
-};
+}
+;
 
 
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state)=> {
     return {
         posts: state.posts.arr
     }
