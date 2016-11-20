@@ -26,7 +26,7 @@ let PostsFilter = ({posts,filterTerm,pathPrefix})=>{
                     </Link>
                 </div>
                 <h4>
-                    <small className="glyphicon glyphicon-tag"/>
+                    <small className="glyphicon glyphicon-tag glyph-before"/>
                     Category
                 </h4>
                 <div className="list-group">
@@ -41,7 +41,7 @@ let PostsFilter = ({posts,filterTerm,pathPrefix})=>{
                         />)}
                 </div>
                 <h4>
-                    <small className="glyphicon glyphicon-user"/>
+                    <small className="glyphicon glyphicon-user glyph-before"/>
                     Author
                 </h4>
                 <div className="list-group">
@@ -56,7 +56,7 @@ let PostsFilter = ({posts,filterTerm,pathPrefix})=>{
                         />)}
                 </div>
                 <h4>
-                    <small className="glyphicon glyphicon-time"/>
+                    <small className="glyphicon glyphicon-time glyph-before"/>
                     Month
                 </h4>
                 <div className="list-group">

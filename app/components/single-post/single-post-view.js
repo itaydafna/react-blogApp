@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import {Link} from 'react-router';
 
-import {Tag} from '../posts-index/tag'
 
+import {AuthorLink} from '../posts-index/author-link'
+import {Tag} from '../posts-index/tag'
 import {getSelectedPost} from '../../reducers/reducer-root'
 
-import {normalizeAuthor, normalizeTag} from '../../assets/UTILS'
 
 
 let SinglePostView = ({selectedPost})=> {
@@ -35,19 +35,10 @@ let SinglePostView = ({selectedPost})=> {
             <article>
                 <header>
                     <h1 className="page-header">{title}</h1>
+                    <AuthorLink
+                        author = {author}/>
                     <p>
-                        <small className="glyphicon glyphicon-user"/>
-                        by <Link
-                        to={{pathname: `/posts/`,
-                    query: {
-                    'author': `${normalizeAuthor(author)}`
-                    }}}
-                    >
-                        {author}
-                    </Link>
-                    </p>
-                    <p>
-                        <small className="glyphicon glyphicon-time"/>
+                        <small className="glyphicon glyphicon-time glyph-before"/>
                         Posted
                         on {formatedDate.getDate()} {monthNames[formatedDate.getMonth()]}, {formatedDate.getFullYear()}
                     </p>

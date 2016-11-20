@@ -11,6 +11,7 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+
 }
 
 /**
@@ -77,7 +78,7 @@ body {
  */
 
 .form-control.previewPane {
-  height: 500px;
+  heights: 500px;
   overflow-y: auto;
   resize: none;
   width: 100%;
@@ -91,4 +92,9 @@ body {
 .categoryTag {
   margin: 0 2px;
 }
+
+.glyph-before {
+  margin-right: 6px;
+}
+
 
