@@ -15,3 +15,11 @@ export const getSelectedPost = (state, postTitle)=>
 
 export const getFilteredPosts = (state, filterTerm, queryVar) =>
     fromPosts.getFilteredPosts(state.posts.arr,filterTerm,queryVar);
+
+
+export const getSortedBy = (state) =>
+	    fromPosts.getSortedBy(state.posts);
+
+
+export const getDirection = (state) =>
+   	fromPosts.getDirection(state.posts);

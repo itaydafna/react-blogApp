@@ -13,8 +13,19 @@ const persistedState = {
     posts: {
         arr: postsData.posts,
         sorting: {
-            sortedBy: 'date',
-            direction: 'descending'
+            date: {
+            	sortedBy: true,
+            	direction: 'descending'
+            },
+            author:{
+				sortedBy: false,
+            	direction: 'descending'
+            },
+            title: {
+            	sortedBy: false,
+            	direction: 'descending'
+            }
+
         }
     }
 };

@@ -2,6 +2,7 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {sortDescending, sortAscending} from '../../../action-creators/sort-posts'
+import {getSortedBy, getDirection} from '../../../reducers/reducer-root'
 
 import {SortChevron} from './sort-chevron';
 
@@ -53,9 +54,11 @@ class PostsTableColumnTitle extends Component {
     };
 }
 
+console.log(getSortedBy);
+
 const mapStateToProps = (state) => ({
-    sortedBy: state.posts.sorting.sortedBy,
-    direction: state.posts.sorting.direction
+    sortedBy: getSortedBy(state),
+    direction: getDirection(state)
 });
 
 PostsTableColumnTitle = connect(

@@ -22,31 +22,40 @@ const arr = (state = [], action) => {
     return state;
 };
 
-const sortedBy = (state = 'date', action) => {
+// const sortedBy = (state = 'date', action) => {
+//     switch (action.type) {
+//         case 'SORT_DESCENDING':
+//             return action.column;
+//         case 'SORT_ASCENDING':
+//             return action.column;
+//     }
+//     return state;
+// };
+
+// const direction = (state = 'descending',action) =>{
+//     switch (action.type) {
+//         case 'SORT_DESCENDING':
+//             return 'descending';
+//         case 'SORT_ASCENDING':
+//             return 'ascending';
+//     }
+//     return state;
+// };
+
+// const sorting = combineReducers({
+//     sortedBy,
+//     direction
+// });
+
+const sorting = (state = {}, action) => {
     switch (action.type) {
         case 'SORT_DESCENDING':
-            return action.column;
+            return state;
         case 'SORT_ASCENDING':
-            return action.column;
+            return state;
     }
     return state;
-};
-
-const direction = (state = 'descending',action) =>{
-    switch (action.type) {
-        case 'SORT_DESCENDING':
-            return 'descending';
-        case 'SORT_ASCENDING':
-            return 'ascending';
-    }
-    return state;
-};
-
-const sorting = combineReducers({
-    sortedBy,
-    direction
-});
-
+}
 
 const posts = combineReducers({
     arr,
@@ -121,3 +130,30 @@ export const getFilteredPosts = (state, filterTerm, queryVar) => {
             return state;
     }
 };
+
+
+//SELECTOR used by the PostTableColumnTitile comp
+
+export const getSortedBy =(state)=>{
+    for (let key in state.sorting){
+        if (state.sorting.hasOwnProperty(key)){
+            if(state.sorting[key].sortedBy){
+                return key
+            }
+        }
+    }
+
+}
+
+//SELECTOR used by the PostTableColumnTitile comp
+
+export const getDirection =(state)=>{
+    for (let key in state.sorting){
+        if (state.sorting.hasOwnProperty(key)){
+            if(state.sorting[key].sortedBy){
+                return state.sorting[key].direction
+            }
+        }
+    }
+
+}
