@@ -8,10 +8,13 @@ const arr = (state = [], action) => {
     switch (action.type) {
         case 'SORT_DESCENDING':
             return [...state.sort((a, b)=>b[action.column].localeCompare(a[action.column]))];
+            break;
         case 'SORT_ASCENDING':
             return [...state.sort((a, b)=>a[action.column].localeCompare(b[action.column]))];
+            break;
         case 'ADD_NEW_POST':
             return [post(undefined,action),...state];
+            break;
         case 'EDIT_POST':
             let postToEdit = getSelectedPost(state,action.postTitle);
             let indexOfPostToEdit = state.indexOf(postToEdit);
@@ -50,12 +53,8 @@ const arr = (state = [], action) => {
 //helper function for the sorting reducer:
 //accepts state and direction: descending || ascending
 const setSortingState = (state,column,direction) => {
-    // console.log('sorting state: ',state);
-    // console.log('change column to: ',column);
-    // console.log('change direction to: ',direction);
-    console.log(state);
+    console.log(direction);
     for( var key in state){
-         console.log(key);
                     if (state.hasOwnProperty(key)){
                         if (key===column){
                             state[key].sortedBy = true;
@@ -74,6 +73,7 @@ const sorting = (state = {}, action) => {
     switch (action.type) {
         case 'SORT_DESCENDING':
          setSortingState(state, action.column,'descending');
+         break;
         case 'SORT_ASCENDING':
          setSortingState(state, action.column,'ascending');
 }
