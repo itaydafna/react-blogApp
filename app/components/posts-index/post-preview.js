@@ -1,5 +1,6 @@
 import {Link} from 'react-router';
 import {normalizeAuthor, normalizeTag,removeNonLetters} from '../../assets/UTILS'
+import {Tag} from './tag';
 
 export const PostPreview = ({
     title,
@@ -42,14 +43,9 @@ export const PostPreview = ({
                 <p className="pull-left">
                     <b>Tags:&nbsp;</b>
                     {tags.map((tag)=>(
-                        <span key={tag}>
-                            <Link
-                                className="label label-default"
-                                to={{pathname: `/posts/`,
-                    query: {
-                    'category': `${normalizeTag(tag)}`
-                    }}}>{tag}</Link>
-                        </span>
+                        <Tag
+                            key = {tag}
+                            tag = {tag}/>
                     ))}
                 </p>
                 <Link className="btn btn-primary pull-right" to={`post/${removeNonLetters(title)}`}>

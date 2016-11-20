@@ -1,6 +1,5 @@
 import {Component} from 'react';
 
-
 import {Sidebar} from '../sidebar/sidebar';
 
 const PostsIndex = ({children, location})=> {

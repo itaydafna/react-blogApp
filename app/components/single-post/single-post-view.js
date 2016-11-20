@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import {Link} from 'react-router';
 
+import {Tag} from '../posts-index/tag'
+
 import {getSelectedPost} from '../../reducers/reducer-root'
 
 import {normalizeAuthor, normalizeTag} from '../../assets/UTILS'
@@ -52,15 +54,9 @@ let SinglePostView = ({selectedPost})=> {
                     <p>
                         <b>Tags:&nbsp;</b>
                         {tags.map((tag)=>(
-                            <span key={tag}>
-                            <Link href="#" className="label label-default"
-                                  to={{pathname: `/posts/`,
-                    query: {
-                    'category': `${normalizeTag(tag)}`
-                    }}}>
-                                {tag}
-                            </Link>
-                        </span>
+                            <Tag
+                                key = {tag}
+                                tag = {tag}/>
                         ))}
                     </p>
                 </header>
