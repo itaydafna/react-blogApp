@@ -5,6 +5,8 @@ import {post} from './reducer-post'
 import {normalizeAuthor, normalizeTag, normalizeMonth, removeNonLetters} from '../assets/UTILS'
 
 const arr = (state = [], action) => {
+    console.log(action.type);
+    console.log(action.column);
     switch (action.type) {
         case 'SORT_DESCENDING':
             return [...state.sort((a, b)=>b[action.column].localeCompare(a[action.column]))];
@@ -132,7 +134,6 @@ export const getFilteredPosts = (state, filterTerm, queryVar) => {
 
 
 //SELECTOR used by the PostTableColumnTitile comp
-
 export const getSortedBy =(state)=>{
     for (let key in state.sorting){
         if (state.sorting.hasOwnProperty(key)){
@@ -150,7 +151,6 @@ export const getDirection =(state)=>{
     for (let key in state.sorting){
         if (state.sorting.hasOwnProperty(key)){
             if(state.sorting[key].sortedBy){
-                console.log(key);
                 return state.sorting[key].direction
             }
         }

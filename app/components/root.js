@@ -11,7 +11,7 @@ const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
 
 import BlogApp from './blog-app';
 import PostsIndex from './posts-index/posts-index';
-import {Admin} from './admin/admin';
+import Admin from './admin/admin';
 import PostPreviews from './posts-index/post-previews'
 import SinglePostView from './single-post/single-post-view'
 import {NewPost} from './admin/new-edit/new-post'
