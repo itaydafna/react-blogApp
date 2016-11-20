@@ -23,6 +23,12 @@ const arr = (state = [], action) => {
             //replacing postToEdit with editedPost
             state.splice(indexOfPostToEdit,1,post(postToEdit,action));
             return[...state];
+        case 'DELETE_POST':
+            let postToDelete = getSelectedPost(state,action.postTitle);
+            let indexOfPostToDelete = state.indexOf(postToDelete);
+            state.splice(indexOfPostToDelete);
+            return[...state];
+
     }
     return state;
 };
