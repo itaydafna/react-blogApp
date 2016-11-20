@@ -25,30 +25,6 @@ const arr = (state = [], action) => {
     return state;
 };
 
-// const sortedBy = (state = 'date', action) => {
-//     switch (action.type) {
-//         case 'SORT_DESCENDING':
-//             return action.column;
-//         case 'SORT_ASCENDING':
-//             return action.column;
-//     }
-//     return state;
-// };
-
-// const direction = (state = 'descending',action) =>{
-//     switch (action.type) {
-//         case 'SORT_DESCENDING':
-//             return 'descending';
-//         case 'SORT_ASCENDING':
-//             return 'ascending';
-//     }
-//     return state;
-// };
-
-// const sorting = combineReducers({
-//     sortedBy,
-//     direction
-// });
 
 //helper function for the sorting reducer:
 //accepts state and direction: descending || ascending
@@ -78,7 +54,7 @@ const sorting = (state = {}, action) => {
          setSortingState(state, action.column,'ascending');
 }
 return state;
-}
+};
 
 const posts = combineReducers({
     arr,
@@ -174,6 +150,7 @@ export const getDirection =(state)=>{
     for (let key in state.sorting){
         if (state.sorting.hasOwnProperty(key)){
             if(state.sorting[key].sortedBy){
+                console.log(key);
                 return state.sorting[key].direction
             }
         }

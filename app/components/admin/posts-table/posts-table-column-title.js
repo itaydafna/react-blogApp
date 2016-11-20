@@ -17,12 +17,11 @@ class PostsTableColumnTitle extends Component {
     }
 
     render() {
-        const {sortedBy,direction,sortDescending, sortAscending, columnName} = this.props;
-        console.log(direction);
+        const {sortedBy,direction,sortDescending, sortAscending, columnName,sorting} = this.props;
         const onColumnHeadClick = (columnName) => {
             //case in which a column which the posts are currently sorted by is being clicked
             //(sorting to the other direction)
-            if (sortedBy === columnName) {
+            if (sortedBy) {
                 if (direction === 'ascending') {
                     sortDescending(columnName);
                 } else if (direction === 'descending') {
@@ -32,10 +31,11 @@ class PostsTableColumnTitle extends Component {
             //case in which a columns which the posts are not currently sorted by is being clicked
             //(keeping the sorted direction of the previous sorted column_
             else {
-                if (direction=== 'ascending') {
+                let storedDirection = sorting[columnName].direction;
+                if (storedDirection==='ascending') {
                     sortAscending(columnName);
                 }
-                else if (direction === 'descending') {
+                else if (storedDirection === 'descending') {
                     sortDescending(columnName);
                 }
 
@@ -46,7 +46,7 @@ class PostsTableColumnTitle extends Component {
                 {columnName}
                     <span className="pull-right">
                       <SortChevron
-                          sortedBy={sortedBy===columnName.toLowerCase()}
+                          sortedBy={sortedBy}
                           sortDirection={direction}
                       />
                     </span>
@@ -55,14 +55,14 @@ class PostsTableColumnTitle extends Component {
     };
 }
 
-
-const mapStateToProps = (state) => ({
-    sortedBy: getSortedBy(state),
-    direction: getDirection(state)
-});
+//
+// const mapStateToProps = (state) => ({
+//     sortedBy: getSortedBy(state),
+//     direction: getDirection(state)
+// });
 
 PostsTableColumnTitle = connect(
-    mapStateToProps,
+    null,
     {
         sortDescending,
         sortAscending
