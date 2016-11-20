@@ -47,14 +47,37 @@ const arr = (state = [], action) => {
 //     direction
 // });
 
+//helper function for the sorting reducer:
+//accepts state and direction: descending || ascending
+const setSortingState = (state,column,direction) => {
+    // console.log('sorting state: ',state);
+    // console.log('change column to: ',column);
+    // console.log('change direction to: ',direction);
+    console.log(state);
+    for( var key in state){
+         console.log(key);
+                    if (state.hasOwnProperty(key)){
+                        if (key===column){
+                            state[key].sortedBy = true;
+                            state[key].direction = direction;
+                        }
+                        else{
+                            state[key].sortedBy = false;
+                        }
+                }      
+    }
+    return {...state};
+}
+
+//sorting reducer function 
 const sorting = (state = {}, action) => {
     switch (action.type) {
         case 'SORT_DESCENDING':
-            return state;
+         setSortingState(state, action.column,'descending');
         case 'SORT_ASCENDING':
-            return state;
-    }
-    return state;
+         setSortingState(state, action.column,'ascending');
+}
+return state;
 }
 
 const posts = combineReducers({

@@ -18,6 +18,7 @@ class PostsTableColumnTitle extends Component {
 
     render() {
         const {sortedBy,direction,sortDescending, sortAscending, columnName} = this.props;
+        // console.log('sorted by:',sortedBy, 'direction: ',direction);
         const onColumnHeadClick = (columnName) => {
             //case in which a column which the posts are currently sorted by is being clicked
             //(sorting to the other direction)
@@ -54,7 +55,6 @@ class PostsTableColumnTitle extends Component {
     };
 }
 
-console.log(getSortedBy);
 
 const mapStateToProps = (state) => ({
     sortedBy: getSortedBy(state),
