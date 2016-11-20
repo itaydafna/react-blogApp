@@ -26,7 +26,7 @@ const arr = (state = [], action) => {
         case 'DELETE_POST':
             let postToDelete = getSelectedPost(state,action.postTitle);
             let indexOfPostToDelete = state.indexOf(postToDelete);
-            state.splice(indexOfPostToDelete);
+            state.splice(indexOfPostToDelete,1);
             return[...state];
 
     }

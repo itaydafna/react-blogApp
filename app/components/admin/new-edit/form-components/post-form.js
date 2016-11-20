@@ -4,6 +4,7 @@ import {withRouter} from 'react-router';
 
 import {addNewPost} from '../../../../action-creators/add-new-post'
 import {editPost} from '../../../../action-creators/edit-post'
+import {deletePost} from '../../../../action-creators/delete-post'
 
 import {DeletePost} from './delete-post';
 import {FormHeading} from './form-heading';
@@ -17,8 +18,8 @@ import {TitleExistsAlert} from './form-alerts/title-exists-alert'
 
 
 class PostForm extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             //validity status for the 4 required fields - true if valid
@@ -30,7 +31,8 @@ class PostForm extends Component {
             postMd: true,
             //should be true if title of the post already exists in data
             titleExists: false
-        }
+        };
+        this.deletePost = this.deletePost.bind(this)
     }
 
     //function which checks it the required fields have values in them
@@ -117,6 +119,11 @@ class PostForm extends Component {
         }
     };
 
+    deletePost(){
+        this.props.deletePost(this.props.params.post);
+        this.context.router.push(`admin`);
+    }
+
     render() {
         //formAction can be either "Edit" or "Add New"
         const {postTitle, postAuthor, postMd, postDescription, titleExists} = this.state;
@@ -173,7 +180,9 @@ class PostForm extends Component {
                     <hr />
                     <button type="submit" className="btn btn-primary">Save Post</button>
                     <DeletePost
-                        formAction={formAction}/>
+                        formAction={formAction}
+                        deletePost = {this.deletePost}
+                    />
                 </form>
             </section>
         );
@@ -195,7 +204,8 @@ const mapStateToProps = (state)=> {
 PostForm = withRouter(connect(
     mapStateToProps, {
         addNewPost,
-        editPost
+        editPost,
+        deletePost
     }
 )(PostForm));
 
