@@ -2,6 +2,7 @@ import {Link} from 'react-router';
 import {normalizeAuthor, normalizeTag,removeNonLetters} from '../../assets/UTILS'
 
 import {AuthorLink} from './author-link';
+import {DateString} from './date-string';
 import {Tag} from './tag';
 
 
@@ -13,11 +14,6 @@ export const PostPreview = ({
     tags
 
 }) => {
-
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
-    ];
-
     return (
         <article>
             <header>
@@ -26,10 +22,9 @@ export const PostPreview = ({
                 </h2>
                <AuthorLink
                    author = {author}/>
-                <p>
-                    <small className="glyphicon glyphicon-time glyph-before"/>
-                    Posted on {date.getDate()} {monthNames[date.getMonth()]}, {date.getFullYear()}
-                </p>
+              <DateString
+                date={date}
+              />
             </header>
             {/* Post Description */}
             <p>{description}</p>

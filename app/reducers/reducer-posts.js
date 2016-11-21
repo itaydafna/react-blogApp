@@ -5,8 +5,6 @@ import {post} from './reducer-post'
 import {normalizeAuthor, normalizeTag, normalizeMonth, removeNonLetters} from '../assets/UTILS'
 
 const arr = (state = [], action) => {
-    console.log(action.type);
-    console.log(action.column);
     switch (action.type) {
         case 'SORT_DESCENDING':
             return [...state.sort((a, b)=>b[action.column].localeCompare(a[action.column]))];
@@ -47,12 +45,12 @@ const setSortingState = (state,column,direction) => {
                         else{
                             state[key].sortedBy = false;
                         }
-                }      
+                }
     }
     return {...state};
 }
 
-//sorting reducer function 
+//sorting reducer function
 const sorting = (state = {}, action) => {
     switch (action.type) {
         case 'SORT_DESCENDING':
