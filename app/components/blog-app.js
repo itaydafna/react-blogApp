@@ -6,10 +6,13 @@ import {Header} from './header'
 
 
 
-const BlogApp = ({children})=> {
+const BlogApp = ({children,router})=> {
         return (
             <div>
-                <Header/>
+                <Header
+                  //a hack in order to have the posts tab active on SinglePost view
+                  //the following const is a boolean: true if on SinglePost view
+                isPostActive = {router.isActive('post')}/>
                 <div className="container">
                     <div className="row">
                 {/* the children components are

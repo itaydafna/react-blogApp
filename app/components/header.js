@@ -1,11 +1,7 @@
 import {Component} from 'react'
 import {Link} from 'react-router'
 
-export const Header = ({onNavClick, activeSection}) => {
-    //a hack in order to have the posts tab active on SinglePost view
-    //the following const is a boolean: true if on SinglePost view
-    const onSinglePostView = window.location.hash.includes('#/post/');
-
+export const Header = ({isPostActive}) => {
     return (
     <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div className="container">
@@ -30,7 +26,7 @@ export const Header = ({onNavClick, activeSection}) => {
             {/* Collect the nav links, forms, and other content for toggling */}
             <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav">
-                    <li className={onSinglePostView?'active':'peanuts'}>
+                    <li className={isPostActive?'active':'peanuts'}>
                         <Link to="posts"
                               activeClassName = 'active-link'
                         >
