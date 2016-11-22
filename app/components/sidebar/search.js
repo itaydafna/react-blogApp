@@ -36,7 +36,10 @@ export class Search extends Component{
                                onBlur = {e=>e.target.value=''}
                         />
             <span className="input-group-btn">
-              <button className="btn btn-default" type="submit">
+              <button className="btn btn-default"
+                      type="submit"
+                      onClick = {(e)=>e.preventDefault()}
+              >
                 <span className="glyphicon glyphicon-search">
                 </span></button>
             </span>
